@@ -31,7 +31,7 @@ export default function About() {
           Kahve ve hamburger bağımlısı bir yazılım geliştiriciyim. Aktif olarak ASELSAN A.Ş.&apos;de çalışıyorum. 12 yaşımdan beri kod yazıyorum ve bu sebeple de işime tutkuyla bağlıyım. Son zamanlarda web geliştirme ve makine öğrenimi ile ilgileniyorum.
         </p>
 
-        <p className="max-w-6xl mx-auto text-md md:text-xl mt-6">
+        <p className="max-w-6xl mx-auto text-md md:text-xl my-6">
           {/* I listen to all kinds of music (especially Hip-Hop) and, I love theater. */}
           {/* I play role-playing, strategy, and action games in my spare time. The Witcher 3: Wild Hunt and Divinity: Original Sin II are my favorites. */}
           {/* In my opinion, I do wonders in the kitchen. By the way, did I say everyone loves my San Sebastian cheesecake? */}
