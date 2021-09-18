@@ -1,7 +1,7 @@
 import Layout from "../components/layout"
 import Container from "../components/container"
 import Header from "../components/header"
-import Image from 'next/image'
+import Image from "next/image"
 
 export default function About() {
   return (
@@ -21,7 +21,6 @@ export default function About() {
         </div>
 
         <h1 className="text-2xl md:text-4xl mb-8 text-bold text-center">
-          {/* Hi, I'm Hasan */}
           Merhaba, ben Hasan
         </h1>
 
@@ -36,7 +35,7 @@ export default function About() {
           {/* I listen to all kinds of music (especially Hip-Hop) and, I love theater. */}
           {/* I play role-playing, strategy, and action games in my spare time. The Witcher 3: Wild Hunt and Divinity: Original Sin II are my favorites. */}
           {/* In my opinion, I do wonders in the kitchen. By the way, did I say everyone loves my San Sebastian cheesecake? */}
-          Biraz kendimden bahsetmek gerekirse, her türden müziği dinlerim fakat Hip-Hop benim favorim. Sahne sanatlarını severim. Boş zamanlarımda rol yapma, strateji ve aksiyon türünde oyunlar oynamayı severim. En sevdiklerim: The Witcher 3: Wild Hunt, Divinity: Original Sin II ve Hades. Ayrıca, mutfakta zaman geçirmeyi çok severim. Bu arada herkesin San Sebastian Cheesecake'ime bayıldığını söylemiş miydim?
+          Biraz kendimden bahsetmek gerekirse, her türden müziği dinlerim fakat Hip-Hop benim favorim. Sahne sanatlarını severim. Boş zamanlarımda rol yapma, strateji ve aksiyon türünde oyunlar oynamayı severim. En sevdiklerim: The Witcher 3: Wild Hunt, Divinity: Original Sin II ve Hades. Ayrıca, mutfakta zaman geçirmeyi çok severim. Bu arada herkesin San Sebastian Cheesecake&apos;ime bayıldığını söylemiş miydim?
         </p>
 
       </Container>
