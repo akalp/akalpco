@@ -18,7 +18,7 @@ export default function Header() {
         </h4>
 
         <h4 className="text-lg mx-3">
-          <Link href="/about">
+          <Link href="/hakkimda">
             <a className="hover:text-success duration-200 transition-colors">
               Hakkımda
             </a>

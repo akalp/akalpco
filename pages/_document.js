@@ -15,6 +15,7 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta name="description" content={SiteConfig.description} />
+          <link rel="shortcut icon" href="favicon.ico" />
 
           {/* facebook */}
           <meta property="og:url" content={SiteConfig.siteUrl} />

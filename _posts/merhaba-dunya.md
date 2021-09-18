@@ -8,7 +8,7 @@ author:
 
 ### Merhaba, ben Hasan!
 
-Hacettepe Üniversitesi Bilgisayar Mühendisliği bölümünden 2020 yılında mezun oldum ve ASELSAN A.Ş.'de yazılım geliştirici olarak çalışıyorum. Küçük yaşlardan beri yazılım geliştiriciliği ile uğraşıyorum. Daha önce oyun geliştime üzerine çalışıyor olsam da şu an aktif olarak web geliştirme ile ilgileniyorum. Makine öğrenmesi üzerine de çalışmalarımı sürdürüyorum. Benimle ilgili daha detaylı bilgiye [hakkımda](/about) sayfasından ve/veya altta yer alan sosyal medya adreslerinden ulaşabilirsin. 
+Hacettepe Üniversitesi Bilgisayar Mühendisliği bölümünden 2020 yılında mezun oldum ve ASELSAN A.Ş.'de yazılım geliştirici olarak çalışıyorum. Küçük yaşlardan beri yazılım geliştiriciliği ile uğraşıyorum. Daha önce oyun geliştime üzerine çalışıyor olsam da şu an aktif olarak web geliştirme ile ilgileniyorum. Makine öğrenmesi üzerine de çalışmalarımı sürdürüyorum. Benimle ilgili daha detaylı bilgiye [hakkımda](/hakkimda) sayfasından ve/veya altta yer alan sosyal medya adreslerinden ulaşabilirsin. 
 
 ### Neler yapacağım?
 

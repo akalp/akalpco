@@ -9,29 +9,29 @@ export default function About() {
       <Container>
         <Header />
 
-        <div className="max-w-xs md:max-w-sm mx-auto mb-8">
+        <div className="max-w-xs md:max-w-sm mx-auto">
           <Image
-            src='/assets/author/hasan.jpg'
+            src='/assets/author/profile_small.jpg'
             alt="Hasan's profile photo"
             className='shadow-sm rounded-full'
             layout="responsive"
-            width={360}
-            height={360}
+            width={240}
+            height={270}
           />
         </div>
 
-        <h1 className="text-2xl md:text-4xl mb-8 text-bold text-center">
+        <h1 className="text-2xl md:text-4xl my-8 text-bold text-center">
           Merhaba, ben Hasan
         </h1>
 
-        <p className="max-w-6xl mx-auto text-md md:text-xl">
+        <p className="max-w-6xl mx-auto text-md md:text-xl my-8">
           {/* I am a Software Engineer addicted to coffee and burgers. */}
           {/* I started writing code when I was 12 years old, so I am passionate about my job. */}
           {/* I have recently been interested in machine learning and web development. */}
           Kahve ve hamburger bağımlısı bir yazılım geliştiriciyim. Aktif olarak ASELSAN A.Ş.&apos;de çalışıyorum. 12 yaşımdan beri kod yazıyorum ve bu sebeple de işime tutkuyla bağlıyım. Son zamanlarda web geliştirme ve makine öğrenimi ile ilgileniyorum.
         </p>
 
-        <p className="max-w-6xl mx-auto text-md md:text-xl my-6">
+        <p className="max-w-6xl mx-auto text-md md:text-xl my-8">
           {/* I listen to all kinds of music (especially Hip-Hop) and, I love theater. */}
           {/* I play role-playing, strategy, and action games in my spare time. The Witcher 3: Wild Hunt and Divinity: Original Sin II are my favorites. */}
           {/* In my opinion, I do wonders in the kitchen. By the way, did I say everyone loves my San Sebastian cheesecake? */}
