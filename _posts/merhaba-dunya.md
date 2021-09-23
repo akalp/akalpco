@@ -1,7 +1,7 @@
 ---
 title: 'Merhaba Dünya'
 excerpt: 'Merhaba dünya. Uzun zaman sonra blogum yayında!'
-date: '2021-09-10T21:00:00.000Z'
+date: '2021-09-10T00:00:00.000Z'
 author:
   name: Hasan Akalp
 ---
