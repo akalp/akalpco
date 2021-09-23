@@ -1,7 +1,7 @@
 ---
 title: 'Bilgisayar Mühendisliği Kazandım Ne Yapmalıyım?'
 excerpt: 'Bilr bilgisayar mühendisliği mezunu olarak nacizane önerilerim'
-date: '2021-09-10T21:00:00.000Z'
+date: '2021-09-23T21:44:00.000Z'
 author:
   name: Hasan Akalp
 ---
