@@ -12,11 +12,6 @@ export const SOCIALMEDIAS = {
     name: 'Github',
     icon: faGithub
   },
-  twitter: {
-    url: 'https://twitter.com/hasanakalp',
-    name: 'Twitter',
-    icon: faTwitter
-  },
   linkedin: {
     url: 'https://linkedin.com/in/akalp',
     name: 'LinkedIn',
@@ -27,14 +22,19 @@ export const SOCIALMEDIAS = {
     name: 'E-Mail',
     icon: faEnvelope
   },
+  twitter: {
+    url: 'https://twitter.com/hasanakalp',
+    name: 'Twitter',
+    icon: faTwitter
+  },
   instagram: {
     url: 'https://instagram.com/hasanakalp',
     name: 'Instagram',
     icon: faInstagram
   },
-  spotify: {
-    url: 'https://open.spotify.com/user/hasanakalp',
-    name: 'Spotify',
-    icon: faSpotify
-  }
+  // spotify: {
+  //   url: 'https://open.spotify.com/user/hasanakalp',
+  //   name: 'Spotify',
+  //   icon: faSpotify
+  // }
 }
