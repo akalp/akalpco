@@ -3,7 +3,7 @@ import ThemeButton from "./theme-button"
 
 export default function Header() {
   return (
-    <section className="flex-col md:flex-row flex items-center justify-between mt-16 mb-16 md:mb-12">
+    <section className="flex-col md:flex-row flex items-center justify-between my-8 md:my-16">
       <h1 className="hover:underline text-2xl md:text-4xl font-bold tracking-tighter leading-tight mb-3 md:mb-0">
         <Link href="/">
           akalp.co

@@ -26,7 +26,7 @@ export default function PostHeader({ title, coverImage, date, author }) {
         </div>
       </div> */}
       <div className={cn("flex", { "justify-end": coverImage })}>
-        <div className="mb-6 text-lg">
+        <div className="text-md lg:text-lg">
           <DateFormatter dateString={date} />
         </div>
       </div>
