@@ -2,8 +2,8 @@ import { faGithub, faTwitter, faLinkedin, faInstagram, faSpotify } from '@fortaw
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 
 export const THEME = {
-  LIGHT: 'theme-light',
-  DARK: 'theme-dark'
+  LIGHT: 'light',
+  DARK: 'dark'
 }
 
 export const SOCIALMEDIAS = {

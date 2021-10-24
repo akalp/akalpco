@@ -10,7 +10,7 @@ export default function SocialIcons() {
         const sm = SOCIALMEDIAS[key]
         return (
           <Link href={sm.url} key={`link-${key}`}>
-            <a className="mx-3 hover:text-gray-500 text-black duration-200 transition-color">
+            <a className="mx-3 hover:text-opacity-75 text-black duration-200 transition-color dark:text-white dark:text-opacity-75 dark:hover:text-opacity-100">
               <FontAwesomeIcon icon={sm.icon} size='lg' />
             </a>
           </Link>

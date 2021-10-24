@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang={SiteConfig.lang}>
+      <Html lang={SiteConfig.lang} className='dark'>
         <Head>
           {/* base */}
           <meta charSet="utf-8" />
@@ -45,7 +45,7 @@ class MyDocument extends Document {
             </>
           )}
         </Head>
-        <body>
+        <body className="dark:bg-gray-900 dark:text-white dark:text-opacity-75">
           <Main />
           <NextScript />
         </body>
