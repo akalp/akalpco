@@ -13,7 +13,7 @@ export default function Header() {
         <div className="flex flex-row items-center mb-3 md:mb-0">
           <h4 className="text-lg mx-3">
             <Link href="/">
-              <a className="hover:text-success duration-200 transition-colors">
+              <a className="navlink">
                 Blog
               </a>
             </Link>
@@ -21,19 +21,11 @@ export default function Header() {
 
           <h4 className="text-lg mx-3">
             <Link href="/hakkimda">
-              <a className="hover:text-success duration-200 transition-colors">
+              <a className="navlink">
                 Hakkımda
               </a>
             </Link>
           </h4>
-
-          {/* <h4 className="text-lg mx-3">
-          <Link href="/photos">
-            <a className="hover:text-success duration-200 transition-colors">
-              Photos
-            </a>
-          </Link>
-        </h4> */}
 
         </div>
 
