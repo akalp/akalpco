@@ -6,11 +6,11 @@ author:
   name: Hasan Akalp
 ---
 
-### Bölümü kazanmak
+## Bölümü kazanmak
 
 Tebrikler! Zoru başardın ve üniversite kazandın 💪 Özellikle de istediğin bölümü kazanmanın verdiği haz gerçekten çok güzel. Tercih listemi hatırlıyorum da tamamen bilgisayar mühendisliği ve elektrik-elektronik mühendisliğinden oluşuyordu. Elektrik-elektronik mühendisliğini de çevremdeki bazı yazılımcıların bu bölümden mezun olmasından dolayı yazmıştım, tabii dönemimdeki popülaritesi de etkiliydi. Ama tam da istediğim gibi bilgisayar mühendisliğine yerleşmiştim. Peki bölüm tamam ama ya üniversite? Burada güzel bir haberim var, hala istediğin üniversiteye gitmek için şansın var. Ben de istediğim üniversiteyi kazanamamıştım fakat yatay geçiş yaparak istediğim üniversiteye gitmeye başladım. Yatay geçiş konusu ile ilgili yazımı da yakında paylaşacağım, ara ara sosyal medya hesaplarımı ve burayı kontrol etmeyi unutma 😉
 
-### Kazandın, peki şimdi?
+## Kazandın, peki şimdi?
 
 Kısaca bazı tavsiyelerde bulunacağım. Bir şeyler eklemek isteyenler veya yok arkadaş olmaz öyle iş diyecekler de benimle istedikleri gibi iletişime geçebilirler 😊 
 

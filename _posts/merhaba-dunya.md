@@ -6,11 +6,11 @@ author:
   name: Hasan Akalp
 ---
 
-### Merhaba, ben Hasan!
+## Merhaba, ben Hasan!
 
 Hacettepe Üniversitesi Bilgisayar Mühendisliği bölümünden 2020 yılında mezun oldum ve ASELSAN A.Ş.'de yazılım geliştirici olarak çalışıyorum. Küçük yaşlardan beri yazılım geliştiriciliği ile uğraşıyorum. Daha önce oyun geliştime üzerine çalışıyor olsam da şu an aktif olarak web geliştirme ile ilgileniyorum. Makine öğrenmesi üzerine de çalışmalarımı sürdürüyorum. Benimle ilgili daha detaylı bilgiye [hakkımda](/hakkimda) sayfasından ve/veya altta yer alan sosyal medya adreslerinden ulaşabilirsin. 
 
-### Neler yapacağım?
+## Neler yapacağım?
 
 Öncelikle bir sene önce mezun olduğumu hatırlatmak istiyorum. Dolayısıyla biraz üniversite ve üniversite hayatı hakkında biraz da yeni mezun bir mühendisin hayatı hakkında yazılar paylaşmayı düşünüyorum. Ayrıca blogum bolca teknik yazıya da ev sahipliği yapacak. Yazmaktan ziyade anlatmayı daha çok seviyorum, bu sebeple de gelecek dönem planlarım içerisinde videolar ve bir podcast serisi de var.
 
