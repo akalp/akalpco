@@ -5,9 +5,9 @@
 @tailwind utilities;
 
 .navlink {
-  @apply text-black hover:text-opacity-75 dark:hover:text-opacity-100 dark:text-white dark:text-opacity-75
+  @apply text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300
 }
 
 .icon {
-  @apply hover:text-opacity-75 text-black duration-100 transition-colors dark:text-white dark:text-opacity-75 dark:hover:text-opacity-100
+  @apply text-black duration-100 transition-colors dark:text-white hover:text-gray-600 dark:hover:text-gray-300
 }

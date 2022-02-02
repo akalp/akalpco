@@ -45,7 +45,7 @@ class MyDocument extends Document {
             </>
           )}
         </Head>
-        <body className="dark:bg-gray-900 dark:text-white dark:text-opacity-75">
+        <body className="dark:bg-gray-900 dark:text-white">
           <Main />
           <NextScript />
         </body>
