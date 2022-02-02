@@ -6,7 +6,7 @@ import cn from 'classnames'
 
 export default function PostHeader({ title, coverImage, date, author }) {
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto mb-10">
       <PostTitle>{title}</PostTitle>
 
       {/* <div className="hidden md:block md:mb-12">
