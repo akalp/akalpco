@@ -28,7 +28,7 @@ export default function About() {
           {/* I am a Software Engineer addicted to coffee and burgers. */}
           {/* I started writing code when I was 12 years old, so I am passionate about my job. */}
           {/* I have recently been interested in machine learning and web development. */}
-          Kahve ve hamburger bağımlısı bir yazılım geliştiriciyim. Aktif olarak ASELSAN A.Ş.&apos;de çalışıyorum. 12 yaşımdan beri kod yazıyorum ve bu sebeple de işime tutkuyla bağlıyım. Son zamanlarda web geliştirme ve makine öğrenimi ile ilgileniyorum.
+          Kahve ve hamburger bağımlısı bir yazılım geliştiriciyim. Aktif olarak Scorp&apos;ta çalışıyorum. 12 yaşımdan beri kod yazıyorum ve bu sebeple de işime tutkuyla bağlıyım. Son zamanlarda web/mobil geliştirme ve makine öğrenimi ile ilgileniyorum.
         </p>
 
         <p className="max-w-6xl mx-auto text-md md:text-xl my-8">
