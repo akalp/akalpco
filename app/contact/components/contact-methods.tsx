@@ -1,6 +1,6 @@
 "use client";
 
-import { ContactCard } from "./ContactCard";
+import { ContactCard } from "./contact-card";
 import { contacts } from "@/app/data/contacts";
 
 export function ContactMethods() {
@@ -11,4 +11,4 @@ export function ContactMethods() {
       ))}
     </div>
   );
-} 
+}

@@ -1,5 +1,6 @@
-import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/header";
+import { Footer } from "@/app/components/footer";
+import { ThemeProvider } from "@/app/components/theme-provider";
 import "./globals.css";
 import { geistSans, geistMono } from "./config/fonts";
 import { metadata } from "./config/metadata";
@@ -28,9 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

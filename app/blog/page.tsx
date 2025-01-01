@@ -1,5 +1,5 @@
 import { getAllPosts } from "@/app/lib/blog";
-import { BlogCard } from "./components/BlogCard";
+import { BlogCard } from "./components/blog-card";
 import { blogMetadata } from "../config/metadata";
 
 export const metadata = blogMetadata;
@@ -8,7 +8,7 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="container-width py-6 md:py-20">
+    <div className="container-width py-6 md:py-12">
       <div className="mb-12">
         <h1 className="heading-1 mb-6">Blog</h1>
         <p className="body-text max-w-2xl">

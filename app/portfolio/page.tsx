@@ -1,12 +1,12 @@
 import { projects } from "../data/projects";
-import { ProjectCard } from "./components/ProjectCard";
+import { ProjectCard } from "./components/project-card";
 import { portfolioMetadata } from "../config/metadata";
 
 export const metadata = portfolioMetadata;
 
 export default function PortfolioPage() {
   return (
-    <div className="container-width py-6 md:py-20">
+    <div className="container-width py-6 md:py-12">
       <div className="mb-12">
         <h1 className="heading-1 mb-6">Portfolio</h1>
         <p className="body-text max-w-2xl">

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "@/app/lib/blog";
-import { BlogCard } from "@/app/blog/components/BlogCard";
+import { BlogCard } from "@/app/blog/components/blog-card";
 
 export default function Home() {
   const recentPosts = getAllPosts().slice(0, 5);
 
   return (
-    <div className="container-width py-6 md:py-20">
+    <div className="container-width py-6 md:py-12">
       <section className="mb-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         <div>
           <h1 className="heading-1 mb-6">Full-Stack Software Engineer</h1>

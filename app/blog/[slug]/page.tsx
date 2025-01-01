@@ -1,6 +1,7 @@
 import { getPostBySlug, getAllPosts } from "@/app/lib/blog";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
+import { SocialShare } from "../components/social-share";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -24,7 +25,7 @@ export default async function BlogPost({
   const content = marked(post.content);
 
   return (
-    <article className="container-width py-6 md:py-20">
+    <article className="container-width py-6 md:py-12">
       <header className="mb-12">
         <h1 className="heading-1 mb-4">{post.title}</h1>
         <div className="flex items-center gap-3 text-sm text-secondary">
@@ -55,6 +56,12 @@ export default async function BlogPost({
         className="prose prose-neutral max-w-none dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: content }}
       />
+      <div className="pt-8">
+        <SocialShare
+          url={`https://akalp.co/blog/${post.slug}`}
+          title={post.title}
+        />
+      </div>
     </article>
   );
 }

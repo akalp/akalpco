@@ -28,7 +28,7 @@ const technologies = {
 
 export default function AboutPage() {
   return (
-    <div className="container-width py-6 md:py-20">
+    <div className="container-width py-6 md:py-12">
       {/* Hero Section */}
       <section className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
         <div>

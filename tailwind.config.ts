@@ -6,6 +6,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -16,7 +17,20 @@ export default {
         accent: "var(--accent)",
         muted: "var(--muted)",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+            maxWidth: "none",
+          },
+        },
+      },
     },
   },
-  plugins: [require('@tailwindcss/typography'),],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config;

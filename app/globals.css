@@ -11,15 +11,13 @@
   --muted: #f3f4f6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #3b82f6;
-    --secondary: #9ca3af;
-    --accent: #fbbf24;
-    --muted: #1f2937;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #3b82f6;
+  --secondary: #9ca3af;
+  --accent: #fbbf24;
+  --muted: #1f2937;
 }
 
 body {
