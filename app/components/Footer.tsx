@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <footer className="bg-muted/20 mt-auto border-t border-muted">
       <div className="container-width pb-6 pt-12">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* Left section */}
           <div>
             <h2 className="text-lg font-semibold">Hasan Akalp</h2>
@@ -37,39 +37,20 @@ export function Footer() {
           </div>
 
           {/* Right section */}
-          <div className="hidden sm:grid sm:grid-cols-2 sm:gap-8">
-            <div>
-              <h3 className="text-sm font-semibold">Navigation</h3>
-              <ul className="mt-4 space-y-3">
-                {mainNavigation.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-secondary hover:text-foreground"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold">Contact</h3>
-              <ul className="mt-4 space-y-3">
-                <li>
+          <div>
+            <h3 className="text-sm font-semibold">Navigation</h3>
+            <ul className="mt-4 flex flex-row gap-6">
+              {mainNavigation.map((item) => (
+                <li key={item.name}>
                   <Link
-                    href="mailto:hasan.akalp@gmail.com"
+                    href={item.href}
                     className="text-sm text-secondary hover:text-foreground"
                   >
-                    hasan.akalp@gmail.com
+                    {item.name}
                   </Link>
                 </li>
-                <li>
-                  <span className="text-sm text-secondary">Ankara, Turkey</span>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
         </div>
 
