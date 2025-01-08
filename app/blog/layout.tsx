@@ -1,9 +1,9 @@
-import { PageTransition } from "@/app/components/page-transition"
+import { PageTransition } from "@/app/components/page-transition";
 
 export default function BlogLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <PageTransition>{children}</PageTransition>
-} 
+  return <PageTransition>{children}</PageTransition>;
+}

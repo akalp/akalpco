@@ -5,7 +5,7 @@ import type { ContactMethod } from "@/app/types/contact";
 
 export function ContactCard({ method }: { method: ContactMethod }) {
   const Icon = method.icon;
-  
+
   const cardContent = (
     <>
       <div className="text-secondary">
@@ -42,4 +42,4 @@ export function ContactCard({ method }: { method: ContactMethod }) {
       )}
     </motion.div>
   );
-} 
+}

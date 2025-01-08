@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "@/app/lib/blog";
-import { BlogCard } from "@/app/blog/components/blog-card";
+import { BlogCard } from "@/app/components/blog-card";
 
 export default function Home() {
   const recentPosts = getAllPosts().slice(0, 5);

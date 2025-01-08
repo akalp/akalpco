@@ -1,7 +1,7 @@
 import { getPostBySlug, getAllPosts } from "@/app/lib/blog";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
-import { SocialShare } from "../components/social-share";
+import { SocialShare } from "@/app/components/social-share";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();

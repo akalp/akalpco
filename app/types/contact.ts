@@ -5,4 +5,4 @@ export type ContactMethod = {
   value: string;
   href?: string;
   icon: LucideIcon;
-}; 
+};

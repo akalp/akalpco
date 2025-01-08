@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/app/lib/blog";
-import { BlogCard } from "./components/blog-card";
-import { blogMetadata } from "../config/metadata";
+import { BlogCard } from "@/app/components/blog-card";
+import { blogMetadata } from "@/app/config/metadata";
 
 export const metadata = blogMetadata;
 

@@ -1,5 +1,5 @@
-import { ContactMethods } from "./components/contact-methods";
-import { contactMetadata } from "../config/metadata";
+import { ContactMethods } from "@/app/components/contact-methods";
+import { contactMetadata } from "@/app/config/metadata";
 
 export const metadata = contactMetadata;
 

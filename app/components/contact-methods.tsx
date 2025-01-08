@@ -1,6 +1,6 @@
 "use client";
 
-import { ContactCard } from "./contact-card";
+import { ContactCard } from "@/app/components/contact-card";
 import { contacts } from "@/app/data/contacts";
 
 export function ContactMethods() {

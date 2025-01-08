@@ -24,14 +24,11 @@ export function BlogCard({ post }: { post: BlogPost }) {
         className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-muted bg-background p-6 hover:border-primary"
       >
         <div className="mb-4">
-          <motion.h2 
-            className="text-xl font-semibold"
-            layout
-          >
+          <motion.h2 className="text-xl font-semibold" layout>
             {post.title}
           </motion.h2>
-          <motion.div 
-            className="text-secondary mt-2 flex items-center gap-3 text-sm"
+          <motion.div
+            className="mt-2 flex items-center gap-3 text-sm text-secondary"
             layout
           >
             <time>
@@ -44,24 +41,18 @@ export function BlogCard({ post }: { post: BlogPost }) {
           </motion.div>
         </div>
 
-        <motion.p 
-          className="text-secondary mb-4 text-sm"
-          layout
-        >
+        <motion.p className="mb-4 text-sm text-secondary" layout>
           {post.description}
         </motion.p>
 
-        <motion.div
-          className="mt-auto flex flex-wrap gap-2"
-          layout
-        >
+        <motion.div className="mt-auto flex flex-wrap gap-2" layout>
           {post.tags.map((tag, index) => (
             <motion.span
               key={tag}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-muted text-secondary rounded-full px-3 py-1 text-xs"
+              className="rounded-full bg-muted px-3 py-1 text-xs text-secondary"
             >
               {tag}
             </motion.span>
@@ -70,4 +61,4 @@ export function BlogCard({ post }: { post: BlogPost }) {
       </motion.article>
     </Link>
   );
-} 
+}

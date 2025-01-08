@@ -1,6 +1,6 @@
 "use client";
 
-import { Project } from "../../types/portfolio";
+import { Project } from "@/app/types/portfolio";
 import Link from "next/link";
 import { Github, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";

@@ -10,4 +10,4 @@ export const stagger = {
       staggerChildren: 0.1,
     },
   },
-}; 
+};

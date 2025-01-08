@@ -1,6 +1,6 @@
-import { projects } from "../data/projects";
-import { ProjectCard } from "./components/project-card";
-import { portfolioMetadata } from "../config/metadata";
+import { projects } from "@/app/data/projects";
+import { ProjectCard } from "@/app/components/project-card";
+import { portfolioMetadata } from "@/app/config/metadata";
 
 export const metadata = portfolioMetadata;
 

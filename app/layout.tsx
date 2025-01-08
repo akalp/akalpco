@@ -1,9 +1,9 @@
 import { Header } from "@/app/components/header";
 import { Footer } from "@/app/components/footer";
 import { ThemeProvider } from "@/app/components/theme-provider";
-import "./globals.css";
-import { geistSans, geistMono } from "./config/fonts";
-import { metadata } from "./config/metadata";
+import "@/app/globals.css";
+import { geistSans, geistMono } from "@/app/config/fonts";
+import { metadata } from "@/app/config/metadata";
 
 export { metadata };
 
