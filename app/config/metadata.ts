@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://akalp.co"),
   title: {
     default: "Hasan Akalp - Full-Stack Software Engineer",
     template: "%s | Hasan Akalp",
