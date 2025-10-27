@@ -41,6 +41,20 @@ npm run build
 npm start
 ```
 
+### Cloudflare Pages (static export)
+
+This project is configured for static export via `output: "export"` in `next.config.ts`.
+
+- Build command: `next build`
+- Output directory: `out`
+- Note: Do not use `next start` with static export. Deploy the contents of `out`.
+- Optional local preview of the static export:
+
+```bash
+npm run build
+npx serve out
+```
+
 Refer to the official Next.js documentation for hosting options and production best practices: https://nextjs.org/docs/app/building-your-application/deploying
 
 ## Learn More
