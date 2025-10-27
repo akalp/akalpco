@@ -1,7 +1,7 @@
 import { getPostBySlug, getAllPosts } from "@/app/lib/blog";
 import { notFound } from "next/navigation";
-import { marked } from "marked";
 import { SocialShare } from "@/app/components/social-share";
+import { renderMarkdown } from "@/app/lib/markdown";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -22,7 +22,7 @@ export default async function BlogPost({
     notFound();
   }
 
-  const content = marked(post.content);
+  const content = await renderMarkdown(post.content);
 
   return (
     <article className="container-width py-6 md:py-12">
