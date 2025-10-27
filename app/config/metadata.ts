@@ -66,9 +66,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
-  verification: {
-    google: "UA-33414229-2",
-  },
 };
 
 // Page-specific metadata
