@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 
 let highlighterPromise: Promise<any> | null = null;
 
@@ -94,5 +95,86 @@ export async function renderMarkdown(markdown: string) {
     }
   };
 
-  return (await marked.parse(markdown, { renderer })) as string;
+  const rawHtml = (await marked.parse(markdown, { renderer })) as string;
+
+  // Sanitize the HTML output from marked to prevent XSS.
+  // Keep allowances for Shiki's output (classes, spans with limited styles, etc.).
+  const cleanHtml = sanitizeHtml(rawHtml, {
+    allowedTags: [
+      // Start with library defaults and add a few needed wrappers
+      ...sanitizeHtml.defaults.allowedTags,
+      "img",
+      "pre",
+      "code",
+      "div",
+      "span",
+      "hr",
+      "table",
+      "thead",
+      "tbody",
+      "tr",
+      "th",
+      "td",
+    ],
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      a: ["href", "name", "target", "rel"],
+      img: ["src", "srcset", "alt", "title", "width", "height", "loading"],
+      div: ["class", "data-lang"],
+      pre: ["class"],
+      code: ["class"],
+      span: ["class", "style"],
+      p: ["class"],
+      h1: ["id", "class"],
+      h2: ["id", "class"],
+      h3: ["id", "class"],
+      h4: ["id", "class"],
+      h5: ["id", "class"],
+      h6: ["id", "class"],
+      ul: ["class"],
+      ol: ["class"],
+      li: ["class"],
+      table: ["class"],
+      thead: ["class"],
+      tbody: ["class"],
+      tr: ["class"],
+      th: ["class"],
+      td: ["class"],
+      blockquote: ["class"],
+    },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
+    allowProtocolRelative: true,
+    // Preserve minimal inline styles used by Shiki for token coloring.
+    allowedStyles: {
+      span: {
+        color: [
+          /^#[0-9a-fA-F]{3,8}$/,
+          /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/,
+          /^rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*(0|1|0?\.\d+)\s*\)$/,
+          /^hsl\(/,
+          /^var\(--shiki-[^)]+\)$/,
+        ],
+        "background-color": [
+          /^#[0-9a-fA-F]{3,8}$/,
+          /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/,
+          /^rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*(0|1|0?\.\d+)\s*\)$/,
+          /^hsl\(/,
+          /^var\(--shiki-[^)]+\)$/,
+        ],
+        "text-decoration-color": [
+          /^#[0-9a-fA-F]{3,8}$/,
+          /^rgb\(/,
+          /^rgba\(/,
+          /^hsl\(/,
+          /^var\(--shiki-[^)]+\)$/,
+        ],
+        "font-weight": [/^(normal|bold|[1-9]00)$/],
+        "font-style": [/^(normal|italic|oblique)$/],
+      },
+    },
+    // Discard content inside dangerous non-text tags entirely.
+    nonTextTags: ["style", "script", "textarea", "option", "noscript"],
+  });
+
+  return cleanHtml;
 }
