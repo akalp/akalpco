@@ -26,6 +26,8 @@ async function getHighlighter() {
           "python",
           "go",
           "rust",
+          "csharp",
+          "xml",
         ],
       });
     })();
