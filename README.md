@@ -30,9 +30,11 @@ Open http://localhost:3000 in your browser to view the site. Edit `app/page.tsx`
 
 ## Configuration
 
-- `NEXT_PUBLIC_SITE_URL` (optional) — sets the canonical base URL and Open Graph metadata.
+Create a `.env.local` file in the project root (or configure environment variables in your hosting provider) and set:
 
-Create a `.env` file in the project root if needed and define environment variables there.
+- `NEXT_PUBLIC_SITE_URL` — canonical base URL used for metadata, sitemap, RSS, and social previews. Example: `https://akalp.co`.
+
+When deploying to Cloudflare Pages (or any static hosting), configure the same variable in the project settings so SSG uses the correct value.
 
 ## Deployment
 
