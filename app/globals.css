@@ -48,21 +48,29 @@ body {
   }
   .prose pre.shiki {
     /* Shiki sets background color inline; we only add spacing */
-    @apply p-4 my-5;
+    @apply my-5 p-4;
   }
   .prose pre code {
     /* Reset typography plugin code block padding */
-    @apply p-0 bg-transparent;
+    @apply bg-transparent p-0;
   }
   .prose code {
     @apply font-mono text-[0.95em];
   }
 
   /* Dual theme toggling for Shiki output */
-  .prose .light-only { display: block; }
-  .prose .dark-only { display: none; }
-  .dark .prose .light-only { display: none; }
-  .dark .prose .dark-only { display: block; }
+  .prose .light-only {
+    display: block;
+  }
+  .prose .dark-only {
+    display: none;
+  }
+  .dark .prose .light-only {
+    display: none;
+  }
+  .dark .prose .dark-only {
+    display: block;
+  }
 
   /* Language badge on code blocks */
   .prose .code-block {

@@ -17,6 +17,8 @@ Open http://localhost:3000 in your browser to view the site. Edit `app/page.tsx`
 - `build` — create a production build
 - `start` — run the production server
 - `lint` — run lint checks
+- `format` — apply Prettier formatting to the codebase
+- `typecheck` — run the TypeScript compiler without emitting files
 
 ## Project Structure
 
