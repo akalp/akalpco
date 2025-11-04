@@ -2,6 +2,7 @@ import { getPostBySlug, getAllPosts } from "@/app/lib/blog";
 import { notFound } from "next/navigation";
 import { SocialShare } from "@/app/components/social-share";
 import { renderMarkdown } from "@/app/lib/markdown";
+import type { Metadata } from "next";
 import { getReadingTime } from "@/app/lib/reading-time";
 
 export async function generateStaticParams() {
@@ -9,6 +10,52 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  if (!post) {
+    return {};
+  }
+
+  const canonicalPath = `/blog/${post.slug}`;
+
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    openGraph: {
+      type: "article",
+      url: canonicalPath,
+      title: post.title,
+      description: post.description,
+      publishedTime: new Date(post.date).toISOString(),
+      authors: ["Hasan Akalp"],
+      tags: post.tags,
+      images: [
+        {
+          url: "/images/hasan.webp",
+          width: 1200,
+          height: 1200,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: ["/images/hasan.webp"],
+    },
+  };
 }
 
 export default async function BlogPost({
