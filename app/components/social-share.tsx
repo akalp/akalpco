@@ -27,6 +27,7 @@ export function SocialShare({ url, title }: ShareButtonProps) {
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-lg p-2 text-secondary hover:bg-muted hover:text-foreground"
+          title="X (Twitter)"
           aria-label="Share on X (Twitter)"
         >
           <Twitter className="h-5 w-5" />

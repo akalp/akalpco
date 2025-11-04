@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     description:
       "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
     images: ["/images/hasan.webp"], // Same image as OpenGraph
+    site: "@hasanakalp",
   },
   robots: {
     index: true,

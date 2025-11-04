@@ -41,7 +41,7 @@ export const contacts: ContactMethod[] = [
     icon: Bird,
   },
   {
-    name: "Twitter",
+    name: "X (Twitter)",
     value: "x.com/hasanakalp",
     href: "https://x.com/hasanakalp",
     icon: Twitter,
