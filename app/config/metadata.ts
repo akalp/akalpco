@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
     images: [
       {
-        url: "/hasan.webp", // Make sure to add this image to your public folder
+        url: "/images/hasan.webp", // Make sure to add this image to your public folder
         width: 1200,
         height: 1200,
         alt: "Hasan Akalp - Full-Stack Software Engineer",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Hasan Akalp - Full-Stack Software Engineer",
     description:
       "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
-    images: ["/hasan.webp"], // Same image as OpenGraph
+    images: ["/images/hasan.webp"], // Same image as OpenGraph
   },
   robots: {
     index: true,
