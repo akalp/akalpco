@@ -4,12 +4,7 @@ import Link from "next/link";
 import { BlogPost } from "@/app/types/blog";
 import { formatDistance } from "date-fns";
 import { motion } from "motion/react";
-
-function getReadingTime(content: string): number {
-  const wordsPerMinute = 200;
-  const words = content.trim().split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
-}
+import { getReadingTime } from "@/app/lib/reading-time";
 
 export function BlogCard({ post }: { post: BlogPost }) {
   const readingTime = getReadingTime(post.content);

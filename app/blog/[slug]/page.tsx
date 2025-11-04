@@ -2,6 +2,7 @@ import { getPostBySlug, getAllPosts } from "@/app/lib/blog";
 import { notFound } from "next/navigation";
 import { SocialShare } from "@/app/components/social-share";
 import { renderMarkdown } from "@/app/lib/markdown";
+import { getReadingTime } from "@/app/lib/reading-time";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -37,9 +38,7 @@ export default async function BlogPost({
             })}
           </time>
           <span>·</span>
-          <span>
-            {Math.ceil(post.content.split(/\s+/).length / 200)} min read
-          </span>
+          <span>{getReadingTime(post.content)} min read</span>
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           {post.tags.map((tag) => (
