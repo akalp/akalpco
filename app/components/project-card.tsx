@@ -2,7 +2,7 @@
 
 import { Project } from "@/app/types/portfolio";
 import Link from "next/link";
-import { Github, ExternalLink } from "lucide-react";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { motion } from "motion/react";
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -54,7 +54,7 @@ export function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="h-5 w-5" />
+              <FiGithub className="h-5 w-5" />
             </Link>
           )}
           {project.link && (
@@ -64,7 +64,7 @@ export function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ExternalLink className="h-5 w-5" />
+              <FiExternalLink className="h-5 w-5" />
             </Link>
           )}
         </div>

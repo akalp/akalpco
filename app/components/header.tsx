@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
 import { mainNavigation } from "@/app/data/navigation";
 import { ThemeToggle } from "./theme-toggle";
@@ -50,9 +50,9 @@ export function Header() {
             aria-controls="mobile-menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <FiX className="h-6 w-6" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <FiMenu className="h-6 w-6" />
             )}
           </button>
 
