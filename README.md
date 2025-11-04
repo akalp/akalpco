@@ -21,7 +21,7 @@ Open http://localhost:3000 in your browser to view the site. Edit `app/page.tsx`
 ## Project Structure
 
 - `app/` — routes, layouts, and UI components
-- `app/content/blog/` — Markdown posts with front‑matter: `title`, `date`, `description`, `tags`, `draft`
+- `app/content/blog/` — Markdown posts with front‑matter: `title`, `date`, `description`, `tags`
 - `app/data/` — navigation and project data
 - `app/fonts/` — local font files
 - `public/` — static assets

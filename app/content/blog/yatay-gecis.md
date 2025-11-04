@@ -2,8 +2,7 @@
 title: "Yatay geçiş mi? O da ne? 🤔"
 date: "2021-12-26"
 description: "İstediğin bölümünde veya üniversitede değil misin? Dert etme, hala bir şansın var."
-tags: ["üniversite"]
-draft: false
+tags: ["universite"]
 ---
 
 ## Evet üniversitedesin ama o da ne...

@@ -2,8 +2,7 @@
 title: "Bilgisayar Mühendisliği Kazandım, Ne Yapmalıyım?"
 date: "2021-09-23"
 description: "Bir bilgisayar mühendisliği mezunu olarak nacizane önerilerim"
-tags: ["bilgisayar mühendisliği", "üniversite"]
-draft: false
+tags: ["bilgisayar-muhendisligi", "universite"]
 ---
 
 ## Bölümü kazanmak

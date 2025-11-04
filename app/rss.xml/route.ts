@@ -13,7 +13,7 @@ function xmlEscape(str: string): string {
 
 export async function GET() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://akalp.co";
-  const posts = getAllPosts(false);
+  const posts = getAllPosts();
 
   const items = posts
     .map((post) => {
@@ -54,4 +54,3 @@ export async function GET() {
     },
   });
 }
-

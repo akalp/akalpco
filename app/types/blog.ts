@@ -5,5 +5,4 @@ export type BlogPost = {
   description: string;
   content: string;
   tags: string[];
-  draft?: boolean;
 };

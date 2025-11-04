@@ -1,9 +1,10 @@
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
+import type { Highlighter } from "shiki";
 
-let highlighterPromise: Promise<any> | null = null;
+let highlighterPromise: Promise<Highlighter> | null = null;
 
-async function getHighlighter() {
+async function getHighlighter(): Promise<Highlighter> {
   if (!highlighterPromise) {
     highlighterPromise = (async () => {
       const { createHighlighter } = await import("shiki");
