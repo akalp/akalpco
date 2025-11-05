@@ -7,4 +7,3 @@ export type Experience = {
   location?: string;
   link?: string; // optional company or project link
 };
-
