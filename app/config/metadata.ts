@@ -49,6 +49,7 @@ export const metadata: Metadata = {
       "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
     images: [defaultOgImage],
     site: "@hasanakalp",
+    creator: "@hasanakalp",
   },
   robots: {
     index: true,

@@ -58,6 +58,8 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       images: [ogImagePath],
+      site: "@hasanakalp",
+      creator: "@hasanakalp",
     },
   };
 }
