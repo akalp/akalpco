@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SocialShare } from "@/app/components/social-share";
 import { renderMarkdown } from "@/app/lib/markdown";
 import type { Metadata } from "next";
+import ogImages from "@/public/og/og-images.json";
 import { getReadingTime } from "@/app/lib/reading-time";
 
 export async function generateStaticParams() {
@@ -25,6 +26,9 @@ export async function generateMetadata({
   }
 
   const canonicalPath = `/blog/${post.slug}`;
+  const ogImageMap = ogImages as Record<string, string>;
+  const ogImagePath =
+    ogImageMap[post.slug] ?? ogImageMap["__default"] ?? "/images/hasan.webp";
 
   return {
     title: post.title,
@@ -42,9 +46,9 @@ export async function generateMetadata({
       tags: post.tags,
       images: [
         {
-          url: "/images/hasan.webp",
+          url: ogImagePath,
           width: 1200,
-          height: 1200,
+          height: 630,
           alt: post.title,
         },
       ],
@@ -53,7 +57,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: ["/images/hasan.webp"],
+      images: [ogImagePath],
     },
   };
 }
