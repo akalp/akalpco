@@ -1,4 +1,5 @@
 import ExportedImage from "next-image-export-optimizer";
+import { ExperienceTimeline } from "@/app/components/experience-timeline";
 import { aboutMetadata } from "../config/metadata";
 
 export const metadata = aboutMetadata;
@@ -52,6 +53,9 @@ export default function AboutPage() {
           />
         </div>
       </section>
+
+      {/* Experience Timeline (renders only when data exists) */}
+      <ExperienceTimeline />
 
       {/* Technologies Section */}
       <section className="mb-16">
