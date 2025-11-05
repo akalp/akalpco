@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import ogImages from "@/public/og/og-images.json";
+
+const defaultOgImage =
+  (ogImages as Record<string, string>)["__default"] ?? "/images/hasan.webp";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://akalp.co"),
@@ -31,9 +35,9 @@ export const metadata: Metadata = {
       "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
     images: [
       {
-        url: "/hasan.webp", // Make sure to add this image to your public folder
+        url: defaultOgImage,
         width: 1200,
-        height: 1200,
+        height: 630,
         alt: "Hasan Akalp - Full-Stack Software Engineer",
       },
     ],
@@ -43,7 +47,8 @@ export const metadata: Metadata = {
     title: "Hasan Akalp - Full-Stack Software Engineer",
     description:
       "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
-    images: ["/hasan.webp"], // Same image as OpenGraph
+    images: [defaultOgImage],
+    site: "@hasanakalp",
   },
   robots: {
     index: true,
@@ -66,9 +71,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
-  verification: {
-    google: "UA-33414229-2",
-  },
 };
 
 // Page-specific metadata

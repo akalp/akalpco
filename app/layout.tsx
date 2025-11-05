@@ -30,8 +30,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
         <ThemeProvider>
+          <a
+            href="#main-content"
+            className="absolute left-1/2 top-4 z-[100] -translate-x-1/2 -translate-y-[150%] transform rounded-md bg-foreground px-4 py-2 font-semibold text-background transition-transform duration-300 focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            Skip to content
+          </a>
           <Header />
-          <main className="flex-grow">{children}</main>
+          <main id="main-content" className="flex-grow">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

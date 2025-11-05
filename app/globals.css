@@ -41,4 +41,58 @@ body {
   .body-text {
     @apply text-base leading-7 text-[var(--secondary)];
   }
+
+  /* Code & Prose styling */
+  .prose pre {
+    @apply overflow-x-auto rounded-lg border border-neutral-200 bg-transparent text-sm leading-6 dark:border-neutral-800;
+  }
+  .prose pre.shiki {
+    /* Shiki sets background color inline; we only add spacing */
+    @apply my-5 p-4;
+  }
+  .prose pre code {
+    /* Reset typography plugin code block padding */
+    @apply bg-transparent p-0;
+  }
+  .prose code {
+    @apply font-mono text-[0.95em];
+  }
+
+  /* Dual theme toggling for Shiki output */
+  .prose .light-only {
+    display: block;
+  }
+  .prose .dark-only {
+    display: none;
+  }
+  .dark .prose .light-only {
+    display: none;
+  }
+  .dark .prose .dark-only {
+    display: block;
+  }
+
+  /* Language badge on code blocks */
+  .prose .code-block {
+    position: relative;
+  }
+  .prose .code-block::after {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.75rem; /* text-xs */
+    line-height: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.375rem; /* rounded-md */
+    background-color: #f3f4f6; /* neutral-100 */
+    color: #374151; /* neutral-700 */
+  }
+  .dark .prose .code-block::after {
+    background-color: #1f2937; /* neutral-800 */
+    color: #d1d5db; /* neutral-300 */
+  }
 }

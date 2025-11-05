@@ -1,8 +1,8 @@
-import type { LucideIcon } from "lucide-react";
+import type { IconType } from "react-icons";
 
 export type ContactMethod = {
   name: string;
   value: string;
   href?: string;
-  icon: LucideIcon;
+  icon: IconType;
 };

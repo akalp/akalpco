@@ -47,7 +47,7 @@ export const projects: Project[] = [
       { name: "Java" },
       // Frontend
       { name: "React" },
-      { name: "Material UI" },
+      { name: "MUI" },
       // Backend
       { name: "Spring Boot" },
       // Databases
@@ -84,9 +84,9 @@ export const projects: Project[] = [
       { name: "Kubernetes" },
       { name: "OpenShift" },
       { name: "Rancher" },
-      { name: "Microk8s" },
+      { name: "MicroK8s" },
       { name: "Helm" },
-      { name: "Gitlab CI/CD" },
+      { name: "GitLab CI/CD" },
       // Monitoring & Logging
       { name: "Prometheus" },
       { name: "Grafana" },
@@ -112,7 +112,7 @@ export const projects: Project[] = [
       { name: "PostgreSQL" },
       // Infrastructure
       { name: "Docker" },
-      { name: "Gitlab CI/CD" },
+      { name: "GitLab CI/CD" },
     ],
     featured: true,
   },

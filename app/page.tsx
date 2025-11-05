@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { getAllPosts } from "@/app/lib/blog";
 import { BlogCard } from "@/app/components/blog-card";
@@ -33,12 +33,12 @@ export default function Home() {
           </div>
         </div>
         <div className="relative aspect-square">
-          <Image
-            src="/hasan.webp"
+          <ExportedImage
+            src="/images/hasan.webp"
             alt="Hasan Akalp - Full-Stack Software Engineer"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             priority
-            quality={85}
             className="rounded-2xl object-cover object-center"
           />
           <div className="from-primary/20 to-accent/20 absolute inset-0 rounded-2xl bg-gradient-to-br" />

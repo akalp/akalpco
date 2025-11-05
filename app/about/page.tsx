@@ -1,4 +1,5 @@
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
+import { ExperienceTimeline } from "@/app/components/experience-timeline";
 import { aboutMetadata } from "../config/metadata";
 
 export const metadata = aboutMetadata;
@@ -42,15 +43,19 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="relative aspect-square lg:aspect-video">
-          <Image
-            src="/hasan.webp"
+          <ExportedImage
+            src="/images/hasan.webp"
             alt="Hasan Akalp"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             priority
             className="rounded-2xl object-cover"
           />
         </div>
       </section>
+
+      {/* Experience Timeline (renders only when data exists) */}
+      <ExperienceTimeline />
 
       {/* Technologies Section */}
       <section className="mb-16">

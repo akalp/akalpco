@@ -1,5 +1,5 @@
 import React from "react";
-import { Sun, Moon } from "lucide-react";
+import { FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
@@ -14,9 +14,9 @@ export function ThemeToggle() {
       }
     >
       {theme === "dark" ? (
-        <Sun className="h-5 w-5" />
+        <FiSun className="h-5 w-5" />
       ) : (
-        <Moon className="h-5 w-5" />
+        <FiMoon className="h-5 w-5" />
       )}
     </button>
   );

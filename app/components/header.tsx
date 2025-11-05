@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
 import { mainNavigation } from "@/app/data/navigation";
 import { ThemeToggle } from "./theme-toggle";
@@ -27,6 +27,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   className="relative text-secondary transition-colors hover:text-foreground"
+                  aria-current={pathname === item.href ? "page" : undefined}
                 >
                   {item.name}
                   {pathname === item.href && (
@@ -45,11 +46,13 @@ export function Header() {
             className="text-secondary hover:text-foreground md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <FiX className="h-6 w-6" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <FiMenu className="h-6 w-6" />
             )}
           </button>
 
@@ -60,6 +63,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="absolute left-0 right-0 top-16 z-50 border-b border-muted bg-background p-4 shadow-lg md:hidden"
+              id="mobile-menu"
             >
               <ul className="flex flex-col gap-4">
                 {mainNavigation.map((item) => (
@@ -72,6 +76,7 @@ export function Header() {
                           ? "bg-primary/10 text-foreground"
                           : "text-secondary hover:bg-muted hover:text-foreground"
                       }`}
+                      aria-current={pathname === item.href ? "page" : undefined}
                     >
                       {item.name}
                     </Link>
