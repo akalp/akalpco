@@ -4,82 +4,67 @@ export const projects: Project[] = [
   {
     title: "gardro.app",
     description:
-      "Led the development of backend and frontend architecture from scratch, implementing features using TypeScript, Next.js, and Python.",
+      "Owned the full-stack MVP using TypeScript, Next.js, Tailwind CSS and a Python/FastAPI backend. Improved image-generation reliability and refined SDXL prompts.",
     technologies: [
-      // Languages
       { name: "TypeScript" },
-      { name: "Python" },
-      // Frontend
       { name: "Next.js" },
       { name: "Tailwind CSS" },
-      { name: "Radix UI" },
+      { name: "Python" },
+      { name: "FastAPI" },
     ],
-    featured: true,
+    featured: false,
+    category: "professional",
   },
   {
     title: "A Livestreaming Platform",
     description:
-      "A livestreaming platform for content creators to stream their content to their audience.",
+      "Worked on livestreaming, moderation, and creator analytics—building backend services and streamer/moderator dashboards.",
     technologies: [
-      // Languages
       { name: "JavaScript" },
-      { name: "Python" },
-      // Frontend
       { name: "Vue.js" },
-      // Backend
+      { name: "Python" },
       { name: "Django" },
-      // Databases
       { name: "MySQL" },
       { name: "Redis" },
       { name: "Firestore" },
-      // Infrastructure
       { name: "Docker" },
       { name: "Google Cloud" },
     ],
-    featured: true,
+    featured: false,
+    category: "professional",
   },
   {
-    title: "Enterprise Level Security System",
-    description: "An enterprise level security system for a large corporation.",
+    title: "Enterprise-Level Security System",
+    description:
+      "Developed React frontends and Spring Boot services for a mission-critical defense application.",
     technologies: [
-      // Languages
       { name: "JavaScript" },
-      { name: "Java" },
-      // Frontend
       { name: "React" },
       { name: "MUI" },
-      // Backend
+      { name: "Java" },
       { name: "Spring Boot" },
-      // Databases
       { name: "PostgreSQL" },
       { name: "Redis" },
-      // Infrastructure
       { name: "Docker" },
     ],
-    featured: true,
+    featured: false,
+    category: "professional",
   },
   {
-    title:
-      "Microservices Architecture, CI/CD Pipeline, Kubernetes and Monitoring System",
+    title: "Microservices Architecture, CI/CD Pipelines & Kubernetes Platform",
     description:
-      "Microservices architecture for internal use of a large corporation. CI/CD Pipelines for automating the build, test, and deployment process and Kubernetes for containerizing the application.",
+      "Designed microservices, automated CI/CD pipelines, and managed Kubernetes environments (OpenShift, Rancher, MicroK8s).",
     technologies: [
-      // Languages
       { name: "JavaScript" },
-      { name: "Java" },
-      { name: "Bash Scripting" },
-      // Frontend
       { name: "React" },
-      // Backend
+      { name: "Java" },
       { name: "Spring Boot" },
-      // Databases
+      { name: "Bash Scripting" },
       { name: "PostgreSQL" },
       { name: "MongoDB" },
       { name: "Redis" },
-      { name: "Elasticsearch" },
-      // Message Brokers
       { name: "Kafka" },
-      // Infrastructure & DevOps
+      { name: "Elasticsearch" },
       { name: "Docker" },
       { name: "Kubernetes" },
       { name: "OpenShift" },
@@ -87,51 +72,80 @@ export const projects: Project[] = [
       { name: "MicroK8s" },
       { name: "Helm" },
       { name: "GitLab CI/CD" },
-      // Monitoring & Logging
       { name: "Prometheus" },
       { name: "Grafana" },
       { name: "Kibana" },
     ],
-    featured: true,
+    featured: false,
+    category: "professional",
   },
   {
-    title:
-      "Enterprise Level Software Development and Testing Management System",
+    title: "Enterprise Software Development & Test Management System",
     description:
-      "An enterprise level software development and testing management system which is communicating with IBM Rational DOORS, IBM Rational ClearQuest and JIRA.",
+      "A Django-based system integrated with IBM DOORS, ClearQuest and JIRA to streamline development, testing and reporting workflows.",
     technologies: [
-      // Languages
       { name: "JavaScript" },
       { name: "Python" },
-      // Frontend
       { name: "jQuery" },
       { name: "Bootstrap" },
-      // Backend
       { name: "Django" },
-      // Database
       { name: "PostgreSQL" },
-      // Infrastructure
       { name: "Docker" },
       { name: "GitLab CI/CD" },
     ],
-    featured: true,
+    featured: false,
+    category: "professional",
   },
   {
-    title: "HuDeX",
+    title: "akalp.co",
     description:
-      "Blockchain Based Economy System for Games. An ecosystem to create, manage, and trade in-game items (as ERC-1155 tokens) on the Ethereum Network.",
+      "Personal website and blog built with Next.js (App Router) and TypeScript, showcasing projects and writing.",
     technologies: [
-      // Languages
-      { name: "Python" },
-      { name: "Solidity" },
-      // Backend
-      { name: "Django" },
-      // Database
-      { name: "PostgreSQL" },
-      // Blockchain
-      { name: "Web3.js" },
-      { name: "Truffle" },
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "Tailwind CSS" },
     ],
     featured: false,
+    category: "personal",
+    github: "https://github.com/akalp/akalpco",
+    link: "https://akalp.co",
+  },
+  {
+    title: "ws",
+    description:
+      "A workspace switcher and scaffolding tool written in Go with a fuzzy-search TUI and project templates.",
+    technologies: [{ name: "Go" }, { name: "TUI" }, { name: "CLI" }],
+    featured: false,
+    category: "personal",
+    github: "https://github.com/akalp/ws",
+  },
+  {
+    title: "SlidePlay",
+    description:
+      "A real-time multiplayer slideshow and quiz app built with Express and Socket.IO, featuring player, host, and admin views with live scoring, slide control, and in-memory state.",
+    technologies: [
+      { name: "Node.js" },
+      { name: "Express" },
+      { name: "Socket.IO" },
+      { name: "JavaScript" },
+      { name: "HTML" },
+      { name: "CSS" },
+    ],
+    featured: false,
+    category: "personal",
+    github: "https://github.com/akalp/SlidePlay",
+  },
+  {
+    title: "bs5-nav-tree",
+    description:
+      "A Bootstrap 5 plugin enabling searchable, collapsible, nested vertical navigation menus.",
+    technologies: [
+      { name: "JavaScript" },
+      { name: "Bootstrap" },
+      { name: "CSS" },
+    ],
+    featured: false,
+    category: "personal",
+    github: "https://github.com/akalp/bs5-nav-tree",
   },
 ];

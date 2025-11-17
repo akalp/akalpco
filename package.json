@@ -6,6 +6,7 @@
     "dev": "next dev",
     "generate:og": "node scripts/generate-og-images.mjs",
     "build": "npm run generate:og && next build && next-image-export-optimizer",
+    "serve": "npx serve out",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
