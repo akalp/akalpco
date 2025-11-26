@@ -40,7 +40,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           {post.description}
         </motion.p>
 
-        <motion.div className="mt-auto flex flex-wrap gap-2" layout>
+        <motion.div className="flex flex-wrap gap-2" layout>
           {post.tags.map((tag, index) => (
             <motion.span
               key={tag}

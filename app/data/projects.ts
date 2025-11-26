@@ -136,6 +136,14 @@ export const projects: Project[] = [
     github: "https://github.com/akalp/SlidePlay",
   },
   {
+    title: "caff",
+    description: "Modern, user-friendly wrapper around macOS caffeinate.",
+    technologies: [{ name: "zsh" }, { name: "shell" }, { name: "caffeinate" }],
+    featured: false,
+    category: "personal",
+    github: "https://github.com/akalp/caff",
+  },
+  {
     title: "bs5-nav-tree",
     description:
       "A Bootstrap 5 plugin enabling searchable, collapsible, nested vertical navigation menus.",

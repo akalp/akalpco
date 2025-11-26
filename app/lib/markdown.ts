@@ -29,6 +29,7 @@ async function getHighlighter(): Promise<Highlighter> {
           "rust",
           "csharp",
           "xml",
+          "zsh",
         ],
       });
     })();
@@ -77,9 +78,6 @@ export async function renderMarkdown(markdown: string) {
         const map: Record<string, string> = {
           typescript: "ts",
           javascript: "js",
-          shell: "bash",
-          sh: "bash",
-          zsh: "bash",
         };
         return map[labelBase] || labelBase;
       })();
