@@ -24,6 +24,8 @@ If you do any kind of serious development on macOS, there's a good chance you've
 
 This blog post is about how I tried to solve that with Amphetamine, why that wasn't quite enough for my setup (especially in **clamshell mode**), and how that annoyance pushed me to write my first Oh My Zsh plugin: `caff`, a smarter wrapper around macOS' built‑in `caffeinate` command.
 
+---
+
 ## Why a developer needs to keep the machine awake
 
 Modern development is full of tasks that take longer than a coffee break:
