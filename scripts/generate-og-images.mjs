@@ -418,11 +418,12 @@ async function main() {
   console.log(`OG manifest updated: ${manifestPath}`);
 }
 
+const postsDirectory = path.join(process.cwd(), "content/blog");
+
 main().catch((error) => {
   console.error("Failed to generate OG images:", error);
   process.exitCode = 1;
 });
-const postsDirectory = path.join(process.cwd(), "content/blog");
 
 function readAllPosts() {
   const fileNames = fs
