@@ -9,12 +9,13 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 in your browser to view the site. Edit `app/page.tsx` (and other files under `app/`) to iterate; changes hot‑reload during development.
+Open http://localhost:3000 in your browser to view the site. Edit `src/app/page.tsx` (and other files under `src/`) to iterate; changes hot‑reload during development.
 
 ## Scripts
 
 - `dev` — start the development server
-- `build` — create a production build
+- `generate:og` — generate Open Graph images in `public/og/`
+- `build` — generate OG images, build, and optimize images for static export
 - `start` — run the production server
 - `lint` — run lint checks
 - `format` — apply Prettier formatting to the codebase
@@ -22,11 +23,15 @@ Open http://localhost:3000 in your browser to view the site. Edit `app/page.tsx`
 
 ## Project Structure
 
-- `app/` — routes, layouts, and UI components
-- `app/content/blog/` — Markdown posts with front‑matter: `title`, `date`, `description`, `tags`
-- `app/data/` — navigation and project data
-- `app/fonts/` — local font files
-- `public/` — static assets
+- `src/app/` — Next.js App Router routes, layouts, and route-level UI
+- `src/components/` — shared UI components
+- `src/lib/` — shared utilities (Markdown rendering, blog helpers, reading time)
+- `src/config/` — app configuration (metadata, fonts, image sizes)
+- `src/data/` — navigation and other site data
+- `src/types/` — TypeScript types
+- `src/assets/fonts/` — local font files (used by `next/font/local` and OG generation)
+- `content/blog/` — Markdown posts with front‑matter: `title`, `date`, `description`, `tags`
+- `public/` — static assets (including generated `public/og/` images)
 
 ## Configuration
 

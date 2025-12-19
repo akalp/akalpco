@@ -7,13 +7,13 @@ import matter from "gray-matter";
 import { parse as parseEmoji } from "twemoji-parser";
 
 const FONT_REGULAR = fs.readFileSync(
-  path.join(process.cwd(), "app/fonts/Geist-Regular.ttf")
+  path.join(process.cwd(), "src/assets/fonts/Geist-Regular.ttf")
 );
 const FONT_BOLD = fs.readFileSync(
-  path.join(process.cwd(), "app/fonts/Geist-Bold.ttf")
+  path.join(process.cwd(), "src/assets/fonts/Geist-Bold.ttf")
 );
 const FONT_MONO = fs.readFileSync(
-  path.join(process.cwd(), "app/fonts/GeistMono-Medium.ttf")
+  path.join(process.cwd(), "src/assets/fonts/GeistMono-Medium.ttf")
 );
 
 const emojiDataUriCache = new Map();
@@ -422,7 +422,7 @@ main().catch((error) => {
   console.error("Failed to generate OG images:", error);
   process.exitCode = 1;
 });
-const postsDirectory = path.join(process.cwd(), "app/content/blog");
+const postsDirectory = path.join(process.cwd(), "content/blog");
 
 function readAllPosts() {
   const fileNames = fs

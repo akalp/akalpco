@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { DEVICE_SIZES, IMAGE_SIZES } from "./config/image-sizes";
+import { DEVICE_SIZES, IMAGE_SIZES } from "./src/config/image-sizes";
 
 const nextConfig: NextConfig = {
   output: "export",
