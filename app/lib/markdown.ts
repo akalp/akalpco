@@ -1,6 +1,11 @@
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import type { Highlighter } from "shiki";
+import {
+  BLOG_IMAGE_SIZES,
+  DEVICE_SIZES,
+  IMAGE_SIZES,
+} from "@/config/image-sizes";
 
 let highlighterPromise: Promise<Highlighter> | null = null;
 
@@ -45,6 +50,111 @@ function escapeHtml(value: unknown) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+const SUPPORTED_OPTIMIZED_FORMATS = new Set([
+  "JPG",
+  "JPEG",
+  "WEBP",
+  "PNG",
+  "AVIF",
+  "GIF",
+]);
+const IMAGE_WIDTH_CANDIDATES = Array.from(
+  new Set([...DEVICE_SIZES, ...IMAGE_SIZES])
+).sort((a, b) => a - b);
+const EXPORT_FOLDER_NAME =
+  process.env.nextImageExportOptimizer_exportFolderName ||
+  "nextImageExportOptimizer";
+const STORE_IMAGES_IN_WEBP =
+  process.env.nextImageExportOptimizer_storePicturesInWEBP !== undefined
+    ? process.env.nextImageExportOptimizer_storePicturesInWEBP === "true"
+    : true;
+
+function normalizeImageSrc(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "";
+  }
+  if (
+    trimmed.startsWith("http://") ||
+    trimmed.startsWith("https://") ||
+    trimmed.startsWith("//") ||
+    trimmed.startsWith("data:")
+  ) {
+    return trimmed;
+  }
+  if (trimmed.startsWith("/")) {
+    return trimmed;
+  }
+  if (trimmed.startsWith("./")) {
+    return `/${trimmed.slice(2)}`;
+  }
+  return `/${trimmed}`;
+}
+
+function splitFilePath(filePath: string) {
+  const normalized = filePath.replace(/\\/g, "/");
+  const noQuery = normalized.split("?")[0]?.split("#")[0] ?? normalized;
+  const lastSlash = noQuery.lastIndexOf("/");
+  const dir = lastSlash >= 0 ? noQuery.slice(0, lastSlash + 1) : "/";
+  const filenameWithExtension =
+    lastSlash >= 0 ? noQuery.slice(lastSlash + 1) : noQuery;
+  const lastDot = filenameWithExtension.lastIndexOf(".");
+  const extension =
+    lastDot >= 0 ? filenameWithExtension.slice(lastDot + 1) : "";
+  const filename =
+    lastDot >= 0
+      ? filenameWithExtension.slice(0, lastDot)
+      : filenameWithExtension;
+  return {
+    dir: dir || "/",
+    filename,
+    extension,
+  };
+}
+
+function buildOptimizedDirectory(dir: string) {
+  const normalizedDir = dir.endsWith("/") ? dir : `${dir}/`;
+  if (normalizedDir === "/") {
+    return `/${EXPORT_FOLDER_NAME}/`;
+  }
+  return `${normalizedDir}${EXPORT_FOLDER_NAME}/`;
+}
+
+function getOptimizedImageAttributes(src: string) {
+  if (!src.startsWith("/") || src.startsWith("//")) {
+    return null;
+  }
+
+  const { dir, filename, extension } = splitFilePath(src);
+  if (!filename || !extension) {
+    return null;
+  }
+
+  const upperExtension = extension.toUpperCase();
+  if (!SUPPORTED_OPTIMIZED_FORMATS.has(upperExtension)) {
+    return null;
+  }
+
+  const outputExtension =
+    STORE_IMAGES_IN_WEBP &&
+    ["JPG", "JPEG", "PNG", "GIF"].includes(upperExtension)
+      ? "WEBP"
+      : upperExtension;
+  const baseDir = buildOptimizedDirectory(
+    dir.startsWith("/") ? dir : `/${dir}`
+  );
+  const urlForWidth = (width: number) =>
+    `${baseDir}${filename}-opt-${width}.${outputExtension}`;
+  const srcSet = IMAGE_WIDTH_CANDIDATES.map(
+    (width) => `${urlForWidth(width)} ${width}w`
+  ).join(", ");
+
+  return {
+    srcSet,
+    src: urlForWidth(IMAGE_WIDTH_CANDIDATES[IMAGE_WIDTH_CANDIDATES.length - 1]),
+  };
 }
 
 export async function renderMarkdown(markdown: string) {
@@ -96,6 +206,39 @@ export async function renderMarkdown(markdown: string) {
     }
   };
 
+  renderer.image = (arg1: unknown, arg2?: unknown, arg3?: unknown) => {
+    let href = "";
+    let title = "";
+    let text = "";
+
+    if (typeof arg1 === "object" && arg1 !== null) {
+      const token = arg1 as { href?: unknown; title?: unknown; text?: unknown };
+      href = typeof token.href === "string" ? token.href : "";
+      title = typeof token.title === "string" ? token.title : "";
+      text = typeof token.text === "string" ? token.text : "";
+    } else {
+      href = typeof arg1 === "string" ? arg1 : "";
+      title = typeof arg2 === "string" ? arg2 : "";
+      text = typeof arg3 === "string" ? arg3 : "";
+    }
+
+    const normalizedSrc = normalizeImageSrc(href);
+    if (!normalizedSrc) {
+      return "";
+    }
+
+    const safeAlt = escapeHtml(text);
+    const safeTitle = title ? ` title="${escapeHtml(title)}"` : "";
+    const baseAttributes = `alt="${safeAlt}"${safeTitle} loading="lazy" decoding="async" class="markdown-image"`;
+    const optimized = getOptimizedImageAttributes(normalizedSrc);
+
+    if (optimized) {
+      return `<img src="${escapeHtml(optimized.src)}" srcset="${escapeHtml(optimized.srcSet)}" sizes="${escapeHtml(BLOG_IMAGE_SIZES)}" ${baseAttributes} />`;
+    }
+
+    return `<img src="${escapeHtml(normalizedSrc)}" ${baseAttributes} />`;
+  };
+
   const rawHtml = (await marked.parse(markdown, { renderer })) as string;
 
   // Sanitize the HTML output from marked to prevent XSS.
@@ -120,7 +263,18 @@ export async function renderMarkdown(markdown: string) {
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
       a: ["href", "name", "target", "rel"],
-      img: ["src", "srcset", "alt", "title", "width", "height", "loading"],
+      img: [
+        "src",
+        "srcset",
+        "sizes",
+        "alt",
+        "title",
+        "width",
+        "height",
+        "loading",
+        "decoding",
+        "class",
+      ],
       div: ["class", "data-lang"],
       pre: ["class"],
       code: ["class"],

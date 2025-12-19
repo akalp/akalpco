@@ -2,6 +2,7 @@ import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { getAllPosts } from "@/app/lib/blog";
 import { BlogCard } from "@/app/components/blog-card";
+import { HERO_IMAGE_SIZES } from "@/config/image-sizes";
 
 export default function Home() {
   const recentPosts = getAllPosts().slice(0, 5);
@@ -37,7 +38,7 @@ export default function Home() {
             src="/images/hasan.webp"
             alt="Hasan Akalp - Full-Stack Software Engineer"
             fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes={HERO_IMAGE_SIZES}
             priority
             className="rounded-2xl object-cover object-center"
           />

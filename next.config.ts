@@ -1,11 +1,12 @@
 import type { NextConfig } from "next";
+import { DEVICE_SIZES, IMAGE_SIZES } from "./config/image-sizes";
 
 const nextConfig: NextConfig = {
   output: "export",
   images: {
     loader: "custom",
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: IMAGE_SIZES,
+    deviceSizes: DEVICE_SIZES,
   },
   transpilePackages: ["next-image-export-optimizer"],
   env: {

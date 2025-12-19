@@ -1,5 +1,6 @@
 import ExportedImage from "next-image-export-optimizer";
 import { ExperienceTimeline } from "@/app/components/experience-timeline";
+import { HERO_IMAGE_SIZES } from "@/config/image-sizes";
 import { aboutMetadata } from "../config/metadata";
 
 export const metadata = aboutMetadata;
@@ -47,7 +48,7 @@ export default function AboutPage() {
             src="/images/hasan.webp"
             alt="Hasan Akalp"
             fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes={HERO_IMAGE_SIZES}
             priority
             className="rounded-2xl object-cover"
           />
