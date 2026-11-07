@@ -19,14 +19,16 @@ export function readingMinutes(body: string | undefined): number {
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 }
 
-/** "20 Dec 2025" */
+/** "20 Dec 2025" (en-US month abbreviations: "Sep", not "Sept"). */
 export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat("en-GB", {
+  const parts = new Intl.DateTimeFormat("en-US", {
     day: "2-digit",
     month: "short",
     year: "numeric",
     timeZone: TIME_ZONE,
-  }).format(date);
+  }).formatToParts(date);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value;
+  return `${get("day")} ${get("month")} ${get("year")}`;
 }
 
 export function isoDate(date: Date): string {

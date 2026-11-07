@@ -1,18 +1,47 @@
 ---
+import { getCollection } from "astro:content";
 import Highlight from "@/components/Highlight.astro";
 import Margin from "@/components/Margin.astro";
 import MarginNote from "@/components/MarginNote.astro";
 import NoteRef from "@/components/NoteRef.astro";
-import Ticket from "@/components/Ticket.astro";
+import PostList from "@/components/PostList.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import TodayTicket from "@/components/TodayTicket.astro";
 import Base from "@/layouts/Base.astro";
+import { getPosts } from "@/lib/writing";
 
-// Static defaults; the ticket Worker (phase 6) will refresh these.
-const ticketRows = [
-  { label: "Brewing", value: "[bean · method]", field: "brewing" },
-  { label: "Playing", value: "[game]", field: "playing" },
-  { label: "Building", value: "[project]", field: "building" },
-  { label: "Reading", value: "[book]", field: "reading" },
-  { label: "Last push", value: "akalp/[repo] · [2h] ago", field: "lastPush" },
+const posts = (await getPosts()).slice(0, 5);
+const projects = (
+  await getCollection("projects", ({ data }) => data.card !== undefined)
+).sort((a, b) => a.data.order - b.data.order);
+
+// Drafts: Hasan will rewrite these in his own voice.
+const offline = [
+  {
+    title: "Coffee",
+    text: "Specialty beans, weighed to the gram, brewed with more care than strictly necessary.",
+    icon: [
+      "M8 16h24v10a10 10 0 0 1-10 10h-4A10 10 0 0 1 8 26z",
+      "M32 19h3a4 4 0 0 1 0 8h-3",
+      "M15 6c0 3 3 3 3 6M22 6c0 3 3 3 3 6",
+    ],
+  },
+  {
+    title: "Games",
+    text: "Strategy and RPGs — the “one more turn” kind that quietly eats a whole evening.",
+    icon: ["M22 5l14 8v16l-14 8-14-8V13z", "M22 5v16M8 13l14 8 14-8M22 21v16"],
+  },
+  {
+    title: "Kitchen",
+    text: "Homemade burgers and desserts, iterated on like side projects — one small release at a time.",
+    icon: [
+      "M8 19a14 9 0 0 1 28 0z",
+      "M7 24h30",
+      "M8 29h28",
+      "M9 33h26a2 2 0 0 1-2 3H11a2 2 0 0 1-2-3z",
+    ],
+  },
 ];
 ---
 
@@ -33,14 +62,15 @@ const ticketRows = [
       </p>
       <Fragment slot="notes">
         <MarginNote n={1} tilt={-1.5}>
-          ws, caff, SlidePlay… they live a bit further down ↓
+          ws, caff, SlidePlay… they live a bit{" "}
+          <a href="#made">further down ↓</a>
         </MarginNote>
         <MarginNote n={2} tilt={0.8}>
           defense, livestreaming, a few startups. the long version is on{" "}
           <a href="/about">/about</a>
         </MarginNote>
         <MarginNote n={3} tilt={-0.6}>
-          today’s beans are on the ticket →
+          today’s beans are on <a href="#ticket">the ticket</a> →
         </MarginNote>
         <MarginNote n={4} tilt={1.2}>
           still iterating. it’s basically a side project.
@@ -49,17 +79,69 @@ const ticketRows = [
     </Margin>
   </section>
 
-  <div class="ticket-demo">
-    <Ticket
-      title="Today’s ticket"
-      meta="thu · 05 nov · 14:12"
-      rows={ticketRows}
-      footer={["no. 0412", "thanks for stopping by"]}
-    />
-    <MarginNote class="ticket-demo__note">
-      printed fresh by a tiny worker, every hour
-    </MarginNote>
-  </div>
+  <section class="page-section writing" aria-labelledby="writing">
+    <div class="writing__list">
+      <SectionHead title="Writing" id="writing">
+        <a slot="aside" href="/writing">
+          all posts →
+        </a>
+      </SectionHead>
+      <PostList posts={posts} />
+      <div class="writing__note">
+        <MarginNote tilt={-0.8}>
+          ↑ the older ones are in Turkish — written for students picking a path.
+        </MarginNote>
+      </div>
+    </div>
+    <div class="writing__ticket" id="ticket">
+      <TodayTicket note="printed fresh by a tiny worker, every hour" />
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="made">
+    <SectionHead title="Things I’ve made" id="made">
+      <div slot="aside">
+        <MarginNote>mostly because something annoyed me</MarginNote>
+      </div>
+    </SectionHead>
+    <ul class="cards">
+      {projects.map((project) => (
+        <li>
+          <ProjectCard project={project} />
+        </li>
+      ))}
+    </ul>
+    <p class="more-link">
+      <a href="/made">everything I’ve made →</a>
+    </p>
+  </section>
+
+  <section class="page-section" aria-labelledby="offline">
+    <SectionHead title="Off the keyboard" id="offline" />
+    <ul class="offline">
+      {offline.map((item) => (
+        <li class="offline__item">
+          <svg
+            aria-hidden="true"
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {item.icon.map((d) => (
+              <path d={d} />
+            ))}
+          </svg>
+          <h3 class="offline__title">{item.title}</h3>
+          <p class="offline__text">{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
 </Base>
 
 <style>
@@ -81,6 +163,9 @@ const ticketRows = [
     font-weight: 350;
     line-height: 1;
     letter-spacing: -0.02em;
+    font-variation-settings:
+      "SOFT" 100,
+      "opsz" 144;
   }
 
   .hero__lede {
@@ -95,19 +180,72 @@ const ticketRows = [
     font-size: 19px;
   }
 
-  .ticket-demo {
+  .writing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 48px 72px;
+  }
+
+  .writing__list {
+    flex: 999 1 560px;
+    min-width: 0;
+  }
+
+  .writing__note {
+    margin-top: 18px;
+  }
+
+  .writing__ticket {
+    flex: 1 1 300px;
+    padding-top: 8px;
+    scroll-margin-top: 24px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more-link {
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+  }
+
+  .more-link a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+
+  .offline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .offline__item {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    max-width: 360px;
-    margin: 0 0 112px auto;
   }
 
-  .ticket-demo__note {
-    padding-left: 8px;
+  .offline__title {
+    font-size: 26px;
+    font-weight: 400;
   }
 
-  .ticket-demo__note :global(.margin-note) {
-    font-size: 17px;
+  .offline__text {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-soft);
   }
 </style>

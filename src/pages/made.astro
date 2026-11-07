@@ -1,0 +1,259 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import MarginNote from "@/components/MarginNote.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import Base from "@/layouts/Base.astro";
+import { inline } from "@/lib/inline";
+import { readingMinutes } from "@/lib/writing";
+
+const all = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const mine = await Promise.all(
+  all
+    .filter((p) => p.data.kind === "mine")
+    .map(async (project) => {
+      const post = project.data.post
+        ? await getEntry(project.data.post)
+        : undefined;
+      return { ...project.data, id: project.id, post };
+    })
+);
+const others = all.filter((p) => p.data.kind === "others");
+const tilts = [1.2, -1, 1.6, -1.2, 1.4];
+---
+
+<Base
+  title="Made"
+  description="Small open-source tools, mostly for myself, sometimes for the living room."
+  section="made"
+>
+  <PageIntro
+    eyebrow={`Made · ${mine.length} things`}
+    title="Things I’ve made."
+    lede="Small tools, mostly for myself, sometimes for the living room. All of them are open source."
+  >
+    <MarginNote slot="aside" tilt={-1.4}>
+      mostly because something annoyed me, and I had an evening.
+    </MarginNote>
+  </PageIntro>
+
+  <div class="projects">
+    {mine.map((project, i) => (
+      <article class="project" aria-labelledby={`p-${project.id}`}>
+        <div class="project__main">
+          <div class="project__head">
+            <h2
+              class:list={[
+                "project__name",
+                { "project__name--self": project.id === "akalpco" },
+              ]}
+              id={`p-${project.id}`}
+            >
+              {project.name}
+            </h2>
+            <span class="project__tech">{project.tech.join(" · ")}</span>
+          </div>
+          {project.description && (
+            <p class="project__desc" set:html={inline(project.description)} />
+          )}
+          {(project.repo || project.post) && (
+            <p class="project__links">
+              {project.repo && project.id !== "akalpco" && (
+                <a href={project.repo}>
+                  {project.repo.replace("https://", "")} ↗
+                </a>
+              )}
+              {project.post && (
+                <a href={`/writing/${project.post.id}`}>
+                  the story, {readingMinutes(project.post.body)} min →
+                </a>
+              )}
+            </p>
+          )}
+          {project.media && (
+            <div
+              class:list={[
+                "project__media",
+                `project__media--${project.media.kind}`,
+                { tilt: project.media.kind === "photo" },
+              ]}
+            >
+              {project.media.label}
+            </div>
+          )}
+        </div>
+        <div class="project__note">
+          {project.note && (
+            <MarginNote tilt={tilts[i % tilts.length]}>
+              {project.note}
+            </MarginNote>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <section class="others" aria-labelledby="others">
+    <div class="others__main">
+      <h2 class="others__title" id="others">
+        And for other people
+      </h2>
+      <p class="others__lede">Work I was part of, not mine to open source.</p>
+      <ul class="dash-list">
+        {others.map(({ data }) => (
+          <li class="dash-list__row">
+            <span>{data.name}</span>
+            <span class="dash-list__aside">{data.tech.join(" · ")}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="others__note">
+      <MarginNote tilt={-1}>
+        the story behind these is on <a href="/about">/about</a>
+      </MarginNote>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .project {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 64px;
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .project:first-child {
+    border-top: 2px solid var(--ink);
+  }
+
+  .project__main {
+    flex: 999 1 560px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .project__note {
+    flex: 1 1 220px;
+    align-self: center;
+  }
+
+  .project__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 24px;
+  }
+
+  .project__name {
+    font-size: clamp(44px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .project__name--self {
+    font-style: italic;
+  }
+
+  .project__tech {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+
+  .project__desc {
+    max-width: 640px;
+    font-size: 21px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .project__desc :global(code) {
+    padding: 2px 6px;
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    background: var(--paper-tint);
+    border-radius: 4px;
+  }
+
+  .project__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+  }
+
+  .project__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+
+  .project__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 640px;
+    aspect-ratio: 16 / 9;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    text-align: center;
+  }
+
+  .project__media--terminal {
+    color: var(--code-muted);
+    background: var(--code-bg);
+    border-radius: 10px;
+  }
+
+  .project__media--photo {
+    --tilt: -0.8deg;
+    color: var(--muted);
+    background: var(--photo);
+    border: 10px solid var(--paper-raised);
+    box-shadow: 0 14px 30px -18px rgb(60 40 20 / 0.45);
+  }
+
+  .others {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 64px;
+    padding: 56px 0 104px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .others__main {
+    flex: 999 1 560px;
+    min-width: 0;
+  }
+
+  .others__note {
+    flex: 1 1 220px;
+    align-self: flex-end;
+  }
+
+  .others__title {
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .others__lede {
+    margin-bottom: 24px;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .others .dash-list__row {
+    padding: 14px 0;
+  }
+</style>

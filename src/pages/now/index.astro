@@ -1,0 +1,15 @@
+---
+import NowPage from "@/components/NowPage.astro";
+import Base from "@/layouts/Base.astro";
+import { getNowEntries } from "@/lib/now";
+
+const [latest, ...previous] = await getNowEntries();
+---
+
+<Base
+  title="Now"
+  description="What has Hasan Akalp’s attention this month."
+  section="now"
+>
+  <NowPage entry={latest} previous={previous} />
+</Base>
