@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Must exactly match the Worker name in Workers Builds.
+  "name": "akalpco",
+  "compatibility_date": "2026-11-04",
+  // Assets-only for now. The /api/ticket Worker (main, KV, cron) arrives in phase 6.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
+}
