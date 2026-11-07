@@ -18,15 +18,22 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@astrojs/markdown-remark": "^7.3.6",
     "@eslint/js": "^10.0.1",
+    "@types/hast": "^3.0.5",
+    "@types/mdast": "^4.0.4",
     "astro": "^7.4.7",
     "eslint": "^10.14.0",
     "eslint-plugin-astro": "^3.2.1",
     "globals": "^17.14.0",
+    "hast-util-to-string": "^3.0.1",
+    "mdast-util-find-and-replace": "^3.0.4",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.2",
+    "shiki": "^4.6.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.1",
+    "unist-util-visit": "^5.2.0",
     "wrangler": "^4.158.0"
   },
   "dependencies": {
