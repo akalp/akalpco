@@ -5,7 +5,13 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
-  globalIgnores(["dist/", ".astro/", ".wrangler/", "docs/design-reference/"]),
+  globalIgnores([
+    "dist/",
+    ".astro/",
+    ".wrangler/",
+    "docs/design-reference/",
+    "src/worker/worker-configuration.d.ts",
+  ]),
   js.configs.recommended,
   tseslint.configs.recommended,
   astro.configs.recommended,

@@ -3,3 +3,4 @@ dist
 .wrangler
 pnpm-lock.yaml
 docs/design-reference
+src/worker/worker-configuration.d.ts

@@ -11,10 +11,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro build && wrangler dev",
-    "check": "astro check",
+    "check": "astro check && tsc -p src/worker",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "astro build && wrangler deploy",
+    "types": "wrangler types src/worker/worker-configuration.d.ts",
+    "ticket": "node scripts/ticket.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
