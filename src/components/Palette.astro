@@ -179,7 +179,7 @@ const data = JSON.stringify({ items, email }).replace(/</g, "\\u003c");
   }
 
   .palette__input::placeholder {
-    color: var(--rule-dash);
+    color: var(--muted);
   }
 
   .palette__esc {
@@ -233,6 +233,12 @@ const data = JSON.stringify({ items, email }).replace(/</g, "\\u003c");
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--muted);
+  }
+
+  /* --muted on the highlighter is 4.4:1; the darker ink keeps it legible. */
+  .palette__results
+    :global([role="option"][aria-selected="true"] .palette__hint) {
+    color: var(--ink-soft);
   }
 
   .palette__empty {
