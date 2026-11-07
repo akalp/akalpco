@@ -1,0 +1,25 @@
+# Footer "say hi" links, in display order.
+- id: email
+  order: 1
+  label: email
+  href: mailto:hasan.akalp@gmail.com
+- id: github
+  order: 2
+  label: GitHub
+  href: https://github.com/akalp
+- id: bluesky
+  order: 3
+  label: Bluesky
+  href: https://bsky.app/profile/hasan.akalp.co
+- id: linkedin
+  order: 4
+  label: LinkedIn
+  href: https://www.linkedin.com/in/akalp
+- id: instagram
+  order: 5
+  label: Instagram
+  href: https://www.instagram.com/hasanakalp
+- id: x
+  order: 6
+  label: X
+  href: https://x.com/hasanakalp

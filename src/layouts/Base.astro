@@ -1,10 +1,28 @@
 ---
+import "@/styles/fonts.css";
+import "@/styles/global.css";
+import frauncesUrl from "@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url";
+import Footer from "@/components/Footer.astro";
+import Header, { type Section } from "@/components/Header.astro";
+
 interface Props {
-  title: string;
+  /** Page title without the site name. Omit on the home page. */
+  title?: string;
   description?: string;
+  /** Highlights the matching nav item. */
+  section?: Section;
+  footer?: "full" | "compact";
 }
 
-const { title, description = "Hasan Akalp — personal site." } = Astro.props;
+const {
+  title,
+  description = "Hasan Akalp writes software in Ankara: small tools for his own days, and sometimes larger systems for other people.",
+  section,
+  footer = "compact",
+} = Astro.props;
+
+const siteName = "Hasan Akalp";
+const fullTitle = title ? `${title} — ${siteName}` : siteName;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -13,15 +31,36 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#F1EADF" />
+    <meta name="color-scheme" content="light" />
+
+    <link
+      rel="preload"
+      href={frauncesUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <slot name="head" />
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <div class="page">
+      <Header current={section} />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer variant={footer} />
+    </div>
   </body>
 </html>

@@ -1,0 +1,73 @@
+---
+/**
+ * Two-column row: content on the left, margin notes on the right.
+ * On narrow screens the notes wrap below the content.
+ */
+interface Props {
+  /** Vertical placement of the notes next to the content. */
+  align?: "start" | "center" | "end";
+  /** Push notes down so they line up with the body of the content. */
+  offset?: string;
+  label?: string;
+  class?: string;
+}
+
+const {
+  align = "start",
+  offset = "0px",
+  label = "Margin notes",
+  class: className,
+} = Astro.props;
+const hasNotes = Astro.slots.has("notes");
+---
+
+<div class:list={["margin-row", className]} data-align={align}>
+  <div class="margin-row__main">
+    <slot />
+  </div>
+  {hasNotes && (
+    <aside
+      class="margin-row__notes"
+      aria-label={label}
+      style={`--notes-offset: ${offset}`}
+    >
+      <slot name="notes" />
+    </aside>
+  )}
+</div>
+
+<style>
+  .margin-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 64px;
+  }
+
+  .margin-row__main {
+    flex: 999 1 560px;
+    min-width: 0;
+  }
+
+  .margin-row__notes {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-top: var(--notes-offset);
+  }
+
+  .margin-row[data-align="center"] .margin-row__notes {
+    justify-content: center;
+  }
+
+  .margin-row[data-align="end"] .margin-row__notes {
+    justify-content: flex-end;
+  }
+
+  /* Once the notes have wrapped below, the offset only adds a gap. */
+  @media (max-width: 860px) {
+    .margin-row__notes {
+      padding-top: 0;
+    }
+  }
+</style>

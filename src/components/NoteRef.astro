@@ -1,0 +1,33 @@
+---
+/**
+ * The small ballpoint number in running text that points at a margin note.
+ */
+interface Props {
+  n: number | string;
+  /** Prefix for ids when a page has more than one set of notes. */
+  scope?: string;
+}
+
+const { n, scope = "mn" } = Astro.props;
+---
+
+<sup class="note-ref" id={`${scope}-ref-${n}`}>
+  <a href={`#${scope}-${n}`} aria-label={`Margin note ${n}`}>
+    {n}
+  </a>
+</sup>
+
+<style>
+  .note-ref {
+    font-family: var(--font-hand);
+    font-size: 0.55em;
+    line-height: 0;
+    color: var(--pen);
+  }
+
+  .note-ref a {
+    color: inherit;
+    text-decoration: none;
+    padding-inline: 0.1em;
+  }
+</style>

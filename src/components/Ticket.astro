@@ -1,0 +1,128 @@
+---
+/**
+ * A receipt-style ticket: today's ticket on home and /now, the route on /about.
+ * Rows with a `field` can be refreshed client-side later (phase 6).
+ */
+export interface TicketRow {
+  label: string;
+  value: string;
+  /** Key in the /api/ticket payload, e.g. "brewing". */
+  field?: string;
+}
+
+interface Props {
+  title: string;
+  meta?: string;
+  rows: TicketRow[];
+  footer?: [string, string];
+  size?: "md" | "lg";
+  tilt?: number;
+  class?: string;
+}
+
+const {
+  title,
+  meta,
+  rows,
+  footer,
+  size = "md",
+  tilt = 1.6,
+  class: className,
+} = Astro.props;
+---
+
+<section
+  class:list={["ticket", "tilt", className]}
+  data-size={size}
+  aria-label={title}
+  style={`--tilt: ${tilt}deg`}
+>
+  <p class="ticket__title">{title}</p>
+  {meta && <p class="ticket__meta">{meta}</p>}
+  <dl class="ticket__rows">
+    {rows.map((row) => (
+      <>
+        <dt>{row.label}</dt>
+        <dd data-ticket-field={row.field}>{row.value}</dd>
+      </>
+    ))}
+  </dl>
+  {footer && (
+    <p class="ticket__footer">
+      <span>{footer[0]}</span>
+      <span>{footer[1]}</span>
+    </p>
+  )}
+</section>
+
+<style>
+  .ticket {
+    --pad: 26px 24px 22px;
+    --row-gap: 10px 16px;
+    background: var(--paper-raised);
+    padding: var(--pad);
+    box-shadow: var(--shadow-paper);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .ticket[data-size="lg"] {
+    --pad: 30px 28px 24px;
+    --row-gap: 12px 18px;
+    font-size: 14px;
+    box-shadow: var(--shadow-paper-lg);
+  }
+
+  .ticket__title {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .ticket__meta {
+    margin-top: 4px;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .ticket__rows {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--row-gap);
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule-dash);
+  }
+
+  .ticket__meta + .ticket__rows {
+    margin-top: 16px;
+  }
+
+  .ticket[data-size="lg"] .ticket__rows {
+    padding-top: 16px;
+  }
+
+  .ticket__rows dt {
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .ticket__rows dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .ticket__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule-dash);
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>

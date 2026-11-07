@@ -1,0 +1,113 @@
+---
+export type Section = "writing" | "made" | "now" | "about";
+
+interface Props {
+  current?: Section;
+}
+
+const { current } = Astro.props;
+
+const nav: { id: Section; href: string }[] = [
+  { id: "writing", href: "/writing" },
+  { id: "made", href: "/made" },
+  { id: "now", href: "/now" },
+  { id: "about", href: "/about" },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__name">
+    <a href="/" class="site-header__home">
+      Hasan Akalp
+    </a>
+    <span class="hand site-header__say">(ha-SAHN)</span>
+  </div>
+  <nav aria-label="Main" class="site-header__nav">
+    {nav.map((item) => (
+      <a
+        href={item.href}
+        aria-current={current === item.id ? "page" : undefined}
+      >
+        {item.id}
+      </a>
+    ))}
+    <button
+      type="button"
+      class="site-header__palette"
+      data-palette-open
+      aria-label="Open command palette"
+      aria-keyshortcuts="Meta+K Control+K"
+    >
+      ⌘K
+    </button>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 28px 0 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .site-header__name {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .site-header__home {
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .site-header__say {
+    font-size: 17px;
+    font-weight: 300;
+  }
+
+  .site-header__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+
+  .site-header__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    padding: 0 10px;
+    text-decoration: none;
+  }
+
+  .site-header__nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  .site-header__palette {
+    margin-left: 8px;
+    min-height: var(--touch);
+    padding: 0 14px;
+    font-size: 13px;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .site-header__palette:hover {
+    color: var(--pen);
+    border-color: var(--pen);
+  }
+</style>
