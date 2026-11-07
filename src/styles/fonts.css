@@ -1,0 +1,10 @@
+/*
+ * Self-hosted via Fontsource, no requests to Google Fonts.
+ * Fraunces uses the "full" build: it is the only one that carries the
+ * opsz, wght and SOFT axes together.
+ */
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/fraunces/full-italic.css";
+@import "@fontsource/kalam/300.css";
+@import "@fontsource/kalam/400.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";

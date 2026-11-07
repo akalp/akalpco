@@ -1,0 +1,74 @@
+/*
+ * Marginalia design tokens.
+ * A paper page, annotated in ballpoint and marked with a highlighter.
+ */
+
+:root {
+  /* Paper */
+  --paper: #f1eadf;
+  --paper-raised: #fbf7ef;
+  --paper-card: #f6f0e6;
+  --paper-tint: #e6dccb;
+  --photo: #e2d7c5;
+
+  /* Ink */
+  --ink: #221e1a;
+  --ink-soft: #3b352e;
+  --muted: #665d52;
+
+  /* Rules */
+  --rule: #cfc3b0;
+  --rule-dash: #8a7f70;
+  --rule-dash-soft: #a89c8a;
+
+  /* Pen & highlighter */
+  --pen: #2747c4;
+  --highlighter: #f2d36b;
+
+  /* Code */
+  --code-bg: #26211c;
+  --code-fg: #f1eadf;
+  --code-rule: #3d362e;
+  --code-border: #5a5146;
+  --code-muted: #b9ad9b;
+  --code-keyword: #f2d36b;
+  --code-string: #a9d3b5;
+  --code-comment: #9c917f;
+
+  /* Shadows */
+  --shadow-paper: 0 1px 0 var(--rule), 0 14px 30px -18px rgb(60 40 20 / 0.35);
+  --shadow-paper-lg: 0 1px 0 var(--rule), 0 18px 36px -20px rgb(60 40 20 / 0.4);
+
+  /* Type */
+  --font-serif: "Fraunces Variable", Georgia, serif;
+  --font-hand: "Kalam", cursive;
+  --font-mono:
+    "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --text-h1: clamp(48px, 7vw, 92px);
+  --text-h1-post: clamp(38px, 5.2vw, 68px);
+  --text-lede: clamp(22px, 2.4vw, 31px);
+  --text-section: 44px;
+  --text-h2-post: 34px;
+  --text-body: 21px;
+  --text-note: 18px;
+  --text-mono: 13px;
+  --text-mono-sm: 12px;
+
+  /* Layout */
+  --page-max: 1200px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --measure: 700px;
+  --touch: 44px;
+}
+
+/* Ink options (⌘K → "Change the ink"). */
+:root[data-ink="red"] {
+  --pen: #b23a1e;
+}
+:root[data-ink="green"] {
+  --pen: #2f6a4d;
+}
+:root[data-ink="purple"] {
+  --pen: #5b3a8c;
+}
