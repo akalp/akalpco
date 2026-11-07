@@ -29,6 +29,11 @@ const { size = "md", tilt = 1.6, note } = Astro.props;
   )}
 </div>
 
+<script>
+  import { refreshTickets } from "@/lib/ticket-client";
+  refreshTickets();
+</script>
+
 <style>
   .today-ticket {
     display: flex;
