@@ -42,49 +42,60 @@ const headers = {
 };
 
 let failures = 0;
-const pass = (msg) => console.log(`  ✓ ${msg}`);
-const fail = (msg) => {
-  failures++;
-  console.log(`  ✗ ${msg}`);
-};
+function check(ok, passMsg, failMsg = passMsg) {
+  if (ok) {
+    console.log(`  ✓ ${passMsg}`);
+  } else {
+    failures++;
+    console.log(`  ✗ ${failMsg}`);
+  }
+}
 
 console.log(`\n${base}\n\nroutes`);
 for (const path of routes) {
   const res = await fetch(base + path, { redirect: "manual" });
-  res.status === 200 ? pass(`${path} 200`) : fail(`${path} ${res.status}`);
+  check(res.status === 200, `${path} 200`, `${path} ${res.status}`);
 }
 
 const missing = await fetch(`${base}/definitely-not-here`, {
   redirect: "manual",
 });
-missing.status === 404
-  ? pass("unknown path 404")
-  : fail(`unknown path ${missing.status}`);
+check(
+  missing.status === 404,
+  "unknown path 404",
+  `unknown path ${missing.status}`
+);
 
 console.log("\nredirects");
 for (const [from, to] of redirects) {
   const res = await fetch(base + from, { redirect: "manual" });
   const location = res.headers.get("location") ?? "";
   const target = new URL(location, base).pathname;
-  res.status === 301 && target === to
-    ? pass(`${from} → ${to}`)
-    : fail(`${from} → ${res.status} ${location || "(no location)"}`);
+  check(
+    res.status === 301 && target === to,
+    `${from} → ${to}`,
+    `${from} → ${res.status} ${location || "(no location)"}`
+  );
 }
 
 console.log("\nheaders");
 const home = await fetch(`${base}/`);
 for (const [name, pattern] of Object.entries(headers)) {
-  pattern.test(home.headers.get(name) ?? "")
-    ? pass(name)
-    : fail(`${name}: ${home.headers.get(name) ?? "missing"}`);
+  check(
+    pattern.test(home.headers.get(name) ?? ""),
+    name,
+    `${name}: ${home.headers.get(name) ?? "missing"}`
+  );
 }
 const html = await home.text();
 const asset = /\/_astro\/[^"]+\.js/.exec(html)?.[0];
 if (asset) {
   const res = await fetch(base + asset);
-  /immutable/.test(res.headers.get("cache-control") ?? "")
-    ? pass("/_astro/* immutable")
-    : fail(`/_astro/* cache-control: ${res.headers.get("cache-control")}`);
+  check(
+    /immutable/.test(res.headers.get("cache-control") ?? ""),
+    "/_astro/* immutable",
+    `/_astro/* cache-control: ${res.headers.get("cache-control")}`
+  );
 }
 
 console.log(failures ? `\n${failures} failed\n` : "\nall good\n");
