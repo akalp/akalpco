@@ -231,3 +231,54 @@ mark {
 .note-ref:target {
   background: linear-gradient(transparent 58%, var(--highlighter) 58%);
 }
+
+/* ---------- Dashed lists ----------
+ * Mono rows with a dashed rule: /made "for other people", /now archive,
+ * colophon. Left item and right item, wrapping on narrow screens.
+ */
+
+.dash-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dash-list__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--rule-dash-soft);
+  text-decoration: none;
+}
+
+.dash-list__aside {
+  color: var(--muted);
+}
+
+.dash-list__serif {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+a.dash-list__row:hover .dash-list__serif {
+  color: var(--pen);
+}
+
+/* ---------- Page sections ---------- */
+
+.page-section {
+  padding-bottom: 112px;
+}
+
+.page-section > .section-head {
+  margin-bottom: 36px;
+}

@@ -10,11 +10,13 @@ export interface TicketRow {
   field?: string;
 }
 
+export type TicketFooterItem = string | { label: string; href: string };
+
 interface Props {
   title: string;
   meta?: string;
   rows: TicketRow[];
-  footer?: [string, string];
+  footer?: [TicketFooterItem, TicketFooterItem];
   size?: "md" | "lg";
   tilt?: number;
   class?: string;
@@ -49,8 +51,13 @@ const {
   </dl>
   {footer && (
     <p class="ticket__footer">
-      <span>{footer[0]}</span>
-      <span>{footer[1]}</span>
+      {footer.map((item) =>
+        typeof item === "string" ? (
+          <span>{item}</span>
+        ) : (
+          <a href={item.href}>{item.label}</a>
+        )
+      )}
     </p>
   )}
 </section>
@@ -124,5 +131,9 @@ const {
     border-top: 1px dashed var(--rule-dash);
     font-size: 12px;
     color: var(--muted);
+  }
+
+  .ticket__footer a {
+    color: inherit;
   }
 </style>

@@ -1,0 +1,51 @@
+---
+/**
+ * Section heading with the heavy ink rule underneath. The "aside" slot sits
+ * on the right: a link ("all posts →") or a handwritten note.
+ */
+interface Props {
+  title: string;
+  id?: string;
+  size?: "lg" | "md" | "sm";
+  level?: 2 | 3;
+}
+
+const { title, id, size = "lg", level = 2 } = Astro.props;
+const Heading = `h${level}` as "h2" | "h3";
+---
+
+<div class="section-head" data-size={size}>
+  <Heading class="section-title" id={id}>
+    {title}
+  </Heading>
+  {Astro.slots.has("aside") && (
+    <div class="section-head__aside">
+      <slot name="aside" />
+    </div>
+  )}
+</div>
+
+<style>
+  .section-head[data-size="md"] .section-title {
+    font-size: 40px;
+  }
+
+  .section-head[data-size="sm"] .section-title {
+    font-size: 36px;
+  }
+
+  .section-head__aside {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+  }
+
+  .section-head__aside :global(a) {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+
+  .section-head__aside :global(.margin-note) {
+    font-size: 18px;
+  }
+</style>

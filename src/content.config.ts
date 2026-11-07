@@ -14,6 +14,17 @@ const writing = defineCollection({
   }),
 });
 
+/** Monthly /now pages. The newest is /now, older ones are archived. */
+const now = defineCollection({
+  loader: glob({ base: "./src/content/now", pattern: "*.md" }),
+  schema: z.object({
+    /** "2026-11" */
+    month: z.string().regex(/^\d{4}-\d{2}$/),
+    /** One line for the "Previously" list. */
+    summary: z.string(),
+  }),
+});
+
 const projects = defineCollection({
   loader: file("src/data/projects.yaml"),
   schema: z.object({
@@ -26,6 +37,13 @@ const projects = defineCollection({
     repo: z.url().optional(),
     post: reference("writing").optional(),
     note: z.string().optional(),
+    /** Placeholder (or, later, real media) shown under the description. */
+    media: z
+      .object({
+        kind: z.enum(["terminal", "photo"]),
+        label: z.string(),
+      })
+      .optional(),
     /** Short version for the home page cards. Omit to leave it off home. */
     card: z
       .object({
@@ -54,4 +72,4 @@ const links = defineCollection({
   }),
 });
 
-export const collections = { writing, projects, route, links };
+export const collections = { writing, now, projects, route, links };

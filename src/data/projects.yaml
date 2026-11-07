@@ -10,6 +10,10 @@
     A workspace switcher and scaffolding tool. Fuzzy-search your projects
     from a TUI, jump into one, or start a new one from a template.
   repo: https://github.com/akalp/ws
+  note: "[your note on why it exists]"
+  media:
+    kind: terminal
+    label: "[terminal recording of the TUI]"
   card:
     tech: Go · TUI
     description: >-
@@ -41,6 +45,10 @@
     the TV, players on their phones, an admin view, and live scoring.
   repo: https://github.com/akalp/SlidePlay
   post: slideplay-quiz-app
+  note: "[your note]"
+  media:
+    kind: photo
+    label: "[photo: host screen on the TV]"
   card:
     tech: Node · Socket.IO
     description: >-
@@ -64,7 +72,7 @@
   kind: mine
   name: akalp.co
   tech: [Astro, Cloudflare]
-  description: The page you’re on. How it’s put together is in the colophon.
+  description: The page you’re on. How it’s put together is in the [colophon](/colophon).
   repo: https://github.com/akalp/akalpco
   note: yes, this counts.
 

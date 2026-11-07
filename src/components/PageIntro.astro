@@ -1,0 +1,79 @@
+---
+/**
+ * Page opening: eyebrow, large title, optional lede, and an optional
+ * margin note (or figure) on the right via the "aside" slot.
+ */
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  /** Align the aside with the bottom (default) or top of the intro. */
+  align?: "end" | "start";
+}
+
+const { eyebrow, title, lede, align = "end" } = Astro.props;
+---
+
+<section class="intro" data-align={align}>
+  <div class="intro__main">
+    <p class="eyebrow intro__eyebrow">{eyebrow}</p>
+    <h1 class="intro__title">{title}</h1>
+    {lede && <p class="intro__lede">{lede}</p>}
+    <slot />
+  </div>
+  {Astro.slots.has("aside") && (
+    <div class="intro__aside">
+      <slot name="aside" />
+    </div>
+  )}
+</section>
+
+<style>
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 32px 72px;
+    padding: 80px 0 72px;
+  }
+
+  .intro[data-align="start"] {
+    align-items: flex-start;
+  }
+
+  .intro__main {
+    flex: 999 1 560px;
+    min-width: 0;
+  }
+
+  .intro__aside {
+    flex: 1 1 220px;
+  }
+
+  .intro__eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .intro__title {
+    font-size: var(--text-h1);
+    font-weight: 350;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variation-settings:
+      "SOFT" 100,
+      "opsz" 144;
+  }
+
+  .intro__lede {
+    max-width: 680px;
+    margin-top: 28px;
+    font-size: clamp(20px, 2vw, 25px);
+    font-weight: 300;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .intro__aside :global(.margin-note) {
+    font-size: 19px;
+  }
+</style>
