@@ -1,0 +1,6 @@
+# v1 (Next.js) URLs → v2
+/blog            /writing           301
+/blog/*          /writing/:splat    301
+/portfolio       /made              301
+/contact         /about             301
+/sitemap.xml     /sitemap-index.xml 301
