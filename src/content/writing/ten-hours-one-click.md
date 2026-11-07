@@ -23,9 +23,9 @@ I’ve been using Obsidian for a long time. Besides regular note-taking, I also 
 
 My idea was:
 
-* Store daily metric values inside **daily notes**, in the **frontmatter**
-* Run periodic analysis and generate simple recommendations
-* Draw a custom **Bases view** that fits my workflow better than a generic table
+- Store daily metric values inside **daily notes**, in the **frontmatter**
+- Run periodic analysis and generate simple recommendations
+- Draw a custom **Bases view** that fits my workflow better than a generic table
 
 So I started building a plugin around this. I kept it private, because it’s personal, and I don’t want to over-polish it or publish it yet. But technically, it was already “real”: TypeScript, a build pipeline, and a working prototype.
 
@@ -57,7 +57,7 @@ Then I checked iCloud “Recently Deleted”. Still nothing.
 
 I was stressed and moving fast, clicking around iCloud.com with that mix of panic and anger — and I randomly found a section called **Data Recovery**.
 
-![Thousands of files](/images/ten-hours-one-click-files.png)
+![Thousands of files](../../assets/writing/ten-hours-one-click-files.png)
 
 It showed a message like “thousands of recoverable files”. I opened it, and I saw entries marked as deleted just minutes ago.
 
@@ -77,9 +77,9 @@ The reason is how Apple built that recovery UI: it looks like a long list, but i
 
 In short:
 
-* The modal only keeps a small set of rows in the DOM
-* When you scroll, the UI *reuses the same row elements*
-* The “path text” and other values update dynamically inside those reused nodes
+- The modal only keeps a small set of rows in the DOM
+- When you scroll, the UI _reuses the same row elements_
+- The “path text” and other values update dynamically inside those reused nodes
 
 So a script that “selects everything matching X” can fail because the element you marked might later represent a totally different file after scrolling.
 
@@ -87,10 +87,10 @@ Once I realized this, I changed the approach.
 
 Instead of trying to select items programmatically, I turned the script into a visual helper:
 
-* Files under my target prefix got a **green border**
-* Everything else got a **red border**
+- Files under my target prefix got a **green border**
+- Everything else got a **red border**
 
-![Green/Red Borders](/images/ten-hours-one-click-after-script.png)
+![Green/Red Borders](../../assets/writing/ten-hours-one-click-after-script.png)
 
 Then I manually scrolled through the list and checked only the green ones. It wasn’t perfect, but it was stable. After 15–20 minutes of scrolling and selecting, I restored the files.
 
@@ -100,7 +100,7 @@ And the code was back (without the heavy folders, which I didn’t need anyway).
 
 After recovery, I didn’t continue development. First, I fixed the workflow.
 
-I moved the project out of the vault into my normal workspace and treated the vault as a *runtime target*, not a source of truth.
+I moved the project out of the vault into my normal workspace and treated the vault as a _runtime target_, not a source of truth.
 
 I also added a packaging flow so only the small output set ends up in the vault.
 
@@ -184,7 +184,9 @@ async function main() {
   }
 
   console.log(`Plugin packaged at ${path.relative(__dirname, outputDir)}`);
-  console.log("Copy this folder into <vault>/.obsidian/plugins to test the build.");
+  console.log(
+    "Copy this folder into <vault>/.obsidian/plugins to test the build."
+  );
 }
 
 main().catch((error) => {

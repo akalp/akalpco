@@ -1,0 +1,99 @@
+# Things I've made (/made, home cards) and work for other people.
+# `card` is the short version used on the home page museum tags.
+
+- id: ws
+  order: 1
+  kind: mine
+  name: ws
+  tech: [Go, TUI, CLI]
+  description: >-
+    A workspace switcher and scaffolding tool. Fuzzy-search your projects
+    from a TUI, jump into one, or start a new one from a template.
+  repo: https://github.com/akalp/ws
+  card:
+    tech: Go · TUI
+    description: >-
+      A workspace switcher and scaffolder with a fuzzy-search TUI and project
+      templates.
+
+- id: caff
+  order: 2
+  kind: mine
+  name: caff
+  tech: [zsh, oh-my-zsh, macOS]
+  description: >-
+    A modern, friendlier wrapper around macOS `caffeinate`. My first
+    oh-my-zsh plugin.
+  repo: https://github.com/akalp/caff
+  post: my-first-omz-plugin-caff
+  card:
+    tech: zsh · macOS
+    description: >-
+      A friendlier wrapper around macOS caffeinate. My first oh-my-zsh plugin.
+
+- id: slideplay
+  order: 3
+  kind: mine
+  name: SlidePlay
+  tech: [Node, Express, Socket.IO]
+  description: >-
+    A real-time slideshow and quiz game for family nights: a host screen on
+    the TV, players on their phones, an admin view, and live scoring.
+  repo: https://github.com/akalp/SlidePlay
+  post: slideplay-quiz-app
+  card:
+    tech: Node · Socket.IO
+    description: >-
+      A living-room quiz game with host, player and admin screens and live
+      scoring.
+
+- id: bs5-nav-tree
+  order: 4
+  kind: mine
+  name: bs5-nav-tree
+  tech: [JavaScript, Bootstrap 5]
+  description: >-
+    A Bootstrap 5 plugin for searchable, collapsible, nested navigation menus.
+  repo: https://github.com/akalp/bs5-nav-tree
+  card:
+    tech: JavaScript
+    description: Searchable, collapsible nested navigation for Bootstrap 5.
+
+- id: akalpco
+  order: 5
+  kind: mine
+  name: akalp.co
+  tech: [Astro, Cloudflare]
+  description: The page you’re on. How it’s put together is in the colophon.
+  repo: https://github.com/akalp/akalpco
+  note: yes, this counts.
+
+- id: gardro
+  order: 10
+  kind: others
+  name: gardro.app, image-generation MVP
+  tech: [Next.js, FastAPI]
+
+- id: livestreaming
+  order: 11
+  kind: others
+  name: a livestreaming platform
+  tech: [Vue, Python, Node]
+
+- id: security-system
+  order: 12
+  kind: others
+  name: a mission-critical security system
+  tech: [React, Spring Boot]
+
+- id: k8s-platform
+  order: 13
+  kind: others
+  name: a microservices and Kubernetes platform
+  tech: [K8s, Kafka, Helm]
+
+- id: test-management
+  order: 14
+  kind: others
+  name: a dev and test management system
+  tech: [Django, DOORS, JIRA]
