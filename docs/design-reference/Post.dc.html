@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hasan Akalp — post</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;family=Kalam:wght@300;400&amp;display=swap">
+<style>
+body{margin:0;background:#F1EADF}
+a{color:#221E1A}a:hover{color:#2747C4}
+</style>
+</helmet>
+<div style="background: #F1EADF; color: #221E1A; font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'SOFT' 100; min-height: 100vh">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px)">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 28px 0 22px; border-bottom: 1px solid #CFC3B0">
+<div style="display: flex; align-items: baseline; gap: 12px">
+<a href="Main.dc.html" style="font-style: italic; font-size: 26px; font-weight: 400; text-decoration: none">Hasan Akalp</a>
+<span style="font-family: 'Kalam', cursive; font-size: 17px; color: {{pen}}">(ha-SAHN)</span>
+</div>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px">
+<a href="#" aria-current="page" style="padding: 12px 10px; text-decoration: underline; text-underline-offset: 6px">writing</a>
+<a href="#" style="padding: 12px 10px; text-decoration: none">made</a>
+<a href="#" style="padding: 12px 10px; text-decoration: none">now</a>
+<a href="#" style="padding: 12px 10px; text-decoration: none">about</a>
+<button type="button" aria-label="Open command palette" style="margin-left: 8px; min-height: 44px; padding: 0 14px; font: inherit; font-size: 13px; color: #221E1A; background: transparent; border: 1px solid #221E1A; border-radius: 6px; cursor: pointer">⌘K</button>
+</nav>
+</header>
+
+<article>
+<div style="max-width: 880px; padding: 72px 0 48px">
+<a href="Main.dc.html" style="display: inline-block; padding: 10px 0; margin-bottom: 28px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: #665D52">← all writing</a>
+<p style="margin: 0 0 22px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.04em; color: #665D52">20 DEC 2025 · 6 MIN READ · EN</p>
+<h1 style="margin: 0 0 26px; font-size: clamp(38px, 5.2vw, 68px); font-weight: 350; line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; font-variation-settings: 'SOFT' 100, 'opsz' 144">Ten Hours, One Click, Almost Gone</h1>
+<p style="margin: 0 0 30px; font-size: clamp(20px, 2vw, 26px); font-weight: 300; font-style: italic; line-height: 1.4; color: #3B352E">Obsidian plugin, iCloud recovery, and a small lesson.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #665D52">
+<span style="padding: 4px 10px; border: 1px solid #A89C8A; border-radius: 999px">obsidian</span>
+<span style="padding: 4px 10px; border: 1px solid #A89C8A; border-radius: 999px">icloud</span>
+<span style="padding: 4px 10px; border: 1px solid #A89C8A; border-radius: 999px">data-recovery</span>
+<span style="padding: 4px 10px; border: 1px solid #A89C8A; border-radius: 999px">workflow</span>
+<span style="padding: 4px 10px; border: 1px solid #A89C8A; border-radius: 999px">plugins</span>
+</div>
+</div>
+
+<nav aria-label="On this page" style="display: flex; flex-wrap: wrap; gap: 6px 22px; padding: 16px 0; margin-bottom: 64px; border-top: 1px solid #CFC3B0; border-bottom: 1px solid #CFC3B0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px">
+<span style="padding: 8px 0; color: #665D52">contents</span>
+<a href="#" style="padding: 8px 0; text-decoration: none">01 TL;DR</a>
+<a href="#" style="padding: 8px 0; text-decoration: none">02 What I was building</a>
+<a href="#" style="padding: 8px 0; text-decoration: none">03 Why it went wrong</a>
+<a href="#" style="padding: 8px 0; text-decoration: none">04 The recovery moment</a>
+<a href="#" style="padding: 8px 0; text-decoration: none">05 Scripting a virtualized list</a>
+<a href="#" style="padding: 8px 0; text-decoration: none">06 What I changed</a>
+<a href="#" style="padding: 8px 0; text-decoration: none">07 Conclusion</a>
+</nav>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px 64px; padding-bottom: 56px">
+<div style="flex: 999 1 560px; min-width: 0; max-width: 700px">
+<div style="background: #FBF7EF; padding: 26px 28px; box-shadow: 0 1px 0 #CFC3B0, 0 14px 30px -20px rgba(60, 40, 20, 0.35); transform: rotate(-0.6deg)">
+<p style="margin: 0 0 12px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.18em; color: #665D52">01 · TL;DR</p>
+<p style="margin: 0; font-size: 20px; line-height: 1.6">[Two or three sentences: about ten hours of plugin work disappeared with one click, iCloud.com’s Data Recovery brought it back, and the habit that changed afterwards.]</p>
+</div>
+</div>
+<aside style="flex: 1 1 220px; padding-top: 18px; font-family: 'Kalam', cursive; font-size: 18px; line-height: 1.35; color: {{pen}}">
+<p style="margin: 0; transform: rotate(1.2deg)">short version, if you’re in a hurry →</p>
+</aside>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px 64px; padding-bottom: 40px">
+<div style="flex: 999 1 560px; min-width: 0; max-width: 700px">
+<h2 style="display: flex; align-items: baseline; gap: 16px; margin: 0 0 22px; font-size: 34px; font-weight: 400; font-style: italic; line-height: 1.15"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; font-style: normal; color: #665D52">02</span>What I was building</h2>
+<p style="margin: 0 0 22px; font-size: 21px; line-height: 1.65; text-wrap: pretty">[Opening paragraph of the post, in its real wording. This block shows the reading measure: around 66 characters per line at 21px, generous leading, nothing competing in the column.]</p>
+<p style="margin: 0; font-size: 21px; line-height: 1.65; text-wrap: pretty">[Second paragraph. A key phrase can carry the <span style="background: linear-gradient(transparent 58%, {{hl}} 58%)">same highlighter</span><sup style="font-family: 'Kalam', cursive; font-size: 0.6em; color: {{pen}}">1</sup> as the home page, with its note sitting in the margin at the same height.]</p>
+</div>
+<aside style="flex: 1 1 220px; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'Kalam', cursive; font-size: 18px; line-height: 1.35; color: {{pen}}">
+<p style="margin: 0; transform: rotate(-1deg)"><span style="font-weight: 400">1 —</span> [your aside here, the kind of thing you’d say out loud but wouldn’t put in the paragraph]</p>
+</aside>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px 64px; padding-bottom: 40px">
+<div style="flex: 999 1 560px; min-width: 0; max-width: 700px">
+<h2 style="display: flex; align-items: baseline; gap: 16px; margin: 16px 0 22px; font-size: 34px; font-weight: 400; font-style: italic; line-height: 1.15"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; font-style: normal; color: #665D52">03</span>Why it went wrong</h2>
+<p style="margin: 0 0 30px; font-size: 21px; line-height: 1.65; text-wrap: pretty">[Paragraph explaining the one click.]</p>
+<blockquote style="margin: 0; padding: 4px 0 4px 0; font-size: clamp(26px, 2.8vw, 34px); font-weight: 300; font-style: italic; line-height: 1.3; text-wrap: balance">“[A pull quote: the one line from this section you’d want someone to remember.]”</blockquote>
+</div>
+<aside style="flex: 1 1 220px; display: flex; align-items: center; font-family: 'Kalam', cursive; font-size: 18px; line-height: 1.35; color: {{pen}}">
+<p style="margin: 0; transform: rotate(1.4deg)">↙ pull quotes stay in the column, no boxes, just bigger and italic</p>
+</aside>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px 64px; padding-bottom: 40px">
+<div style="flex: 999 1 560px; min-width: 0; max-width: 700px">
+<h2 style="display: flex; align-items: baseline; gap: 16px; margin: 16px 0 22px; font-size: 34px; font-weight: 400; font-style: italic; line-height: 1.15"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; font-style: normal; color: #665D52">05</span>Scripting a virtualized list</h2>
+<p style="margin: 0 0 26px; font-size: 21px; line-height: 1.65; text-wrap: pretty">[Paragraph leading into the code. Inline code like <code style="padding: 2px 6px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.8em; background: #E6DCCB; border-radius: 4px">querySelectorAll</code> sits on a soft paper tint.]</p>
+<figure style="margin: 0; background: #26211C; color: #F1EADF; border-radius: 10px; overflow: hidden">
+<figcaption style="display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #3D362E; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #B9AD9B"><span>console.js</span><button type="button" style="min-height: 28px; padding: 0 10px; font: inherit; color: #F1EADF; background: transparent; border: 1px solid #5A5146; border-radius: 4px; cursor: pointer">copy</button></figcaption>
+<pre style="margin: 0; padding: 20px 18px; overflow-x: auto; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; line-height: 1.7"><code><span style="color: #9C917F">// [the real snippet from the post goes here]</span>
+<span style="color: #F2D36B">const</span> rows = document.querySelectorAll(<span style="color: #A9D3B5">'[row-selector]'</span>);
+<span style="color: #F2D36B">for</span> (<span style="color: #F2D36B">const</span> row <span style="color: #F2D36B">of</span> rows) {
+  <span style="color: #9C917F">// …</span>
+}</code></pre>
+</figure>
+</div>
+<aside style="flex: 1 1 220px; display: flex; align-items: flex-end; font-family: 'Kalam', cursive; font-size: 18px; line-height: 1.35; color: {{pen}}">
+<p style="margin: 0; transform: rotate(-1.2deg)">code blocks: warm dark, the highlighter yellow for keywords</p>
+</aside>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px 64px; padding: 24px 0 72px">
+<div style="flex: 999 1 560px; min-width: 0; max-width: 700px">
+<p style="margin: 0; font-family: 'Kalam', cursive; font-size: 30px; color: {{pen}}; transform: rotate(-2deg)">— Hasan, Ankara</p>
+</div>
+<div style="flex: 1 1 220px"></div>
+</div>
+</article>
+
+<nav aria-label="More writing" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px; padding: 40px 0 96px; border-top: 2px solid #221E1A">
+<a href="#" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 0; text-decoration: none">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #665D52">← newer</span>
+<span style="font-size: 18px; font-style: italic; color: #665D52">this is the newest one</span>
+</a>
+<a href="#" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 0; text-align: right; text-decoration: none">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #665D52">older →</span>
+<span style="font-size: 24px; line-height: 1.25">SlidePlay: A Local Quiz App for the Living Room</span>
+</a>
+</nav>
+
+<footer style="border-top: 1px solid #CFC3B0; padding: 28px 0 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #665D52">
+<span>made in Ankara · built with Astro · served by Cloudflare · <a href="#" style="color: #665D52">colophon</a></span>
+<span>© 2026 Hasan Akalp</span>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"pen":{"editor":"color","default":"#2747C4","options":["#2747C4","#B23A1E","#2F6A4D","#5B3A8C"],"section":"Ink"},"hl":{"editor":"color","default":"#F2D36B","options":["#F2D36B","#F4B7A3","#BFE0C4","#C9D4F5"],"section":"Ink"},"$preview":{"width":1440,"height":3400}}'>
+class Component extends DCLogic {
+renderVals() {
+return { pen: this.props.pen ?? '#2747C4', hl: this.props.hl ?? '#F2D36B' };
+}
+}
+</script>
+</body>
+</html>

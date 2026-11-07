@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hasan Akalp — command palette</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;family=Kalam:wght@300;400&amp;display=swap">
+<style>
+body{margin:0;background:#F1EADF}
+input::placeholder{color:#8A7F70}
+</style>
+</helmet>
+<div style="position: relative; min-height: 900px; background: #F1EADF; color: #221E1A; font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'SOFT' 100; overflow: hidden">
+
+<div aria-hidden="true" style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); opacity: 0.5">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 28px 0 22px; border-bottom: 1px solid #CFC3B0">
+<span style="font-style: italic; font-size: 26px">Hasan Akalp</span>
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px">writing · made · now · about</span>
+</div>
+<p style="margin: 88px 0 0; font-size: clamp(48px, 7vw, 92px); font-weight: 350; line-height: 1">Hi, I’m Hasan.</p>
+<p style="margin: 32px 0 0; max-width: 780px; font-size: 30px; font-weight: 300; line-height: 1.42">I write software in Ankara — mostly small tools that make my own days a little smoother…</p>
+</div>
+
+<div style="position: absolute; inset: 0; background: rgba(34, 30, 26, 0.38); display: flex; justify-content: center; align-items: flex-start; padding: 110px 16px 40px">
+<div role="dialog" aria-modal="true" aria-label="Command palette" style="width: 100%; max-width: 640px; background: #FBF7EF; border: 1.5px solid #221E1A; border-radius: 12px; box-shadow: 0 30px 60px -24px rgba(34, 30, 26, 0.55); overflow: hidden">
+
+<div style="display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px dashed #8A7F70">
+<span aria-hidden="true" style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 18px; color: {{pen}}">›</span>
+<input type="text" aria-label="Search pages, posts and commands" placeholder="a page, a post, or a command…" value="{{query}}" onChange="{{onInput}}" onKeyDown="{{onKey}}" autofocus style="flex: 1; min-width: 0; min-height: 64px; padding: 0; font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 350; color: #221E1A; background: transparent; border: 0; outline: none">
+<span style="padding: 3px 8px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #665D52; border: 1px solid #A89C8A; border-radius: 4px">esc</span>
+</div>
+
+<div style="max-height: 470px; overflow-y: auto; padding: 8px 8px 12px">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+<p style="margin: 14px 12px 6px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; color: #665D52">{{g.name}}</p>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+<button type="button" onClick="{{it.pick}}" onMouseEnter="{{it.hover}}" style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; width: 100%; min-height: 44px; padding: 10px 12px; font-family: 'Fraunces', Georgia, serif; font-size: 18px; text-align: left; color: #221E1A; background: {{it.bg}}; border: 0; border-radius: 6px; cursor: pointer">
+<span style="min-width: 0">{{it.label}}</span>
+<span style="flex-shrink: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #665D52">{{it.hint}}</span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 28px 12px; font-family: 'Kalam', cursive; font-size: 20px; color: {{pen}}">nothing here. maybe try “coffee”?</p>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px dashed #8A7F70; background: #F6F0E6">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #665D52">↑↓ move · ↵ open · esc clear</span>
+<span style="font-family: 'Kalam', cursive; font-size: 17px; color: {{pen}}">{{msg}}</span>
+</div>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"pen":{"editor":"color","default":"#2747C4","options":["#2747C4","#B23A1E","#2F6A4D","#5B3A8C"],"section":"Ink"},"hl":{"editor":"color","default":"#F2D36B","options":["#F2D36B","#F4B7A3","#BFE0C4","#C9D4F5"],"section":"Ink"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { query: '', sel: 0, msg: 'psst — there’s a secret in here', ink: -1 };
+}
+inks() {
+return [
+{ name: 'blue pen', hex: '#2747C4' },
+{ name: 'red pen', hex: '#B23A1E' },
+{ name: 'green pen', hex: '#2F6A4D' },
+{ name: 'purple pen', hex: '#5B3A8C' }
+];
+}
+items() {
+const ink = this.inkNow();
+const all = [
+{ group: 'PAGES', label: 'Home', hint: '/' },
+{ group: 'PAGES', label: 'Writing', hint: '/writing' },
+{ group: 'PAGES', label: 'Things I’ve made', hint: '/made' },
+{ group: 'PAGES', label: 'Now', hint: '/now' },
+{ group: 'PAGES', label: 'About', hint: '/about' },
+{ group: 'PAGES', label: 'Colophon', hint: '/colophon' },
+{ group: 'WRITING', label: 'Ten Hours, One Click, Almost Gone', hint: '6 min' },
+{ group: 'WRITING', label: 'SlidePlay: A Local Quiz App for the Living Room', hint: '11 min' },
+{ group: 'WRITING', label: 'My First Oh-My-Zsh Plugin: caff', hint: '10 min' },
+{ group: 'WRITING', label: 'Yatay geçiş mi? O da ne?', hint: 'TR · 4 min' },
+{ group: 'WRITING', label: 'Bilgisayar Mühendisliği Kazandım, Ne Yapmalıyım?', hint: 'TR · 4 min' },
+{ group: 'MADE', label: 'ws', hint: 'Go · github ↗' },
+{ group: 'MADE', label: 'caff', hint: 'zsh · github ↗' },
+{ group: 'MADE', label: 'SlidePlay', hint: 'Node · github ↗' },
+{ group: 'MADE', label: 'bs5-nav-tree', hint: 'JS · github ↗' },
+{ group: 'DO', label: 'Copy my email', hint: 'copy', action: 'email' },
+{ group: 'DO', label: 'Change the ink', hint: ink.name, action: 'ink' },
+{ group: 'DO', label: 'View this site’s source', hint: 'github ↗' }
+];
+const q = (this.state.query || '').toLowerCase().trim();
+if (q.indexOf('coffee') >= 0 || q.indexOf('sudo') >= 0 || q.indexOf('brew') >= 0) {
+all.push({ group: 'SECRET', label: 'sudo make coffee', hint: '↵', action: 'coffee' });
+}
+return all.filter((i) => !q || i.label.toLowerCase().indexOf(q) >= 0 || i.group.toLowerCase().indexOf(q) >= 0 || i.action === 'coffee');
+}
+inkNow() {
+const list = this.inks();
+if (this.state.ink < 0) {
+const p = this.props.pen ?? '#2747C4';
+const found = list.find((x) => x.hex.toLowerCase() === String(p).toLowerCase());
+return found || { name: 'your pen', hex: p };
+}
+return list[this.state.ink % list.length];
+}
+run(item) {
+if (!item) return;
+if (item.action === 'ink') {
+const list = this.inks();
+const cur = list.findIndex((x) => x.hex === this.inkNow().hex);
+const next = (cur + 1) % list.length;
+this.setState({ ink: next, msg: 'switched to the ' + list[next].name });
+} else if (item.action === 'coffee') {
+this.setState({ msg: '418 — I’m a teapot. the coffee is on the home page ticket.' });
+} else if (item.action === 'email') {
+this.setState({ msg: 'copied [email] to your clipboard' });
+} else {
+this.setState({ msg: 'opening ' + item.hint.replace(' ↗', '') + ' …' });
+}
+}
+renderVals() {
+const list = this.items();
+const sel = Math.min(this.state.sel, Math.max(0, list.length - 1));
+const hl = this.props.hl ?? '#F2D36B';
+const groups = [];
+list.forEach((item, idx) => {
+let g = groups.find((x) => x.name === item.group);
+if (!g) { g = { name: item.group, items: [] }; groups.push(g); }
+g.items.push({
+label: item.label,
+hint: item.hint,
+bg: idx === sel ? hl : 'transparent',
+pick: () => { this.setState({ sel: idx }); this.run(item); },
+hover: () => { if (this.state.sel !== idx) this.setState({ sel: idx }); }
+});
+});
+return {
+pen: this.inkNow().hex,
+query: this.state.query,
+msg: this.state.msg,
+groups: groups,
+empty: list.length === 0,
+onInput: (e) => this.setState({ query: e.target.value, sel: 0 }),
+onKey: (e) => {
+if (e.key === 'ArrowDown') { e.preventDefault(); this.setState({ sel: Math.min(sel + 1, list.length - 1) }); }
+else if (e.key === 'ArrowUp') { e.preventDefault(); this.setState({ sel: Math.max(sel - 1, 0) }); }
+else if (e.key === 'Enter') { e.preventDefault(); this.run(list[sel]); }
+else if (e.key === 'Escape') { this.setState({ query: '', sel: 0 }); }
+}
+};
+}
+}
+</script>
+</body>
+</html>
