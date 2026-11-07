@@ -23,22 +23,3 @@ const { n, tilt = 0, scope = "mn", class: className } = Astro.props;
   {n !== undefined && <span class="margin-note__n">{n} —</span>}
   <slot />
 </p>
-
-<style>
-  .margin-note {
-    font-family: var(--font-hand);
-    font-weight: 300;
-    font-size: var(--text-note);
-    line-height: 1.35;
-    color: var(--pen);
-    text-wrap: pretty;
-  }
-
-  .margin-note__n {
-    font-weight: 400;
-  }
-
-  .margin-note :global(a) {
-    color: inherit;
-  }
-</style>
