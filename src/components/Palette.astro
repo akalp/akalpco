@@ -1,0 +1,273 @@
+---
+/**
+ * ⌘K command palette: search across pages, posts, projects and commands.
+ * A native <dialog> handles the focus trap, Esc and focus return; the index
+ * is embedded as JSON at build time (no inline script, CSP stays strict).
+ */
+import { getCollection, getEntry } from "astro:content";
+import { getPosts, readingMinutes } from "@/lib/writing";
+
+export interface PaletteItem {
+  group: string;
+  label: string;
+  hint: string;
+  href?: string;
+  action?: "email" | "ink";
+  /** Extra search terms (tags, tech). */
+  keywords?: string;
+  lang?: string;
+}
+
+const posts = await getPosts();
+const projects = (
+  await getCollection(
+    "projects",
+    ({ data }) => data.kind === "mine" && data.repo !== undefined
+  )
+).sort((a, b) => a.data.order - b.data.order);
+const email = (await getEntry("links", "email"))?.data.href.replace(
+  "mailto:",
+  ""
+);
+
+const items: PaletteItem[] = [
+  { group: "Pages", label: "Home", hint: "/", href: "/" },
+  { group: "Pages", label: "Writing", hint: "/writing", href: "/writing" },
+  { group: "Pages", label: "Things I’ve made", hint: "/made", href: "/made" },
+  { group: "Pages", label: "Now", hint: "/now", href: "/now" },
+  { group: "Pages", label: "About", hint: "/about", href: "/about" },
+  { group: "Pages", label: "Colophon", hint: "/colophon", href: "/colophon" },
+  ...posts.map((post) => ({
+    group: "Writing",
+    label: post.data.title,
+    hint: `${post.data.lang === "tr" ? "TR · " : ""}${readingMinutes(post.body)} min`,
+    href: `/writing/${post.id}`,
+    keywords: post.data.tags.join(" "),
+    lang: post.data.lang,
+  })),
+  ...projects.map(({ data }) => ({
+    group: "Made",
+    label: data.name,
+    hint: `${data.tech[0]} · github ↗`,
+    href: data.repo,
+    keywords: data.tech.join(" "),
+  })),
+  ...(email
+    ? [
+        {
+          group: "Do",
+          label: "Copy my email",
+          hint: "copy",
+          action: "email" as const,
+          keywords: email,
+        },
+      ]
+    : []),
+  {
+    group: "Do",
+    label: "Change the ink",
+    hint: "blue pen",
+    action: "ink",
+    keywords: "pen color colour red green purple",
+  },
+  {
+    group: "Do",
+    label: "View this site’s source",
+    hint: "github ↗",
+    href: "https://github.com/akalp/akalpco",
+    keywords: "code repo",
+  },
+];
+
+const data = JSON.stringify({ items, email }).replace(/</g, "\\u003c");
+---
+
+<dialog class="palette" aria-label="Command palette" data-palette>
+  <div class="palette__search">
+    <span class="palette__prompt" aria-hidden="true">
+      ›
+    </span>
+    <input
+      class="palette__input"
+      type="text"
+      role="combobox"
+      aria-expanded="true"
+      aria-controls="palette-list"
+      aria-autocomplete="list"
+      aria-label="Search pages, posts and commands"
+      placeholder="a page, a post, or a command…"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+    />
+    <kbd class="palette__esc">esc</kbd>
+  </div>
+  <div class="palette__results" id="palette-list" role="listbox"></div>
+  <p class="palette__empty" hidden>
+    nothing here. maybe try “coffee”?
+  </p>
+  <div class="palette__foot">
+    <span class="palette__keys">↑↓ move · ↵ open · esc close</span>
+    <span class="palette__msg" aria-live="polite">
+      psst — there’s a secret in here
+    </span>
+  </div>
+  <script type="application/json" id="palette-data" is:inline set:html={data} />
+</dialog>
+
+<script>
+  import { initPalette } from "@/lib/palette";
+  initPalette();
+</script>
+
+<style>
+  .palette {
+    width: calc(100% - 32px);
+    max-width: 640px;
+    max-height: calc(100dvh - 32px);
+    margin: 110px auto auto;
+    padding: 0;
+    overflow: hidden;
+    color: var(--ink);
+    background: var(--paper-raised);
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 0 30px 60px -24px rgb(34 30 26 / 0.55);
+  }
+
+  .palette[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .palette::backdrop {
+    background: rgb(34 30 26 / 0.38);
+  }
+
+  @media (max-height: 640px), (max-width: 480px) {
+    .palette {
+      margin-top: 16px;
+    }
+  }
+
+  .palette__search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+    border-bottom: 1px dashed var(--rule-dash);
+  }
+
+  .palette__prompt {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--pen);
+  }
+
+  .palette__input {
+    flex: 1;
+    min-width: 0;
+    min-height: 64px;
+    padding: 0;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 350;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+
+  .palette__input::placeholder {
+    color: var(--rule-dash);
+  }
+
+  .palette__esc {
+    padding: 3px 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--rule-dash-soft);
+    border-radius: 4px;
+  }
+
+  .palette__results {
+    max-height: min(470px, 60dvh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 8px 12px;
+  }
+
+  .palette__results:empty {
+    display: none;
+  }
+
+  .palette__results :global(.palette__group-label) {
+    margin: 14px 12px 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .palette__results :global([role="option"]) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    min-height: var(--touch);
+    padding: 10px 12px;
+    font-size: 18px;
+    line-height: 1.3;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .palette__results :global([role="option"][aria-selected="true"]) {
+    background: var(--highlighter);
+  }
+
+  .palette__results :global(.palette__hint) {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .palette__empty {
+    margin: 28px 20px;
+    font-family: var(--font-hand);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--pen);
+  }
+
+  .palette__foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--paper-card);
+    border-top: 1px dashed var(--rule-dash);
+  }
+
+  .palette__keys {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .palette__msg {
+    font-family: var(--font-hand);
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--pen);
+  }
+
+  :global(html:has(.palette[open])) {
+    overflow: hidden;
+  }
+</style>
