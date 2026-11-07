@@ -37,7 +37,13 @@ const contents = headings
 const minutes = readingMinutes(post.body);
 ---
 
-<Base title={title} description={description} section="writing">
+<Base
+  title={title}
+  description={description}
+  section="writing"
+  ogImage={`/og/${post.id}.png`}
+  article={{ publishedTime: date, tags, lang }}
+>
   <article lang={lang} class="post">
     <header class="post__head">
       <p class="eyebrow post__meta" lang="en">

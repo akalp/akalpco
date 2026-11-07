@@ -1,4 +1,5 @@
 import { unified } from "@astrojs/markdown-remark";
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import {
   marginaliaTheme,
@@ -16,6 +17,11 @@ export default defineConfig({
   site: "https://akalp.co",
   output: "static",
   trailingSlash: "never",
+  integrations: [
+    sitemap({
+      filter: (page) => !page.endsWith("/404"),
+    }),
+  ],
   build: {
     format: "file",
   },
