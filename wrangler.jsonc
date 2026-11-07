@@ -8,4 +8,7 @@
     "directory": "./dist",
     "not_found_handling": "404-page",
   },
+  // Required by `wrangler preview`, which Workers Builds runs for
+  // non-production branches. Settings above are inherited.
+  "previews": {},
 }
