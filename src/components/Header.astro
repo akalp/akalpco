@@ -56,11 +56,14 @@ const nav: { id: Section; href: string }[] = [
 
   .site-header__name {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 12px;
   }
 
   .site-header__home {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
     font-size: 26px;
     font-style: italic;
     font-weight: 400;
