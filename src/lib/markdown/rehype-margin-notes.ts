@@ -10,8 +10,8 @@ const TILTS = [-1, 1.2, -0.6, 1.4, -1.2, 0.8];
  * Turns GFM footnotes into margin notes.
  *
  * Every top-level block that references a footnote is wrapped in a two-column
- * row: the block on the left, its notes in an <aside> on the right. On narrow
- * screens the aside wraps below the block. The footnotes section at the end
+ * row: the block on the left, its notes on the right. On narrow
+ * screens the notes wrap below the block. The footnotes section at the end
  * of the document is removed.
  */
 export function rehypeMarginNotes() {
@@ -77,11 +77,8 @@ export function rehypeMarginNotes() {
 
       return h("div", { className: ["mn-row"] }, [
         block,
-        h(
-          "aside",
-          { className: ["mn-notes"], ariaLabel: "Margin notes" },
-          notes
-        ),
+        // Not an <aside>: many notes per page would mean many landmarks.
+        h("div", { className: ["mn-notes"] }, notes),
       ]);
     });
   };
