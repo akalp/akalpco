@@ -24,6 +24,9 @@ export default defineConfig({
   ],
   build: {
     format: "file",
+    // All CSS is small (a few KB gzipped); inlining removes render-blocking
+    // requests. The CSP allows inline styles.
+    inlineStylesheets: "always",
   },
   vite: {
     build: {
