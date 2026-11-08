@@ -36,3 +36,12 @@ Cloudflare Workers Builds is connected to this repository:
 - Deploy command: `pnpm wrangler deploy`
 
 Configuration lives in `wrangler.jsonc`.
+
+## License
+
+The source code is released under the [MIT License](LICENSE).
+
+The writing in `src/content/`, the photos and images in `src/assets/` and the
+design references in `docs/design-reference/` are © Hasan Akalp, all rights
+reserved. The fonts are under the SIL Open Font License (see
+`src/assets/og-fonts/README.md` and the Fontsource packages).
