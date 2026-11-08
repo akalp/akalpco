@@ -38,6 +38,11 @@ const fullTitle = title ? `${title} — ${siteName}` : siteName;
 const path = Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
 const canonical = new URL(path || "/", Astro.site);
 const image = new URL(ogImage, Astro.site);
+// Cloudflare Web Analytics (cookieless). Workers static assets skip the
+// zone's automatic injection, so the beacon is added here; only on
+// production builds, so previews don't count as visits.
+const analytics =
+  import.meta.env.PROD && (process.env.WORKERS_CI_BRANCH ?? "main") === "main";
 ---
 
 <!doctype html>
@@ -107,6 +112,14 @@ const image = new URL(ogImage, Astro.site);
     <!-- Applies the saved ink before first paint. External, so the CSP can
          stay free of inline scripts. -->
     <script is:inline src="/ink.js"></script>
+    {analytics && (
+      <script
+        is:inline
+        type="module"
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "22697ad10c324a7bbfe3421fd662996b"}'
+      />
+    )}
     <slot name="head" />
   </head>
   <body>

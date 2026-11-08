@@ -5,6 +5,7 @@
  * is embedded as JSON at build time (no inline script, CSP stays strict).
  */
 import { getCollection, getEntry } from "astro:content";
+import { encodeEmail } from "@/lib/email";
 import { getPosts, readingMinutes } from "@/lib/writing";
 
 export interface PaletteItem {
@@ -25,9 +26,12 @@ const projects = (
     ({ data }) => data.kind === "mine" && data.repo !== undefined
   )
 ).sort((a, b) => a.data.order - b.data.order);
-// The address only appears as a mailto: link (below), so Cloudflare's
-// Email Address Obfuscation can protect it. It is never put in the JSON.
+// The address is never put in the JSON or the HTML as plain text; the
+// hidden link below carries it encoded (see lib/email).
 const emailHref = (await getEntry("links", "email"))?.data.href;
+const emailCode = emailHref?.startsWith("mailto:")
+  ? encodeEmail(emailHref.slice(7))
+  : undefined;
 
 const items: PaletteItem[] = [
   { group: "Pages", label: "Home", hint: "/", href: "/" },
@@ -51,7 +55,7 @@ const items: PaletteItem[] = [
     href: data.repo,
     keywords: data.tech.join(" "),
   })),
-  ...(emailHref
+  ...(emailCode
     ? [
         {
           group: "Do",
@@ -111,8 +115,8 @@ const data = JSON.stringify({ items }).replace(/</g, "\\u003c");
       psst — there’s a secret in here
     </span>
   </div>
-  {emailHref && (
-    <a href={emailHref} data-palette-email hidden>
+  {emailCode && (
+    <a href="/about" data-email={emailCode} data-palette-email hidden>
       email
     </a>
   )}

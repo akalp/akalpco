@@ -1,4 +1,5 @@
 import type { PaletteItem } from "@/components/Palette.astro";
+import { decodeEmail } from "@/lib/email";
 
 const INKS = [
   { id: "blue", name: "blue pen" },
@@ -40,26 +41,11 @@ function saveInk(id: string) {
   }
 }
 
-/**
- * Reads the address from the hidden mailto: link in the palette. Behind
- * Cloudflare's Email Address Obfuscation the href is
- * /cdn-cgi/l/email-protection#<hex> until Cloudflare's script decodes it,
- * so that format is decoded here too (first byte is the XOR key).
- */
+/** Reads the address from the palette's hidden, encoded link. */
 function readEmail(): string | undefined {
-  const href =
-    document
-      .querySelector<HTMLAnchorElement>("[data-palette-email]")
-      ?.getAttribute("href") ?? "";
-  if (href.startsWith("mailto:")) return href.slice(7).split("?")[0];
-  const hex = href.split("/cdn-cgi/l/email-protection#")[1];
-  if (!hex) return undefined;
-  const key = parseInt(hex.slice(0, 2), 16);
-  let out = "";
-  for (let i = 2; i < hex.length; i += 2) {
-    out += String.fromCharCode(parseInt(hex.slice(i, i + 2), 16) ^ key);
-  }
-  return out;
+  const code = document.querySelector<HTMLAnchorElement>("[data-palette-email]")
+    ?.dataset.email;
+  return code ? decodeEmail(code) : undefined;
 }
 
 export function initPalette() {
