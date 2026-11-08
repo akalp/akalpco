@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { encodeEmail } from "@/lib/email";
 
 interface Props {
   /** "full" adds the say-hi line and links (home, about). */
@@ -23,7 +24,12 @@ const year = new Date().getFullYear();
       <nav aria-label="Elsewhere" class="site-footer__links">
         {links.map(({ data }) => (
           <a
-            href={data.href}
+            {...(data.href.startsWith("mailto:")
+              ? {
+                  href: "/about",
+                  "data-email": encodeEmail(data.href.slice(7)),
+                }
+              : { href: data.href })}
             rel={data.href.startsWith("http") ? "me" : undefined}
           >
             {data.label} <span aria-hidden="true">↗</span>
@@ -40,6 +46,11 @@ const year = new Date().getFullYear();
     <span>© {year} Hasan Akalp</span>
   </div>
 </footer>
+
+<script>
+  import { revealEmails } from "@/lib/email";
+  revealEmails();
+</script>
 
 <style>
   .site-footer {
