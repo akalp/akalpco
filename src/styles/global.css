@@ -9,6 +9,9 @@
 }
 
 html {
+  /* Reserve the scrollbar's space so the layout does not shift when the
+     palette locks page scrolling. */
+  scrollbar-gutter: stable;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -97,6 +100,11 @@ a:hover {
 
 .skip-link:focus {
   top: 12px;
+}
+
+/* Keep short phrases (a link and its arrow) on one line. */
+.nowrap {
+  white-space: nowrap;
 }
 
 .visually-hidden {

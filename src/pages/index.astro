@@ -63,14 +63,19 @@ const offline = [
       <Fragment slot="notes">
         <MarginNote n={1} tilt={-1.5}>
           ws, caff, SlidePlay… they live a bit{" "}
-          <a href="#made">further down ↓</a>
+          <a href="#made" class="nowrap">
+            further down ↓
+          </a>
         </MarginNote>
         <MarginNote n={2} tilt={0.8}>
           defense, livestreaming, a few startups. the long version is on{" "}
           <a href="/about">/about</a>
         </MarginNote>
         <MarginNote n={3} tilt={-0.6}>
-          today’s beans are on <a href="#ticket">the ticket</a> →
+          today’s beans are on{" "}
+          <a href="#ticket" class="nowrap">
+            the ticket ↓
+          </a>
         </MarginNote>
         <MarginNote n={4} tilt={1.2}>
           still iterating. it’s basically a side project.
@@ -89,7 +94,7 @@ const offline = [
       <PostList posts={posts} />
       <div class="writing__note">
         <MarginNote tilt={-0.8}>
-          ↑ the older ones are in Turkish — written for students picking a path.
+          ↑ the ones marked TR are in Turkish.
         </MarginNote>
       </div>
     </div>

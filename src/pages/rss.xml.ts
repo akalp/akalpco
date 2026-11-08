@@ -68,7 +68,7 @@ export const GET: APIRoute = async ({ site }) => {
   return rss({
     title: "Hasan Akalp — Writing",
     description:
-      "Notes from building small tools and larger systems, plus a few older posts in Turkish.",
+      "Notes from building small tools and larger systems, in English and sometimes Turkish.",
     site: siteUrl,
     items,
     trailingSlash: false,
