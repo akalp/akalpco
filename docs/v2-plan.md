@@ -15,29 +15,29 @@ Working notes for Claude Code: migrate akalp.co from Next.js to Astro on Cloudfl
 
 ### Colors (`src/styles/tokens.css`)
 
-| Token | Hex | Use |
-|---|---|---|
-| `--paper` | `#F1EADF` | page background |
-| `--paper-raised` | `#FBF7EF` | ticket card, input background |
-| `--paper-card` | `#F6F0E6` | project cards, palette footer |
-| `--paper-tint` | `#E6DCCB` | inline code background |
-| `--photo` | `#E2D7C5` | image placeholder, inside of the polaroid |
-| `--ink` | `#221E1A` | text, heavy rules |
-| `--ink-soft` | `#3B352E` | secondary body text |
-| `--muted` | `#665D52` | meta, dates, labels (passes 4.5:1) |
-| `--rule` | `#CFC3B0` | thin dividers |
-| `--rule-dash` | `#8A7F70` / `#A89C8A` | dashed rules (ticket, lists) |
-| `--pen` | `#2747C4` | margin notes (blue ballpoint) |
-| `--highlighter` | `#F2D36B` | highlighter |
-| `--code-bg` | `#26211C` | code block background |
+| Token            | Hex                   | Use                                       |
+| ---------------- | --------------------- | ----------------------------------------- |
+| `--paper`        | `#F1EADF`             | page background                           |
+| `--paper-raised` | `#FBF7EF`             | ticket card, input background             |
+| `--paper-card`   | `#F6F0E6`             | project cards, palette footer             |
+| `--paper-tint`   | `#E6DCCB`             | inline code background                    |
+| `--photo`        | `#E2D7C5`             | image placeholder, inside of the polaroid |
+| `--ink`          | `#221E1A`             | text, heavy rules                         |
+| `--ink-soft`     | `#3B352E`             | secondary body text                       |
+| `--muted`        | `#665D52`             | meta, dates, labels (passes 4.5:1)        |
+| `--rule`         | `#CFC3B0`             | thin dividers                             |
+| `--rule-dash`    | `#8A7F70` / `#A89C8A` | dashed rules (ticket, lists)              |
+| `--pen`          | `#2747C4`             | margin notes (blue ballpoint)             |
+| `--highlighter`  | `#F2D36B`             | highlighter                               |
+| `--code-bg`      | `#26211C`             | code block background                     |
 
 Ink options, from ⌘K → "Change the ink":
 
-| Ink | Hex |
-|---|---|
-| blue | `#2747C4` |
-| red | `#B23A1E` |
-| green | `#2F6A4D` |
+| Ink    | Hex       |
+| ------ | --------- |
+| blue   | `#2747C4` |
+| red    | `#B23A1E` |
+| green  | `#2F6A4D` |
 | purple | `#5B3A8C` |
 
 The chosen ink is stored in `localStorage` (always wrapped in `try/catch`). It sets `<html data-ink="…">`, which swaps `--pen`.
@@ -67,35 +67,35 @@ Dark mode: not in the first v2 release, because it doesn't fit the paper concept
 
 ## 3. Pages
 
-| Route | Content | Reference |
-|---|---|---|
-| `/` | "Hi, I'm Hasan." with a highlighted paragraph and 4 margin notes · Writing list + Today's ticket · Things I've made (4 cards) · Off the keyboard (coffee / games / kitchen) · say-hi footer | `Main.dc.html` |
-| `/writing` | all posts, grouped by year, with the TR label | list style in Main |
-| `/writing/[slug]` | meta, title, description as subtitle, tags, one-line contents, TL;DR card, margin notes, pull quote, code block, "— Hasan, Ankara" signature, newer/older links | `Post.dc.html` |
-| `/made` | open-source projects + an "And for other people" list | `Made.dc.html` |
-| `/now` | monthly text (Working on / Learning / Away from the desk) + large ticket + "Previously" archive | `Now.dc.html` |
-| `/now/[month]` | archived /now pages | — |
-| `/about` | "The longer version." + polaroid portrait + narrative paragraphs + "What I reach for" + "Route so far" ticket | `About.dc.html` |
-| `/colophon` | type specimens, color swatches, moving parts, earlier versions (v1 → the `v1` git tag) | `Colophon.dc.html` |
-| `/404` | paper-themed, short, with a Kalam note | — |
-| ⌘K | on every page: search across pages, posts, projects and commands. Hidden: `coffee` → "418 — I'm a teapot." | `Palette.dc.html` |
+| Route             | Content                                                                                                                                                                                     | Reference          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `/`               | "Hi, I'm Hasan." with a highlighted paragraph and 4 margin notes · Writing list + Today's ticket · Things I've made (4 cards) · Off the keyboard (coffee / games / kitchen) · say-hi footer | `Main.dc.html`     |
+| `/writing`        | all posts, grouped by year, with the TR label                                                                                                                                               | list style in Main |
+| `/writing/[slug]` | meta, title, description as subtitle, tags, one-line contents, TL;DR card, margin notes, pull quote, code block, "— Hasan, Ankara" signature, newer/older links                             | `Post.dc.html`     |
+| `/made`           | open-source projects + an "And for other people" list                                                                                                                                       | `Made.dc.html`     |
+| `/now`            | monthly text (Working on / Learning / Away from the desk) + large ticket + "Previously" archive                                                                                             | `Now.dc.html`      |
+| `/now/[month]`    | archived /now pages                                                                                                                                                                         | —                  |
+| `/about`          | "The longer version." + polaroid portrait + narrative paragraphs + "What I reach for" + "Route so far" ticket                                                                               | `About.dc.html`    |
+| `/colophon`       | type specimens, color swatches, moving parts, earlier versions (v1 → the `v1` git tag)                                                                                                      | `Colophon.dc.html` |
+| `/404`            | paper-themed, short, with a Kalam note                                                                                                                                                      | —                  |
+| ⌘K                | on every page: search across pages, posts, projects and commands. Hidden: `coffee` → "418 — I'm a teapot."                                                                                  | `Palette.dc.html`  |
 
 Text in square brackets (`[bean · method]`, `[portrait]`, `[email]` and so on) is a placeholder for real content. The margin notes and the "Off the keyboard" lines are drafts, and Hasan will rewrite them in his own voice.
 
 ## 4. What moves from the current repo
 
-| Today | v2 |
-|---|---|
-| `content/blog/*.md` (title, date, description, tags) | Moves to `src/content/writing/*.md`. Add `lang: 'en' \| 'tr'` (default `en`) and an optional `draft` to the schema. Set `lang: tr` on `cs-okumak` and `yatay-gecis`. Slugs stay the same. |
-| `public/images/*.png` + `next-image-export-optimizer` + `public/images/optimized/` | Images move to `src/assets/writing/` and are referenced by relative paths from the markdown. `astro:assets` optimizes them. Delete `optimized/` and the hash JSON. |
-| `scripts/generate-og-images.mjs` (satori + resvg) | Becomes a `src/pages/og/[slug].png.ts` endpoint with a template in the new design: paper background, Fraunces title, mono meta. Keep TTF font files in the repo for OG. |
-| Shiki (github-light/dark) | Use Astro's built-in Shiki with a custom warm-dark theme on `--code-bg`: keywords `#F2D36B`, strings `#A9D3B5`, comments `#9C917F`. |
-| `marked` + `sanitize-html` | Not needed. Use Astro's markdown pipeline (remark/rehype). |
-| `src/app/rss.xml/route.ts` | Use `@astrojs/rss` at `/rss.xml` (same URL). Links point to `/writing/…`. |
-| `sitemap.ts`, `robots.ts` | Use `@astrojs/sitemap` (`/sitemap-index.xml`) + `public/robots.txt`. |
-| `src/data/projects.ts`, `experience.ts`, `contacts.ts` | Become `src/data/projects.yaml`, `route.yaml` and `links.yaml`, loaded as Zod-validated collections with the `file()` loader. |
-| Tailwind, motion, react, react-icons, twemoji-parser, date-fns | Removed. Plain CSS with custom properties, no framework islands. |
-| `public/favicon*`, `apple-touch-icon`, `site.webmanifest`, `hasan.webp` | Favicon redrawn for v2: an italic Fraunces "ha" on ink with a highlighter underline (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `android-chrome-*`); the same mark sits on the OG cards. `site.webmanifest` uses the paper colors. The portrait is now `src/assets/hasan.jpeg` (metadata stripped), optimized by `astro:assets`; `hasan.webp` is gone. |
+| Today                                                                              | v2                                                                                                                                                                                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content/blog/*.md` (title, date, description, tags)                               | Moves to `src/content/writing/*.md`. Add `lang: 'en' \| 'tr'` (default `en`) and an optional `draft` to the schema. Set `lang: tr` on `cs-okumak` and `yatay-gecis`. Slugs stay the same.                                                                                                                                                                         |
+| `public/images/*.png` + `next-image-export-optimizer` + `public/images/optimized/` | Images move to `src/assets/writing/` and are referenced by relative paths from the markdown. `astro:assets` optimizes them. Delete `optimized/` and the hash JSON.                                                                                                                                                                                                |
+| `scripts/generate-og-images.mjs` (satori + resvg)                                  | Becomes a `src/pages/og/[slug].png.ts` endpoint with a template in the new design: paper background, Fraunces title, mono meta. Keep TTF font files in the repo for OG.                                                                                                                                                                                           |
+| Shiki (github-light/dark)                                                          | Use Astro's built-in Shiki with a custom warm-dark theme on `--code-bg`: keywords `#F2D36B`, strings `#A9D3B5`, comments `#9C917F`.                                                                                                                                                                                                                               |
+| `marked` + `sanitize-html`                                                         | Not needed. Use Astro's markdown pipeline (remark/rehype).                                                                                                                                                                                                                                                                                                        |
+| `src/app/rss.xml/route.ts`                                                         | Use `@astrojs/rss` at `/rss.xml` (same URL). Links point to `/writing/…`.                                                                                                                                                                                                                                                                                         |
+| `sitemap.ts`, `robots.ts`                                                          | Use `@astrojs/sitemap` (`/sitemap-index.xml`) + `public/robots.txt`.                                                                                                                                                                                                                                                                                              |
+| `src/data/projects.ts`, `experience.ts`, `contacts.ts`                             | Become `src/data/projects.yaml`, `route.yaml` and `links.yaml`, loaded as Zod-validated collections with the `file()` loader.                                                                                                                                                                                                                                     |
+| Tailwind, motion, react, react-icons, twemoji-parser, date-fns                     | Removed. Plain CSS with custom properties, no framework islands.                                                                                                                                                                                                                                                                                                  |
+| `public/favicon*`, `apple-touch-icon`, `site.webmanifest`, `hasan.webp`            | Favicon redrawn for v2: an italic Fraunces "ha" on ink with a highlighter underline (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `android-chrome-*`); the same mark sits on the OG cards. `site.webmanifest` uses the paper colors. The portrait is now `src/assets/hasan.jpeg` (metadata stripped), optimized by `astro:assets`; `hasan.webp` is gone. |
 
 ### Markdown plugins
 
@@ -111,16 +111,16 @@ No Pages. Everything runs as one Worker project:
 ```jsonc
 // wrangler.jsonc
 {
-  "name": "akalpco",                 // must exactly match the Worker name in Workers Builds
+  "name": "akalpco", // must exactly match the Worker name in Workers Builds
   "main": "./src/worker/index.ts",
   "compatibility_date": "<build day>",
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*"]    // the Worker only runs for the API; pages are free assets
+    "run_worker_first": ["/api/*"], // the Worker only runs for the API; pages are free assets
   },
   "kv_namespaces": [{ "binding": "TICKET", "id": "<id>" }],
-  "triggers": { "crons": ["0 * * * *"] }
+  "triggers": { "crons": ["0 * * * *"] },
 }
 ```
 
@@ -159,15 +159,15 @@ No Pages. Everything runs as one Worker project:
 - Workers Builds detects pnpm from the lockfile. Build command: `pnpm build`. Deploy command: `pnpm wrangler deploy`, with wrangler as a devDependency.
 - Scripts:
 
-  | Script | Does |
-  |---|---|
-  | `dev` | `astro dev` |
-  | `build` | `astro build` |
+  | Script    | Does                                       |
+  | --------- | ------------------------------------------ |
+  | `dev`     | `astro dev`                                |
+  | `build`   | `astro build`                              |
   | `preview` | `wrangler dev`, Worker and assets together |
-  | `check` | `astro check` |
-  | `lint` | lint |
-  | `format` | format |
-  | `deploy` | deploy |
+  | `check`   | `astro check`                              |
+  | `lint`    | lint                                       |
+  | `format`  | format                                     |
+  | `deploy`  | deploy                                     |
 
 ## 7. Cloudflare setup (with Claude Code, via dashboard + wrangler)
 
@@ -226,10 +226,12 @@ No Pages. Everything runs as one Worker project:
 
 ## 10. Open decisions
 
-- Footer email address and how it's shown.
-- Whether to turn on Web Analytics (the colophon says "none" for now).
+None left.
 
 Decided:
+
+- Footer email: shown only as plain `mailto:` links (footer and a hidden link in the ⌘K palette) so Cloudflare's Email Address Obfuscation can rewrite them; the palette decodes Cloudflare's `/cdn-cgi/l/email-protection#…` form itself. Turn on Scrape Shield → Email Address Obfuscation for the zone.
+- Analytics: Cloudflare Web Analytics (cookieless), named on the colophon; Google Search Console is used for indexing only and not listed. The CSP allows `static.cloudflareinsights.com` (script) and `cloudflareinsights.com` (beacon).
 
 - First `/now` content and the ticket's initial values: written for November 2026, with October archived; ticket defaults live in `src/data/ticket.json`.
 - Portrait photo: `src/assets/hasan.jpeg`, with EXIF/GPS metadata stripped before committing.
