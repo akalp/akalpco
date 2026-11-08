@@ -50,6 +50,14 @@
   padding-top: 4px;
 }
 
+/* Set by margin-align.ts on desktop: notes hang in the margin without
+   stretching their row; the script keeps them from overlapping. */
+.mn-row.is-aligned > .mn-notes {
+  align-self: flex-start;
+  height: 0;
+  overflow: visible;
+}
+
 /* ---------- Headings ---------- */
 
 .prose h2 {
@@ -130,6 +138,13 @@
 }
 
 .prose li + li {
+  margin-top: 8px;
+}
+
+/* A list split around a margin note keeps its item spacing. */
+.prose
+  > :is(ul, ol, .mn-row:has(> :is(ul, ol):first-child))
+  + :is(ul, ol, .mn-row:has(> :is(ul, ol):first-child)) {
   margin-top: 8px;
 }
 

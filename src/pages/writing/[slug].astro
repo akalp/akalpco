@@ -113,6 +113,11 @@ const minutes = readingMinutes(post.body);
 </Base>
 
 <script>
+  import { alignMarginNotes } from "@/lib/margin-align";
+  alignMarginNotes();
+</script>
+
+<script>
   // Enable the copy buttons rendered (hidden) by rehype-code-figure.
   for (const button of document.querySelectorAll<HTMLButtonElement>(
     ".code-block__copy"
