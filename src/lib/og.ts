@@ -29,6 +29,15 @@ const COLORS = {
 // Resolved from the project root: this module is bundled before it runs.
 const fontDir = join(process.cwd(), "src/assets/og-fonts");
 let fonts: Promise<Parameters<typeof satori>[1]["fonts"]> | undefined;
+let mark: Promise<string> | undefined;
+
+/** The "ha" favicon, inlined as a data URI for Satori. */
+function loadMark() {
+  mark ??= readFile(join(process.cwd(), "public/favicon.svg")).then(
+    (svg) => `data:image/svg+xml;base64,${svg.toString("base64")}`
+  );
+  return mark;
+}
 
 function loadFonts() {
   fonts ??= Promise.all([
@@ -79,12 +88,18 @@ export async function renderOg({ title, meta, lang }: OgCard) {
         {
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "baseline",
+          alignItems: "center",
           paddingBottom: 22,
           borderBottom: `1.5px solid ${COLORS.rule}`,
         },
         [
-          el("div", { fontSize: 34 }, "Hasan Akalp"),
+          el("div", { display: "flex", alignItems: "center", gap: 18 }, [
+            {
+              type: "img",
+              props: { src: await loadMark(), width: 56, height: 56 },
+            },
+            el("div", { fontSize: 34 }, "Hasan Akalp"),
+          ]),
           el(
             "div",
             {
