@@ -40,6 +40,28 @@ function saveInk(id: string) {
   }
 }
 
+/**
+ * Reads the address from the hidden mailto: link in the palette. Behind
+ * Cloudflare's Email Address Obfuscation the href is
+ * /cdn-cgi/l/email-protection#<hex> until Cloudflare's script decodes it,
+ * so that format is decoded here too (first byte is the XOR key).
+ */
+function readEmail(): string | undefined {
+  const href =
+    document
+      .querySelector<HTMLAnchorElement>("[data-palette-email]")
+      ?.getAttribute("href") ?? "";
+  if (href.startsWith("mailto:")) return href.slice(7).split("?")[0];
+  const hex = href.split("/cdn-cgi/l/email-protection#")[1];
+  if (!hex) return undefined;
+  const key = parseInt(hex.slice(0, 2), 16);
+  let out = "";
+  for (let i = 2; i < hex.length; i += 2) {
+    out += String.fromCharCode(parseInt(hex.slice(i, i + 2), 16) ^ key);
+  }
+  return out;
+}
+
 export function initPalette() {
   const dialog = document.querySelector<HTMLDialogElement>("[data-palette]");
   const dataEl = document.getElementById("palette-data");
@@ -50,9 +72,8 @@ export function initPalette() {
   const empty = dialog.querySelector<HTMLElement>(".palette__empty")!;
   const msg = dialog.querySelector<HTMLElement>(".palette__msg")!;
 
-  const { items, email } = JSON.parse(dataEl.textContent ?? "{}") as {
+  const { items } = JSON.parse(dataEl.textContent ?? "{}") as {
     items: PaletteItem[];
-    email?: string;
   };
   const haystacks = new Map(
     items.map((item) => [
@@ -153,7 +174,9 @@ export function initPalette() {
       saveInk(next.id);
       say(`switched to the ${next.name}`);
       render();
-    } else if (item.action === "email" && email) {
+    } else if (item.action === "email") {
+      const email = readEmail();
+      if (!email) return;
       try {
         await navigator.clipboard.writeText(email);
         say(`copied ${email} to your clipboard`);

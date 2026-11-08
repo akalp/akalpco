@@ -25,10 +25,9 @@ const projects = (
     ({ data }) => data.kind === "mine" && data.repo !== undefined
   )
 ).sort((a, b) => a.data.order - b.data.order);
-const email = (await getEntry("links", "email"))?.data.href.replace(
-  "mailto:",
-  ""
-);
+// The address only appears as a mailto: link (below), so Cloudflare's
+// Email Address Obfuscation can protect it. It is never put in the JSON.
+const emailHref = (await getEntry("links", "email"))?.data.href;
 
 const items: PaletteItem[] = [
   { group: "Pages", label: "Home", hint: "/", href: "/" },
@@ -52,14 +51,14 @@ const items: PaletteItem[] = [
     href: data.repo,
     keywords: data.tech.join(" "),
   })),
-  ...(email
+  ...(emailHref
     ? [
         {
           group: "Do",
           label: "Copy my email",
           hint: "copy",
           action: "email" as const,
-          keywords: email,
+          keywords: "mail contact",
         },
       ]
     : []),
@@ -79,7 +78,7 @@ const items: PaletteItem[] = [
   },
 ];
 
-const data = JSON.stringify({ items, email }).replace(/</g, "\\u003c");
+const data = JSON.stringify({ items }).replace(/</g, "\\u003c");
 ---
 
 <dialog class="palette" aria-label="Command palette" data-palette>
@@ -112,6 +111,11 @@ const data = JSON.stringify({ items, email }).replace(/</g, "\\u003c");
       psst — there’s a secret in here
     </span>
   </div>
+  {emailHref && (
+    <a href={emailHref} data-palette-email hidden>
+      email
+    </a>
+  )}
   <script type="application/json" id="palette-data" is:inline set:html={data} />
 </dialog>
 
