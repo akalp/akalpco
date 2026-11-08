@@ -35,6 +35,8 @@ const projects = defineCollection({
     tech: z.array(z.string()),
     description: z.string().optional(),
     repo: z.url().optional(),
+    /** Live site or app, if there is one. */
+    site: z.url().optional(),
     post: reference("writing").optional(),
     note: z.string().optional(),
     /** Placeholder (or, later, real media) shown under the description. */

@@ -57,11 +57,16 @@ const tilts = [1.2, -1, 1.6, -1.2, 1.4];
           {project.description && (
             <p class="project__desc" set:html={inline(project.description)} />
           )}
-          {(project.repo || project.post) && (
+          {(project.repo || project.site || project.post) && (
             <p class="project__links">
               {project.repo && project.id !== "akalpco" && (
                 <a href={project.repo}>
                   {project.repo.replace("https://", "")} ↗
+                </a>
+              )}
+              {project.site && (
+                <a href={project.site}>
+                  {project.site.replace("https://", "")} ↗
                 </a>
               )}
               {project.post && (

@@ -30,13 +30,27 @@
     oh-my-zsh plugin.
   repo: https://github.com/akalp/caff
   post: my-first-omz-plugin-caff
+
+- id: caffbar
+  order: 3
+  kind: mine
+  name: CaffBar
+  tech: [Swift, macOS, Homebrew]
+  description: >-
+    caff’s menu bar sibling: a small macOS app that runs `caffeinate` with
+    one-click presets, a custom duration and the core sleep modes. Installs
+    with Homebrew.
+  repo: https://github.com/akalp/caffbar
+  media:
+    kind: photo
+    label: "[screenshot: the menu bar panel]"
   card:
-    tech: zsh · macOS
+    tech: Swift · macOS
     description: >-
-      A friendlier wrapper around macOS caffeinate. My first oh-my-zsh plugin.
+      caff’s menu bar sibling: caffeinate presets and modes, one click away.
 
 - id: slideplay
-  order: 3
+  order: 4
   kind: mine
   name: SlidePlay
   tech: [Node, Express, Socket.IO]
@@ -49,26 +63,79 @@
   media:
     kind: photo
     label: "[photo: host screen on the TV]"
+
+- id: paper-cleaner
+  order: 5
+  kind: mine
+  name: paper-cleaner
+  tech: [TypeScript, FastAPI, Docker]
+  description: >-
+    Turns phone photos of worksheets into clean, printable pages:
+    perspective correction, cropping, tone and manual erase. Runs locally,
+    no accounts, no cloud.
+  repo: https://github.com/akalp/paper-cleaner
+  media:
+    kind: photo
+    label: "[screenshot: perspective correction]"
   card:
-    tech: Node · Socket.IO
+    tech: Vite · FastAPI
     description: >-
-      A living-room quiz game with host, player and admin screens and live
-      scoring.
+      Turns phone photos of worksheets into clean, printable pages, locally.
+
+- id: petpomodoro
+  order: 6
+  kind: mine
+  name: PetPomodoro
+  tech: [TypeScript, React, PWA]
+  description: >-
+    A cozy Pomodoro app with a tamagotchi twist: every honestly finished
+    focus session helps a small pet grow. Local-first, works offline, made
+    for the iPhone home screen.
+  repo: https://github.com/akalp/petpomodoro
+  site: https://petpomodoro.pages.dev
+  media:
+    kind: photo
+    label: "[screenshot: the pet on an iPhone home screen]"
+  card:
+    tech: React · PWA
+    description: >-
+      A cozy Pomodoro app where finished focus sessions help a small pet grow.
+
+- id: aseprite-builder
+  order: 7
+  kind: mine
+  name: aseprite-builder
+  tech: [Go, CLI, TUI]
+  description: >-
+    An unofficial CLI and TUI that builds, installs, updates and repairs
+    the Aseprite sprite editor from its official source code. It never
+    redistributes the binaries.
+  repo: https://github.com/akalp/aseprite-builder
+  media:
+    kind: terminal
+    label: "[terminal recording of a build]"
+
+- id: latex-devcontainer
+  order: 8
+  kind: mine
+  name: latex-devcontainer
+  tech: [LaTeX, Docker, VS Code]
+  description: >-
+    A Dev Container for LaTeX: open the folder in VS Code and get build,
+    lint and format on save, with a SyncTeX preview next to the source.
+  repo: https://github.com/akalp/latex-devcontainer
 
 - id: bs5-nav-tree
-  order: 4
+  order: 9
   kind: mine
   name: bs5-nav-tree
   tech: [JavaScript, Bootstrap 5]
   description: >-
     A Bootstrap 5 plugin for searchable, collapsible, nested navigation menus.
   repo: https://github.com/akalp/bs5-nav-tree
-  card:
-    tech: JavaScript
-    description: Searchable, collapsible nested navigation for Bootstrap 5.
 
 - id: akalpco
-  order: 5
+  order: 10
   kind: mine
   name: akalp.co
   tech: [Astro, Cloudflare]

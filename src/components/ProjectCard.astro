@@ -66,12 +66,23 @@ const { name, card, repo } = Astro.props.project.data;
 
   .tag-card__foot {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 12px;
+    gap: 4px 12px;
     padding-top: 12px;
     border-top: 1px dashed var(--rule-dash);
     font-family: var(--font-mono);
     font-size: var(--text-mono-sm);
     color: var(--muted);
+  }
+
+  /* Keep "TypeScript · FastAPI" and "github ↗" whole; the link wraps to
+     its own line (still right-aligned) when the card is narrow. */
+  .tag-card__foot > span {
+    white-space: nowrap;
+  }
+
+  .tag-card__foot > span:last-child {
+    margin-left: auto;
   }
 </style>
