@@ -10,7 +10,9 @@
     A workspace switcher and scaffolding tool. Fuzzy-search your projects
     from a TUI, jump into one, or start a new one from a template.
   repo: https://github.com/akalp/ws
-  note: "[your note on why it exists]"
+  note: >-
+    every experiment gets a dated folder now. my home directory has never
+    been this tidy.
   media:
     kind: terminal
     label: A terminal recording of ws. The fuzzy-search TUI opens a workspace, then ws new scaffolds a Go project.
@@ -62,7 +64,9 @@
     the TV, players on their phones, an admin view, and live scoring.
   repo: https://github.com/akalp/SlidePlay
   post: slideplay-quiz-app
-  note: "[your note]"
+  note: >-
+    first played at my dad’s birthday, on the living-room TV. the scoreboard
+    got loud.
   media:
     kind: screen
     label: The SlidePlay host screen after a question, showing the correct answer and each player’s pick and time.
