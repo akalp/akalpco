@@ -17,6 +17,10 @@
   // Hourly: refresh "last push" from GitHub.
   "triggers": { "crons": ["0 * * * *"] },
   "observability": { "enabled": true },
+  // Served at the apex; Cloudflare creates the DNS record and certificate.
+  "routes": [{ "pattern": "akalp.co", "custom_domain": true }],
+  // Keep the workers.dev URL for smoke tests; pages canonicalise to akalp.co.
+  "workers_dev": true,
   // Required by `wrangler preview`, which Workers Builds runs for
   // non-production branches. Bindings are not inherited, so previews get
   // their own KV namespace and never touch production data.
