@@ -15,8 +15,6 @@ In a few seconds, my plugin folder disappeared. No drama, no complex bug — jus
 
 This is the story of what happened, how iCloud Data Recovery saved me, and why I changed my workflow right after.
 
----
-
 ## What I was building
 
 I’ve been using Obsidian for a long time. Besides regular note-taking, I also track a personal metric related to health and breathing quality.
@@ -43,9 +41,9 @@ So I did what many of us do when we see duplicate entries: I clicked **Delete** 
 
 That was the real mistake.
 
-Because I was following the Developer Docs–style setup, my whole development codebase lived inside the vault under `.obsidian/plugins/...`. So deleting “the plugin” was not just uninstalling a build artifact. It removed the actual source folder.
+Because I was following the Developer Docs–style setup, my whole development codebase lived inside the vault under `.obsidian/plugins/...`. So deleting “the plugin” was not just uninstalling a build artifact. ==It removed the actual source folder.==
 
-I commit often, but I hadn’t pushed yet.
+I commit often, but I hadn’t pushed yet.[^1]
 
 So it felt like watching ten hours fly away.
 
@@ -73,7 +71,7 @@ I decided to speed things up with a small script in Safari DevTools.
 
 My first plan was full automation: detect the items under my plugin path and auto-select them. But it didn’t work reliably.
 
-The reason is how Apple built that recovery UI: it looks like a long list, but it’s not actually rendering thousands of DOM nodes at the same time. It uses a common performance pattern called **list virtualization**.
+The reason is how Apple built that recovery UI: it looks like a long list, but it’s not actually rendering thousands of DOM nodes at the same time. It uses a common performance pattern called **list virtualization**.[^2]
 
 In short:
 
@@ -100,7 +98,7 @@ And the code was back (without the heavy folders, which I didn’t need anyway).
 
 After recovery, I didn’t continue development. First, I fixed the workflow.
 
-I moved the project out of the vault into my normal workspace and treated the vault as a _runtime target_, not a source of truth.
+I moved the project out of the vault into my normal workspace and treated the vault as a ==runtime target, not a source of truth==.
 
 I also added a packaging flow so only the small output set ends up in the vault.
 
@@ -201,7 +199,7 @@ Then I just moved the packaged folder into the vault to test it:
 mv release/<plugin_name> <vault>/.obsidian/plugins/
 ```
 
-And yes — I pushed everything immediately after that.
+And yes — I pushed everything immediately after that.[^3]
 
 ## Conclusion
 
@@ -213,4 +211,10 @@ I’ll keep the plugin private for now. It’s a personal project and I don’t 
 
 But the lesson is already public in my head:
 
-Even if you’re careful, “just one quick click” can be enough. So don’t let your development flow depend on luck.
+Even if you’re careful, “just one quick click” can be enough. So ==don’t let your development flow depend on luck==.
+
+[^1]: the most expensive “later” I’ve ever said.
+
+[^2]: the same trick that keeps long feeds fast. great for users, terrible for my script.
+
+[^3]: even when I forget, my agents don’t :)

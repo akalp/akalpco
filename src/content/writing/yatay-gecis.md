@@ -8,7 +8,7 @@ tags: ["universite"]
 
 ## Evet üniversitedesin ama o da ne...
 
-Burası hiç de senin beklediğin gibi değil 😬 Bu dert değil, hala istediğin bölüm veya üniversite için bir şansın var: Yatay geçiş. Peki neyin nesi bu, nasıl yapılır ve ne zaman yapabilabilir? Hadi hepsini cevaplayalım 😇
+Burası hiç de senin beklediğin gibi değil 😬 Bu dert değil, hala istediğin bölüm veya üniversite için bir şansın var: Yatay geçiş. Peki neyin nesi bu, nasıl yapılır ve ne zaman yapabilabilir? Hadi hepsini cevaplayalım 😇[^1]
 
 ## Yatay Geçiş?
 
@@ -34,7 +34,7 @@ Burayı okuyorsan üniversite tam sana göre ama bölüm tercihin yanlış demek
 
 "Bu üniversite de pek benlik değilmiş, değiştirebilir miyim acaba 🤔" dediğini duyar gibiyim. Elbette değiştirebilirsin. Burada önemli olan hedefin. Üniversite değiştirmek istiyorsan eğer hem genel ortalaman ile hem de üniversite puanın ile geçiş yapabilirsin. Yok ben bölüm de değiştireceğim diyorsan burada kötü bir haberim var, sadece üniversite puanını kullanabilirsin 😢
 
-**Üniversitem değişsin ama bölümüm aynı kalsın:** Üniversite sınavındaki puanın, geçmek istediğin üniversitedeki bölümünün sınav senendeki puanına eşdeğer veya o puandan yüksekse direkt başvurabilirsin. Bu şekilde birçok arkadaşım üniversite değişikliği yaptı, bu sayede bulunduğun üniversitede ortalama kasmak zorunda kalmıyorsun. Bir öğrenci bundan başka ne isteyebilir ki 😏
+**Üniversitem değişsin ama bölümüm aynı kalsın:** Üniversite sınavındaki puanın, geçmek istediğin üniversitedeki bölümünün sınav senendeki puanına eşdeğer veya o puandan yüksekse direkt başvurabilirsin. Bu şekilde birçok arkadaşım üniversite değişikliği yaptı,[^2] bu sayede bulunduğun üniversitede ortalama kasmak zorunda kalmıyorsun. Bir öğrenci bundan başka ne isteyebilir ki 😏
 
 Eee, üniversite puanın üst paragraftaki şartı sağlamıyorsa ne olacak peki? 🤔 Burada cevap genel not ortalamanda saklı. Eğer genel not ortalaman geçmek istediğin üniversitenin belirlediği değere eşdeğerse veya puanın bu değerden yüksekse üzülme sen de başvurabilirsin 👑
 
@@ -42,13 +42,13 @@ Eee, üniversite puanın üst paragraftaki şartı sağlamıyorsa ne olacak peki
 
 ## Ne zaman peki?
 
-Henüz son iki sınıftan birinde değilsen ve birinci yılını tamamlamışsan şanslısın, bu uygulamadan faydalanabilirsin. 🥇
+==Henüz son iki sınıftan birinde değilsen ve birinci yılını tamamlamışsan== şanslısın, bu uygulamadan faydalanabilirsin. 🥇
 
 ## Peki başka ne şartlar var?
 
 Eğer geçmek istediğin bölüm İngilizce ise şimdiki bölümünün de İngilizce olması gerekiyor ayrıca geçmek istediğin üniversite senden İngilizce sınav belgesi isteyecektir. Şimdiye kadar sadece İzmir Yüksek Teknoloji Enstitüsü'nün istemediğini duydum, onun dışında bildiğim tüm üniversiteler TOEFL gibi sınavların sonucunu istiyor ya da kendi İngilizce sınavlarından belli bir puanı almanı istiyor.
 
-Ayrıca, dönem kaybının olmaması gerekiyor. Dönem kaybın varsa kabul alma şansın yoka yakın diyebiliriz. 🥲
+Ayrıca, ==dönem kaybının olmaması gerekiyor==. Dönem kaybın varsa kabul alma şansın yoka yakın diyebiliriz. 🥲
 
 ## Ee nasıl geçtiğimi anlayacağım?
 
@@ -59,3 +59,7 @@ Kontejana dahil olma şansını artırmak için genel not ortalamanı yüksek tu
 ## Önceki derslerime ne olacak?
 
 Gittiğin yerde ortak dersler varsa bu derslerini sayacaklar zaten, rahat ol 🙂 Peki farklı olan dersler? Burada bir şart var. Eğer farklı olan ders eski üniversitende/bölümünde zorunlu ders ise seçmeli ders olarak saydırabiliyorsun ama eğer seçmeli bir ders ise maalesef bu dersi saydıramıyorsun. Üniversitenin bu konuda rahatlık sunuyorsa ona bir şey diyemem tabi 😊 Araştırmak lazım bunları hep 🤓
+
+[^1]: 2021’de yazdım; şartlar değişmiş olabilir, başvurmadan önce güncel yönetmeliğe bak.
+
+[^2]: ben de bu yoldan geçtim.

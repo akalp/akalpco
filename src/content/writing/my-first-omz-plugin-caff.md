@@ -22,9 +22,7 @@ For years I treated "keeping my Mac awake" as an annoying detail I only thought 
 
 If you do any kind of serious development on macOS, there's a good chance you've run into the same thing: you start a long-running task, step away for a bit, and come back to discover that **sleep won the race**.
 
-This blog post is about how I tried to solve that with Amphetamine, why that wasn't quite enough for my setup (especially in **clamshell mode**), and how that annoyance pushed me to write my first Oh My Zsh plugin: `caff`, a smarter wrapper around macOS' built‑in `caffeinate` command.
-
----
+This blog post is about how I tried to solve that with Amphetamine, why that wasn't quite enough for my setup (especially in **clamshell mode**[^1]), and how that annoyance pushed me to write my first Oh My Zsh plugin: `caff`, a smarter wrapper around macOS' built‑in `caffeinate` command.
 
 ## Why a developer needs to keep the machine awake
 
@@ -178,7 +176,7 @@ I wanted something more **predictable** and more **terminal-native**.
 4. **Works well with clamshell mode**
    When used with the right flags and/or durations, `caffeinate` is just another process. It doesn't care whether the lid is open or closed — if it's running, it will keep the system awake according to the flags you gave it.
 
-In other words, `caffeinate` behaves like a **tool** you can compose with other tools. It feels like a better foundation for a dev-centric workflow than a mouse-driven menu bar app.
+In other words, `caffeinate` behaves like a ==tool you can compose with other tools==. It feels like a better foundation for a dev-centric workflow than a mouse-driven menu bar app.
 
 The only issue: its **ergonomics** are not great. Even though you can pack flags as `-disu`, it still expects raw seconds via `-t <seconds>` and gives you no visual feedback.
 
@@ -186,7 +184,7 @@ The only issue: its **ergonomics** are not great. Even though you can pack flags
 - I'd like some quick presets like `short`, `medium`, `long`, `night`.
 - I'd like a simple visual indication when I'm in "awake mode".
 
-So I did what any annoyed developer would do: I wrote a wrapper.
+So I did what any annoyed developer would do: I wrote a wrapper.[^3]
 
 ## Introducing `caff`: a smart `caffeinate` wrapper
 
@@ -206,7 +204,8 @@ At a high level, it gives you:
 Instead of this:
 
 ```zsh
-# Using caffeinate directly (flags must include a leading dash, duration is in seconds)
+# Using caffeinate directly
+# (flags must include a leading dash, duration is in seconds)
 caffeinate -disu -t 7200 -- npm run build
 ```
 
@@ -285,7 +284,7 @@ caff disu
 - **Known duration**: `caff` starts `caffeinate` in the background and shows a single-line progress bar with remaining time.
 - **Unknown duration**: it shows a little spinner that keeps animating until you hit Ctrl+C.
 
-In both cases, **Ctrl+C** stops the UI and `caffeinate`, and `caff` exits with status `130`. That makes it explicit that the session was interrupted.
+In both cases, **Ctrl+C** stops the UI and `caffeinate`, and `caff` exits with status `130`.[^2] That makes it explicit that the session was interrupted.
 
 ### Quiet mode for scripts
 
@@ -336,7 +335,7 @@ It's predictable, scriptable, and — most importantly — lives where I already
 Writing `caff` started as a tiny quality-of-life improvement: _"I just want a nicer way to use `caffeinate`."_ But it ended up being my:
 
 - First **Oh My Zsh plugin**
-- First little experiment in "turn an annoyance into a tool"
+- First little experiment in “==turn an annoyance into a tool==”
 - A reminder that many dev problems are solvable with a thin layer of ergonomics on top of existing primitives
 
 If you:
@@ -346,3 +345,9 @@ If you:
 - Live in the terminal
 
 …then `caffeinate` is probably already the right tool for you. `caff` just makes it **nicer**.
+
+[^1]: lid closed, external monitor, keyboard on the desk.
+
+[^2]: 128 + SIGINT (2). scripts can tell “interrupted” from “failed”.
+
+[^3]: even the name felt long. I went with caff, that felt long too, so I added a cf alias.

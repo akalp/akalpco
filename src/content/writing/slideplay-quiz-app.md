@@ -9,7 +9,7 @@ tags: ["nodejs", "socketio", "realtime", "side-project", "web"]
 
 GitHub repo: [akalp/SlidePlay](https://github.com/akalp/SlidePlay)
 
-SlidePlay is a small web app I built as a birthday surprise for my dad. It runs only on a local network and turns a TV plus a few phones into a private quiz game.
+SlidePlay is a small web app I built as ==a birthday surprise for my dad==. It runs only on a local network and turns a TV plus a few phones into a private quiz game.
 
 - Built with **Node.js**, **Express**, and **Socket.IO**.
 - Uses three roles: **Player**, **Host**, and **Admin**, all running in the browser.
@@ -21,8 +21,6 @@ SlidePlay is a small web app I built as a birthday surprise for my dad. It runs 
 - In practice it feels like **“a private Kahoot meets Google Slides, served from my laptop over Wi-Fi.”**
 
 The rest of this post is about why I built it, what it does, and how it works under the hood.
-
----
 
 ## Why I built my own tiny quiz app
 
@@ -198,7 +196,7 @@ I wanted the game to feel like a quiz show, not just a static poll. SlidePlay ke
 
 - When a question starts, I snapshot which players are currently connected.
 - Each of those players can answer **once**.
-- A correct answer gets base points plus a speed bonus.
+- A correct answer gets base points plus a speed bonus.[^1]
 - A wrong answer gives zero points.
 - When everyone in that snapshot has answered (or disconnected), the server reveals the answer.
 
@@ -311,7 +309,7 @@ socket.on("host:videoControl", ({ action, time }) => {
 
 On the player view, I only show the text for the video slide. The actual playback happens on the host screen, which keeps everyone focused on the TV.
 
-> A small practical note here: A small practical note here: Chrome’s autoplay rules matter. Muted autoplay is usually fine, but autoplay with sound is only allowed after the user has interacted with the site (click, tap, etc.), or if Chrome considers the user “engaged” with that domain, or the site is installed as a PWA In other words, if I try to call video.play() from a Socket.IO event before anyone has clicked anything on the host page, Chrome may silently block it. In practice I either start videos muted, or I require at least one manual click on the host view before I rely on remote play commands.
+> A small practical note here: Chrome’s autoplay rules matter. Muted autoplay is usually fine, but autoplay with sound is only allowed after the user has interacted with the site (click, tap, etc.), or if Chrome considers the user “engaged” with that domain, or the site is installed as a PWA In other words, if I try to call video.play() from a Socket.IO event before anyone has clicked anything on the host page, Chrome may silently block it. In practice I either start videos muted, or I require at least one manual click on the host view before I rely on remote play commands.
 
 ### Avatars and live reload with `chokidar`
 
@@ -350,14 +348,14 @@ The first real test was on my home network:
 - I opened the **host view** in a browser and mirrored it to the TV.
 - Five people joined as **players** from phones and a tablet over Wi-Fi.
 
-The funniest bug was not in my code but in the browser: I shared the local URL, people tapped it, and Chrome tried to be “smart” and turned it into `https://...`. Of course, my small Node server was only listening on plain `http://`, so nothing worked at first.
+The funniest bug was not in my code but in the browser: I shared the local URL, people tapped it, and Chrome tried to be “smart” and turned it into `https://...`. Of course, my small Node server was only listening on plain `http://`, so nothing worked at first.[^2]
 
 Once we realized what was going on and everyone typed the `http://` URL manually, everything clicked:
 
 - Players picked avatars and names.
 - I walked through content, video, question, scoreboard, and final slides from the admin panel.
 - Scores updated in real time, and the scoreboard slides made the quiz feel real.
-- Most importantly, my dad got a custom, interactive birthday quiz built around his own story.
+- Most importantly, my dad got a custom, interactive birthday quiz built around his own story.[^3]
 
 All of it stayed on the local network. No public link, no external service, no uploads.
 
@@ -375,4 +373,10 @@ From a technical side, the interesting parts for me were:
 - Splitting the UI into **Player / Host / Admin** roles.
 - Adding **remote video control** and **live reload** with `chokidar`.
 
-If you’ve ever wanted a private “Kahoot meets Google Slides” for your own family, friends, or a small team, this pattern works well: keep everything local, keep the content in one JSON file, and use WebSockets to glue a few simple web pages into something that feels like a live show in your living room.
+If you’ve ever wanted a private “Kahoot meets Google Slides” for your own family, friends, or a small team, this pattern works well: ==keep everything local, keep the content in one JSON file==, and use WebSockets to glue a few simple web pages into something that feels like a live show in your living room.
+
+[^1]: the speed bonus made everyone very competitive, very fast.
+
+[^2]: next time: a QR code with the full http:// URL on the TV.
+
+[^3]: the night he understood my job best, and he was really happy.
