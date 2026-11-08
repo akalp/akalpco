@@ -12,7 +12,8 @@ export function ticketRows(): TicketRow[] {
     { label: "Reading", value: defaults.reading, field: "reading" },
     {
       label: "Last push",
-      value: `${defaults.lastPush.repo} · [2h] ago`,
+      // The real "· 2h ago" comes from the Worker; without it, just the repo.
+      value: defaults.lastPush.repo,
       field: "lastPush",
     },
   ];
