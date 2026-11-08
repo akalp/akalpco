@@ -1,0 +1,186 @@
+# Things I've made (/made, home cards) and work for other people.
+# `card` is the short version used on the home page museum tags.
+
+- id: ws
+  order: 1
+  kind: mine
+  name: ws
+  tech: [Go, TUI, CLI]
+  description: >-
+    A workspace switcher and scaffolding tool. Fuzzy-search your projects
+    from a TUI, jump into one, or start a new one from a template.
+  repo: https://github.com/akalp/ws
+  note: >-
+    every experiment gets a dated folder now. my home directory has never
+    been this tidy.
+  media:
+    kind: terminal
+    label: A terminal recording of ws. The fuzzy-search TUI opens a workspace, then ws new scaffolds a Go project.
+    src: ../assets/made/ws-tui.gif
+    still: ../assets/made/ws-tui-still.png
+  card:
+    tech: Go · TUI
+    description: >-
+      A workspace switcher and scaffolder with a fuzzy-search TUI and project
+      templates.
+
+- id: caff
+  order: 2
+  kind: mine
+  name: caff
+  tech: [zsh, oh-my-zsh, macOS]
+  description: >-
+    A modern, friendlier wrapper around macOS `caffeinate`. My first
+    oh-my-zsh plugin.
+  repo: https://github.com/akalp/caff
+  post: my-first-omz-plugin-caff
+
+- id: caffbar
+  order: 3
+  kind: mine
+  name: CaffBar
+  tech: [Swift, macOS, Homebrew]
+  description: >-
+    caff’s menu bar sibling: a small macOS app that runs `caffeinate` with
+    one-click presets, a custom duration and the core sleep modes. Installs
+    with Homebrew.
+  repo: https://github.com/akalp/caffbar
+  media:
+    kind: screen
+    label: CaffBar’s menu bar panel during a session, with presets, duration and mode toggles.
+    src: ../assets/made/caffbar-panel.png
+  card:
+    tech: Swift · macOS
+    description: >-
+      caff’s menu bar sibling: caffeinate presets and modes, one click away.
+
+- id: slideplay
+  order: 4
+  kind: mine
+  name: SlidePlay
+  tech: [Node, Express, Socket.IO]
+  description: >-
+    A real-time slideshow and quiz game for family nights: a host screen on
+    the TV, players on their phones, an admin view, and live scoring.
+  repo: https://github.com/akalp/SlidePlay
+  post: slideplay-quiz-app
+  note: >-
+    first played at my dad’s birthday, on the living-room TV. the scoreboard
+    got loud.
+  media:
+    kind: screen
+    label: The SlidePlay host screen after a question, showing the correct answer and each player’s pick and time.
+    src: ../assets/made/slideplay-host.png
+
+- id: paper-cleaner
+  order: 5
+  kind: mine
+  name: paper-cleaner
+  tech: [TypeScript, FastAPI, Docker]
+  description: >-
+    Turns phone photos of worksheets into clean, printable pages:
+    perspective correction, cropping, tone and manual erase. Runs locally,
+    no accounts, no cloud.
+  repo: https://github.com/akalp/paper-cleaner
+  media:
+    kind: screen
+    label: The paper-cleaner editor correcting the perspective of a photographed worksheet, next to the cleaned preview.
+    src: ../assets/made/paper-cleaner-perspective.png
+  card:
+    tech: Vite · FastAPI
+    description: >-
+      Turns phone photos of worksheets into clean, printable pages, locally.
+
+- id: petpomodoro
+  order: 6
+  kind: mine
+  name: PetPomodoro
+  tech: [TypeScript, React, PWA]
+  description: >-
+    A cozy Pomodoro app with a tamagotchi twist: every honestly finished
+    focus session helps a small pet grow. Local-first, works offline, made
+    for the iPhone home screen.
+  repo: https://github.com/akalp/petpomodoro
+  site: https://petpomodoro.pages.dev
+  media:
+    kind: screen
+    label: PetPomodoro on an iPhone, showing Momo the pet with its level, mood and stats.
+    src: ../assets/made/petpomodoro-pet.png
+  card:
+    tech: React · PWA
+    description: >-
+      A cozy Pomodoro app where finished focus sessions help a small pet grow.
+
+- id: aseprite-builder
+  order: 7
+  kind: mine
+  name: aseprite-builder
+  tech: [Go, CLI, TUI]
+  description: >-
+    An unofficial CLI and TUI that builds, installs, updates and repairs
+    the Aseprite sprite editor from its official source code. It never
+    redistributes the binaries.
+  repo: https://github.com/akalp/aseprite-builder
+  media:
+    kind: terminal
+    label: A terminal recording of aseprite-builder. The TUI shows its disclaimer, the main menu and a system check before any build.
+    src: ../assets/made/aseprite-builder-tui.gif
+    still: ../assets/made/aseprite-builder-tui-still.png
+
+- id: latex-devcontainer
+  order: 8
+  kind: mine
+  name: latex-devcontainer
+  tech: [LaTeX, Docker, VS Code]
+  description: >-
+    A Dev Container for LaTeX: open the folder in VS Code and get build,
+    lint and format on save, with a SyncTeX preview next to the source.
+  repo: https://github.com/akalp/latex-devcontainer
+
+- id: bs5-nav-tree
+  order: 9
+  kind: mine
+  name: bs5-nav-tree
+  tech: [JavaScript, Bootstrap 5]
+  description: >-
+    A Bootstrap 5 plugin for searchable, collapsible, nested navigation menus.
+  repo: https://github.com/akalp/bs5-nav-tree
+
+- id: akalpco
+  order: 10
+  kind: mine
+  name: akalp.co
+  tech: [Astro, Cloudflare]
+  description: The page you’re on. How it’s put together is in the [colophon](/colophon).
+  repo: https://github.com/akalp/akalpco
+  note: yes, this counts.
+
+- id: gardro
+  order: 10
+  kind: others
+  name: gardro.app, image-generation MVP
+  tech: [Next.js, FastAPI]
+
+- id: livestreaming
+  order: 11
+  kind: others
+  name: a livestreaming platform
+  tech: [Vue, Python, Node]
+
+- id: security-system
+  order: 12
+  kind: others
+  name: a mission-critical security system
+  tech: [React, Spring Boot]
+
+- id: k8s-platform
+  order: 13
+  kind: others
+  name: a microservices and Kubernetes platform
+  tech: [K8s, Kafka, Helm]
+
+- id: test-management
+  order: 14
+  kind: others
+  name: a dev and test management system
+  tech: [Django, DOORS, JIRA]

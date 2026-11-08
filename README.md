@@ -1,72 +1,60 @@
-akalp.co — personal website and blog for Hasan Akalp. Built with Next.js (App Router) and TypeScript. Includes portfolio, blog, and contact pages.
+# akalp.co
 
-## Getting Started
+Personal site of Hasan Akalp. Built with [Astro](https://astro.build) as a fully static site and served from Cloudflare Workers static assets.
 
-Run the development server:
+> v2 ("Marginalia") is in progress on the `v2` branch. See [`docs/v2-plan.md`](docs/v2-plan.md). The previous Next.js site is preserved at the [`v1`](https://github.com/akalp/akalpco/tree/v1) tag.
+
+## Requirements
+
+- Node.js 26 (see `.nvmrc`)
+- pnpm (version pinned in `package.json` → `packageManager`)
+
+## Getting started
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
-
-Open http://localhost:3000 in your browser to view the site. Edit `src/app/page.tsx` (and other files under `src/`) to iterate; changes hot‑reload during development.
 
 ## Scripts
 
-- `dev` — start the development server
-- `generate:og` — generate Open Graph images in `public/og/`
-- `build` — generate OG images, build, and optimize images for static export
-- `start` — run the production server
-- `lint` — run lint checks
-- `format` — apply Prettier formatting to the codebase
-- `typecheck` — run the TypeScript compiler without emitting files
+| Script    | Does                                                |
+| --------- | --------------------------------------------------- |
+| `dev`     | Start the Astro dev server                          |
+| `build`   | Build the static site into `dist/`                  |
+| `preview` | Build, then serve `dist/` through `wrangler dev`    |
+| `check`   | Type-check `.astro` and `.ts` files (`astro check`) |
+| `lint`    | Run ESLint                                          |
+| `format`  | Format with Prettier                                |
+| `deploy`  | Build and deploy with `wrangler deploy`             |
 
-## Project Structure
+## Content
 
-- `src/app/` — Next.js App Router routes, layouts, and route-level UI
-- `src/components/` — shared UI components
-- `src/lib/` — shared utilities (Markdown rendering, blog helpers, reading time)
-- `src/config/` — app configuration (metadata, fonts, image sizes)
-- `src/data/` — navigation and other site data
-- `src/types/` — TypeScript types
-- `src/assets/fonts/` — local font files (used by `next/font/local` and OG generation)
-- `content/blog/` — Markdown posts with front‑matter: `title`, `date`, `description`, `tags`
-- `public/` — static assets (including generated `public/og/` images)
+- Posts: `src/content/writing/*.md`. Footnotes (`[^1]`) become margin notes and `==text==` is highlighted.
+- `/now`: one file per month in `src/content/now/`; the newest is `/now`, older ones are archived.
+- Projects, route, links: YAML in `src/data/`. Project images go in `src/assets/made/`.
+- Strip metadata from photos before adding them (phone photos carry GPS):
 
-## Configuration
+  ```bash
+  magick photo.jpeg -auto-orient -strip -quality 92 photo.jpeg
+  ```
 
-Create a `.env.local` file in the project root (or configure environment variables in your hosting provider) and set:
-
-- `NEXT_PUBLIC_SITE_URL` — canonical base URL used for metadata, sitemap, RSS, and social previews. Example: `https://akalp.co`.
-
-When deploying to Cloudflare Pages (or any static hosting), configure the same variable in the project settings so SSG uses the correct value.
+- The ticket: `pnpm ticket [brew|play|build|read] "…"` updates the live values; build-time defaults are in `src/data/ticket.json`.
 
 ## Deployment
 
-Build the app and run it in any Node.js environment:
+Cloudflare Workers Builds is connected to this repository:
 
-```bash
-npm run build
-npm start
-```
+- Build command: `pnpm build`
+- Deploy command: `pnpm wrangler deploy`
 
-### Cloudflare Pages (static export)
+Configuration lives in `wrangler.jsonc`.
 
-This project is configured for static export via `output: "export"` in `next.config.ts`.
+## License
 
-- Build command: `next build`
-- Output directory: `out`
-- Note: Do not use `next start` with static export. Deploy the contents of `out`.
-- Optional local preview of the static export:
+The source code is released under the [MIT License](LICENSE).
 
-```bash
-npm run build
-npx serve out
-```
-
-Refer to the official Next.js documentation for hosting options and production best practices: https://nextjs.org/docs/app/building-your-application/deploying
-
-## Learn More
-
-- Next.js documentation: https://nextjs.org/docs
-- Learn Next.js (tutorial): https://nextjs.org/learn
+The writing in `src/content/`, the photos and images in `src/assets/` and the
+design references in `docs/design-reference/` are © Hasan Akalp, all rights
+reserved. The fonts are under the SIL Open Font License (see
+`src/assets/og-fonts/README.md` and the Fontsource packages).

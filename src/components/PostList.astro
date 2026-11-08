@@ -1,0 +1,82 @@
+---
+import { formatDate, readingMinutes, type Post } from "@/lib/writing";
+
+interface Props {
+  posts: Post[];
+  /** Show the date next to the reading time (on /writing). */
+  showDate?: boolean;
+}
+
+const { posts, showDate = false } = Astro.props;
+---
+
+<ul class="post-list">
+  {posts.map((post) => (
+    <li>
+      <a href={`/writing/${post.id}`} class="post-list__item">
+        <span class="post-list__title" lang={post.data.lang}>
+          {post.data.title}
+        </span>
+        <span class="post-list__meta">
+          {post.data.lang === "tr" && (
+            <abbr class="post-list__lang" title="Turkish">
+              TR
+            </abbr>
+          )}
+          {showDate && (
+            <time datetime={post.data.date.toISOString()}>
+              {formatDate(post.data.date)}
+            </time>
+          )}
+          <span>{readingMinutes(post.body)} min</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .post-list__item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+  }
+
+  .post-list__title {
+    flex: 1 1 380px;
+    font-size: 25px;
+    line-height: 1.25;
+    text-wrap: pretty;
+  }
+
+  .post-list__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+
+  .post-list__lang {
+    padding: 0 6px;
+    border: 1px solid var(--muted);
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .post-list__item:hover .post-list__title {
+    color: var(--pen);
+  }
+</style>

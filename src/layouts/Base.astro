@@ -1,0 +1,125 @@
+---
+import "@/styles/fonts.css";
+import "@/styles/global.css";
+import frauncesUrl from "@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url";
+import Footer from "@/components/Footer.astro";
+import Header, { type Section } from "@/components/Header.astro";
+import Palette from "@/components/Palette.astro";
+
+interface Props {
+  /** Page title without the site name. Omit on the home page. */
+  title?: string;
+  description?: string;
+  /** Highlights the matching nav item. */
+  section?: Section;
+  footer?: "full" | "compact";
+  /** Path of the Open Graph image, e.g. "/og/my-post.png". */
+  ogImage?: string;
+  /** Set on posts: switches og:type to "article". */
+  article?: { publishedTime: Date; tags: string[]; lang: string };
+  /** Keep the page out of search results (404). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = "Hasan Akalp writes software in Ankara: small tools for his own days, and sometimes larger systems for other people.",
+  section,
+  footer = "compact",
+  ogImage = "/og/default.png",
+  article,
+  noindex = false,
+} = Astro.props;
+
+const siteName = "Hasan Akalp";
+const fullTitle = title ? `${title} — ${siteName}` : siteName;
+// build.format "file" makes the pathname "/writing/x.html"; canonical URLs
+// are extensionless.
+const path = Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+const canonical = new URL(path || "/", Astro.site);
+const image = new URL(ogImage, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <link rel="canonical" href={canonical} />
+    )}
+    <meta name="theme-color" content="#F1EADF" />
+    <meta name="color-scheme" content="light" />
+
+    <link
+      rel="preload"
+      href={frauncesUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Hasan Akalp — Writing"
+      href="/rss.xml"
+    />
+
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title ?? siteName} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:locale"
+      content={article?.lang === "tr" ? "tr_TR" : "en_US"}
+    />
+    {article && (
+      <>
+        <meta
+          property="article:published_time"
+          content={article.publishedTime.toISOString()}
+        />
+        <meta property="article:author" content={siteName} />
+        {article.tags.map((tag) => (
+          <meta property="article:tag" content={tag} />
+        ))}
+      </>
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? siteName} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:site" content="@hasanakalp" />
+
+    <!-- Applies the saved ink before first paint. External, so the CSP can
+         stay free of inline scripts. -->
+    <script is:inline src="/ink.js"></script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <div class="page">
+      <Header current={section} />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer variant={footer} />
+    </div>
+    <Palette />
+  </body>
+</html>

@@ -1,0 +1,17 @@
+# "Route so far" ticket on /about.
+- id: aselsan
+  order: 1
+  year: 2019
+  place: Aselsan · Ankara
+- id: scorp
+  order: 2
+  year: 2023
+  place: Scorp · remote
+- id: gardro
+  order: 3
+  year: 2024
+  place: gardro.app · remote
+- id: independent
+  order: 4
+  year: 2025
+  place: independent · here

@@ -1,0 +1,292 @@
+@import "./tokens.css";
+
+/* ---------- Reset ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Reserve the scrollbar's space so the layout does not shift when the
+     palette locks page scrolling. */
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 100;
+  font-optical-sizing: auto;
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+ul,
+ol {
+  margin: 0;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- Links & focus ---------- */
+
+a {
+  color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--pen);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--highlighter);
+  color: var(--ink);
+}
+
+/* ---------- Layout ---------- */
+
+.page {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 10;
+  padding: 12px 16px;
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  box-shadow: var(--shadow-paper);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Keep short phrases (a link and its arrow) on one line. */
+.nowrap {
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Type helpers ---------- */
+
+code,
+kbd,
+pre,
+samp {
+  /* No programming ligatures: "==" and "=>" should read as typed. */
+  font-variant-ligatures: none;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.hand {
+  font-family: var(--font-hand);
+  color: var(--pen);
+}
+
+.section-title {
+  font-size: var(--text-section);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* ---------- Tilt ----------
+ * Hand-placed things sit slightly crooked. Set --tilt on an element;
+ * rotations are switched off for people who ask for reduced motion.
+ */
+
+.tilt {
+  transform: rotate(var(--tilt, 0deg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- Highlighter ---------- */
+
+mark {
+  color: inherit;
+  background: linear-gradient(transparent 58%, var(--highlighter) 58%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---------- Margin notes ----------
+ * Shared by the MarginNote/NoteRef components and markdown footnotes.
+ */
+
+.margin-note {
+  font-family: var(--font-hand);
+  font-weight: 300;
+  font-size: var(--text-note);
+  line-height: 1.35;
+  color: var(--pen);
+}
+
+.margin-note__n {
+  font-weight: 400;
+}
+
+.margin-note a {
+  color: inherit;
+}
+
+.margin-note code {
+  font-size: 0.85em;
+}
+
+.note-ref {
+  font-family: var(--font-hand);
+  font-size: 0.6em;
+  line-height: 0;
+  color: var(--pen);
+}
+
+.note-ref a {
+  padding-inline: 0.1em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.margin-note:target,
+.note-ref:target {
+  background: linear-gradient(transparent 58%, var(--highlighter) 58%);
+}
+
+/* ---------- Dashed lists ----------
+ * Mono rows with a dashed rule: /made "for other people", /now archive,
+ * colophon. Left item and right item, wrapping on narrow screens.
+ */
+
+.dash-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dash-list__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--rule-dash-soft);
+  text-decoration: none;
+}
+
+.dash-list__aside {
+  color: var(--muted);
+}
+
+.dash-list__serif {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+a.dash-list__row:hover .dash-list__serif {
+  color: var(--pen);
+}
+
+/* ---------- Page sections ---------- */
+
+.page-section {
+  padding-bottom: 112px;
+}
+
+.page-section > .section-head {
+  margin-bottom: 36px;
+}

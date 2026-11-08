@@ -1,0 +1,45 @@
+---
+import MarginNote from "@/components/MarginNote.astro";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base title="Not found" noindex>
+  <section class="lost">
+    <p class="eyebrow">404 · page not found</p>
+    <h1 class="lost__title">This page isn’t here.</h1>
+    <p class="lost__body">
+      It might have moved when the site was rewritten. The{" "}
+      <a href="/writing">writing</a> list and the <a href="/">home page</a> are
+      still where they were.
+    </p>
+    <MarginNote tilt={-1.5} class="lost__note">
+      I checked under the desk too. nothing.
+    </MarginNote>
+  </section>
+</Base>
+
+<style>
+  .lost {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: var(--measure);
+    padding: 88px 0 120px;
+  }
+
+  .lost__title {
+    font-size: var(--text-h1-post);
+    font-weight: 350;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .lost__body {
+    font-size: var(--text-body);
+    line-height: 1.65;
+  }
+
+  .lost__note :global(.margin-note) {
+    font-size: 22px;
+  }
+</style>

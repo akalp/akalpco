@@ -1,0 +1,114 @@
+---
+/**
+ * An animated GIF (terminal recording) with a pause/play button.
+ *
+ * WCAG 2.2.2: animations longer than five seconds need a way to stop them.
+ * People who ask for reduced motion start on a still frame; without JS the
+ * <picture> source does the same, and the button stays hidden.
+ */
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+
+interface Props {
+  gif: ImageMetadata;
+  /** Representative still frame, shown when paused. */
+  still?: ImageMetadata;
+  alt: string;
+}
+
+const { gif, still, alt } = Astro.props;
+const poster = still
+  ? await getImage({
+      src: still,
+      format: "webp",
+      width: Math.min(still.width, 1280),
+    })
+  : undefined;
+---
+
+<div class="gif" data-gif>
+  <picture>
+    {poster && (
+      <source srcset={poster.src} media="(prefers-reduced-motion: reduce)" />
+    )}
+    <img
+      src={gif.src}
+      width={gif.width}
+      height={gif.height}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      data-gif-src={gif.src}
+      data-still-src={poster?.src}
+    />
+  </picture>
+  {poster && (
+    <button type="button" class="gif__toggle" hidden>
+      pause
+    </button>
+  )}
+</div>
+
+<script>
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-gif]")) {
+    const img = root.querySelector("img");
+    const button = root.querySelector<HTMLButtonElement>(".gif__toggle");
+    const gif = img?.dataset.gifSrc;
+    const still = img?.dataset.stillSrc;
+    if (!img || !button || !gif || !still) continue;
+
+    // From here on the script decides what plays.
+    root.querySelector("source")?.remove();
+    let playing = !reduce.matches;
+
+    const apply = () => {
+      img.src = playing ? gif : still;
+      button.textContent = playing ? "pause" : "play";
+      button.setAttribute(
+        "aria-label",
+        playing ? "Pause the animation" : "Play the animation"
+      );
+    };
+
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      playing = !playing;
+      apply();
+    });
+    apply();
+  }
+</script>
+
+<style>
+  .gif {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .gif__toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    min-width: var(--touch);
+    min-height: 36px;
+    padding: 0 12px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--code-fg);
+    background: rgb(38 33 28 / 0.85);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .gif__toggle:hover {
+    border-color: var(--code-muted);
+  }
+
+  .gif__toggle:focus-visible {
+    outline-color: var(--highlighter);
+  }
+</style>

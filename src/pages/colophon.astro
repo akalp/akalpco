@@ -1,0 +1,270 @@
+---
+import MarginNote from "@/components/MarginNote.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import Base from "@/layouts/Base.astro";
+
+const type = [
+  {
+    name: "Fraunces",
+    note: "headings and body · soft axis turned up",
+    class: "specimen--serif",
+  },
+  {
+    name: "Kalam",
+    note: "margin notes · only ever in ink",
+    class: "specimen--hand",
+  },
+  {
+    name: "JetBrains Mono",
+    note: "dates, labels, code, the ticket",
+    class: "specimen--mono",
+  },
+];
+
+const swatches = [
+  { name: "paper", value: "#F1EADF", token: "--paper", outline: true },
+  { name: "ticket", value: "#FBF7EF", token: "--paper-raised", outline: true },
+  { name: "ink", value: "#221E1A", token: "--ink" },
+  { name: "pen", value: "#2747C4", token: "--pen" },
+  { name: "highlighter", value: "#F2D36B", token: "--highlighter" },
+];
+
+const parts = [
+  { name: "Astro", detail: "static pages, markdown posts" },
+  { name: "Cloudflare Workers", detail: "static assets, free plan" },
+  { name: "A tiny Worker + KV", detail: "prints the daily ticket" },
+  { name: "⌘K", detail: "a search index built at deploy" },
+  { name: "Analytics", detail: "Cloudflare Web Analytics, no cookies" },
+];
+
+const versions = [
+  { name: "v2 · 2026", text: "this one. Astro, paper and ink." },
+  {
+    name: "v1 · 2025",
+    text: "Next.js, dark, a little more serious.",
+    href: "https://github.com/akalp/akalpco/tree/v1",
+  },
+];
+---
+
+<Base
+  title="Colophon"
+  description="How akalp.co is made: the type, the ink, and the few moving parts behind it."
+>
+  <PageIntro
+    eyebrow="Colophon"
+    title="How this is made."
+    lede="A page about the page: the type, the ink, and the few moving parts behind it."
+  >
+    <MarginNote slot="aside" tilt={1.2}>
+      for the curious, and for future me.
+    </MarginNote>
+  </PageIntro>
+
+  <section class="page-section" aria-labelledby="type">
+    <SectionHead title="Type" id="type" size="md" />
+    <ul class="grid grid--type">
+      {type.map((font) => (
+        <li class="specimen">
+          <span class:list={["specimen__aa", font.class]} aria-hidden="true">
+            Aa
+          </span>
+          <span class="specimen__name">{font.name}</span>
+          <span class="specimen__note">{font.note}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="page-section" aria-labelledby="ink">
+    <SectionHead title="Ink and paper" id="ink" size="md" />
+    <ul class="grid grid--swatches">
+      {swatches.map((swatch) => (
+        <li class="swatch">
+          <span
+            class:list={[
+              "swatch__chip",
+              { "swatch__chip--outline": swatch.outline },
+            ]}
+            style={`background: var(${swatch.token})`}
+          />
+          <span>
+            {swatch.name} · {swatch.value}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="page-section parts" aria-labelledby="parts">
+    <div class="parts__main">
+      <SectionHead title="Moving parts" id="parts" size="md" />
+      <ul class="dash-list">
+        {parts.map((part) => (
+          <li class="dash-list__row">
+            <span class="parts__name">{part.name}</span>
+            <span class="dash-list__aside">{part.detail}</span>
+          </li>
+        ))}
+        <li class="dash-list__row">
+          <span class="parts__name">Source</span>
+          <a href="https://github.com/akalp/akalpco">
+            github.com/akalp/akalpco ↗
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="parts__note">
+      <MarginNote tilt={-1.2}>psst, open ⌘K and type “coffee”.</MarginNote>
+    </div>
+  </section>
+
+  <section class="page-section versions" aria-labelledby="versions">
+    <SectionHead title="Earlier versions" id="versions" size="md" />
+    <ul class="dash-list">
+      {versions.map((version) =>
+        version.href ? (
+          <li>
+            <a href={version.href} class="dash-list__row">
+              <span>{version.name} ↗</span>
+              <span class="dash-list__serif">{version.text}</span>
+            </a>
+          </li>
+        ) : (
+          <li class="dash-list__row">
+            <span>{version.name}</span>
+            <span class="dash-list__serif">{version.text}</span>
+          </li>
+        )
+      )}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .page-section {
+    padding-bottom: 88px;
+  }
+
+  .page-section :global(.section-head) {
+    margin-bottom: 32px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .grid--type {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+
+  .grid--swatches {
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+  }
+
+  .specimen {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .specimen__aa {
+    font-size: 72px;
+    line-height: 1;
+  }
+
+  .specimen--serif {
+    font-weight: 350;
+    font-variation-settings:
+      "SOFT" 100,
+      "opsz" 144;
+  }
+
+  .specimen--hand {
+    font-family: var(--font-hand);
+    color: var(--pen);
+  }
+
+  .specimen--mono {
+    font-family: var(--font-mono);
+    font-size: 64px;
+    line-height: 1.1;
+  }
+
+  .specimen__name {
+    font-size: 24px;
+  }
+
+  .specimen__note {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--muted);
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .swatch__chip {
+    height: 96px;
+    border-radius: 4px;
+  }
+
+  .swatch__chip--outline {
+    border: 1.5px solid var(--ink);
+  }
+
+  .parts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 64px;
+  }
+
+  .parts__main {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: var(--measure);
+  }
+
+  .parts__note {
+    flex: 1 1 220px;
+    align-self: center;
+  }
+
+  .parts__name {
+    font-family: var(--font-serif);
+    font-size: 20px;
+  }
+
+  .parts .dash-list__row {
+    font-size: 13px;
+  }
+
+  .parts .dash-list__row a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+
+  .versions {
+    padding-bottom: 104px;
+  }
+
+  .versions :global(.section-head) {
+    margin-bottom: 8px;
+  }
+
+  .versions .dash-list__row {
+    padding: 18px 0;
+  }
+</style>

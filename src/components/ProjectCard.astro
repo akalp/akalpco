@@ -1,0 +1,88 @@
+---
+/**
+ * Museum-tag card for the home page: a punched hole, the name, a short
+ * description and a dashed footer with the tech line.
+ */
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { name, card, repo } = Astro.props.project.data;
+---
+
+<a href={repo ?? "/made"} class="tag-card">
+  <span class="tag-card__hole" aria-hidden="true"></span>
+  <span class="tag-card__name">{name}</span>
+  <span class="tag-card__desc">{card?.description}</span>
+  <span class="tag-card__foot">
+    <span>{card?.tech}</span>
+    <span>{repo ? "github ↗" : "more →"}</span>
+  </span>
+</a>
+
+<style>
+  .tag-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    padding: 26px 22px 18px;
+    background: var(--paper-card);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px 4px 4px 18px;
+    text-decoration: none;
+  }
+
+  .tag-card:hover {
+    border-color: var(--pen);
+  }
+
+  .tag-card__hole {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 12px;
+    height: 12px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+  }
+
+  .tag-card__name {
+    font-size: 30px;
+    font-weight: 450;
+    line-height: 1.1;
+  }
+
+  .tag-card__desc {
+    flex-grow: 1;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+
+  .tag-card__foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule-dash);
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--muted);
+  }
+
+  /* Keep "TypeScript · FastAPI" and "github ↗" whole; the link wraps to
+     its own line (still right-aligned) when the card is narrow. */
+  .tag-card__foot > span {
+    white-space: nowrap;
+  }
+
+  .tag-card__foot > span:last-child {
+    margin-left: auto;
+  }
+</style>

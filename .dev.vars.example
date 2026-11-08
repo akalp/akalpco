@@ -1,0 +1,3 @@
+# Copy to .dev.vars for `pnpm preview` (wrangler dev). Never commit .dev.vars.
+TICKET_TOKEN=change-me
+# GITHUB_TOKEN=

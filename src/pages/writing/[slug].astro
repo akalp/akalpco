@@ -1,0 +1,260 @@
+---
+import { render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import {
+  formatDate,
+  getPosts,
+  isoDate,
+  readingMinutes,
+  type Post,
+} from "@/lib/writing";
+import "@/styles/prose.css";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+
+const { post, newer, older } = Astro.props;
+const { title, description, date, tags, lang } = post.data;
+const { Content, headings } = await render(post);
+
+const contents = headings
+  .filter((heading) => heading.depth === 2)
+  .map((heading, i) => ({
+    ...heading,
+    n: String(i + 1).padStart(2, "0"),
+  }));
+const minutes = readingMinutes(post.body);
+---
+
+<Base
+  title={title}
+  description={description}
+  section="writing"
+  ogImage={`/og/${post.id}.png`}
+  article={{ publishedTime: date, tags, lang }}
+>
+  <article lang={lang} class="post">
+    <header class="post__head">
+      <p class="eyebrow post__meta" lang="en">
+        <time datetime={isoDate(date)}>{formatDate(date)}</time> · {minutes} min
+        read · {lang}
+      </p>
+      <h1 class="post__title">{title}</h1>
+      <p class="post__lede">{description}</p>
+      {tags.length > 0 && (
+        <ul class="post__tags" aria-label="Tags">
+          {tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    {contents.length > 1 && (
+      <nav aria-label="On this page" class="post__contents" lang="en">
+        <span class="post__contents-label">contents</span>
+        {contents.map((heading) => (
+          <a href={`#${heading.slug}`}>
+            <span class="post__contents-n">{heading.n}</span>{" "}
+            <span lang={lang}>{heading.text}</span>
+          </a>
+        ))}
+      </nav>
+    )}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <p class="post__sign hand tilt" lang="en">
+      — Hasan, Ankara
+    </p>
+  </article>
+
+  <nav aria-label="More writing" class="post__more">
+    {newer ? (
+      <a href={`/writing/${newer.id}`} rel="prev">
+        <span class="post__more-dir">← newer</span>
+        <span class="post__more-title" lang={newer.data.lang}>
+          {newer.data.title}
+        </span>
+      </a>
+    ) : (
+      <p>
+        <span class="post__more-dir">← newer</span>
+        <span class="post__more-none">this is the newest one</span>
+      </p>
+    )}
+    {older ? (
+      <a href={`/writing/${older.id}`} rel="next" class="post__more-older">
+        <span class="post__more-dir">older →</span>
+        <span class="post__more-title" lang={older.data.lang}>
+          {older.data.title}
+        </span>
+      </a>
+    ) : (
+      <p class="post__more-older">
+        <span class="post__more-dir">older →</span>
+        <span class="post__more-none">this is the oldest one</span>
+      </p>
+    )}
+  </nav>
+</Base>
+
+<script>
+  import { alignMarginNotes } from "@/lib/margin-align";
+  alignMarginNotes();
+</script>
+
+<script>
+  // Enable the copy buttons rendered (hidden) by rehype-code-figure.
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    ".code-block__copy"
+  )) {
+    const code = button.closest("figure")?.querySelector("pre code");
+    if (!code || !navigator.clipboard) continue;
+    button.hidden = false;
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent ?? "");
+        button.textContent = "copied";
+      } catch {
+        button.textContent = "failed";
+      }
+      setTimeout(() => (button.textContent = "copy"), 1600);
+    });
+  }
+</script>
+
+<style>
+  .post__head {
+    max-width: 900px;
+    padding: 80px 0 40px;
+  }
+
+  .post__meta {
+    margin-bottom: 22px;
+  }
+
+  .post__title {
+    margin-bottom: 26px;
+    font-size: var(--text-h1-post);
+    font-weight: 350;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    font-variation-settings:
+      "SOFT" 100,
+      "opsz" 144;
+  }
+
+  .post__lede {
+    margin-bottom: 30px;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
+  .post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--muted);
+  }
+
+  .post__tags li {
+    padding: 4px 10px;
+    border: 1px solid var(--rule-dash-soft);
+    border-radius: 999px;
+  }
+
+  .post__contents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 22px;
+    margin-bottom: 64px;
+    padding: 8px 0;
+    border-block: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+  }
+
+  .post__contents a,
+  .post__contents-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6ch;
+    min-height: var(--touch);
+  }
+
+  .post__contents a {
+    text-decoration: none;
+  }
+
+  .post__contents-label,
+  .post__contents-n {
+    color: var(--muted);
+  }
+
+  .post__sign {
+    --tilt: -2deg;
+    margin: 72px 0 72px;
+    font-size: 30px;
+    font-weight: 300;
+    transform-origin: left center;
+  }
+
+  .post__more {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 24px;
+    padding: 40px 0 96px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .post__more > * {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    text-decoration: none;
+  }
+
+  .post__more-older {
+    text-align: right;
+  }
+
+  .post__more-dir {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--muted);
+  }
+
+  .post__more-title {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+  .post__more-none {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--muted);
+  }
+</style>

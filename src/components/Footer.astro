@@ -1,0 +1,100 @@
+---
+import { getCollection } from "astro:content";
+
+interface Props {
+  /** "full" adds the say-hi line and links (home, about). */
+  variant?: "full" | "compact";
+}
+
+const { variant = "compact" } = Astro.props;
+const links =
+  variant === "full"
+    ? (await getCollection("links")).sort((a, b) => a.data.order - b.data.order)
+    : [];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" data-variant={variant}>
+  {variant === "full" && (
+    <div class="site-footer__hi">
+      <p class="site-footer__line">
+        If something here made you want to say hi, I’d like that.
+      </p>
+      <nav aria-label="Elsewhere" class="site-footer__links">
+        {links.map(({ data }) => (
+          <a
+            href={data.href}
+            rel={data.href.startsWith("http") ? "me" : undefined}
+          >
+            {data.label} <span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  )}
+  <div class="site-footer__meta">
+    <span>
+      made in Ankara · built with Astro · served by Cloudflare ·{" "}
+      <a href="/colophon">colophon</a>
+    </span>
+    <span>© {year} Hasan Akalp</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .site-footer[data-variant="full"] {
+    padding-top: 56px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .site-footer__hi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+
+  .site-footer__line {
+    max-width: 620px;
+    font-size: clamp(30px, 3.6vw, 46px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.15;
+  }
+
+  .site-footer__links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 32px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+
+  .site-footer__links a {
+    padding: 12px 0;
+    line-height: 20px;
+  }
+
+  .site-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .site-footer__meta a {
+    color: inherit;
+  }
+</style>

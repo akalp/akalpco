@@ -1,0 +1,176 @@
+---
+/**
+ * Shared body of /now and the archived /now/[month] pages.
+ */
+import { render } from "astro:content";
+import MarginNote from "@/components/MarginNote.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import TodayTicket from "@/components/TodayTicket.astro";
+import { monthLabel, type NowEntry } from "@/lib/now";
+
+interface Props {
+  entry: NowEntry;
+  /** Older entries for the "Previously" list. */
+  previous: NowEntry[];
+  archived?: boolean;
+}
+
+const { entry, previous, archived = false } = Astro.props;
+const { Content } = await render(entry);
+const label = monthLabel(entry.data.month);
+---
+
+<section class="now">
+  <div class="now__main">
+    <p class="eyebrow now__eyebrow">
+      {archived ? `Now · archived · ${label}` : `Now · updated ${label}`}
+    </p>
+    <h1 class="now__title">
+      {archived ? `What I was up to.` : "What I’m up to."}
+    </h1>
+    <p class="now__lede">
+      {archived
+        ? `An old /now page from ${label}, kept on purpose.`
+        : "Not a feed, not a status. Just what has my attention this month, written down so I can look back on it later."}
+    </p>
+    <div class="now__body">
+      <Content />
+    </div>
+    {archived && (
+      <p class="now__back">
+        <a href="/now">← what I’m up to now</a>
+      </p>
+    )}
+  </div>
+  {!archived && (
+    <div class="now__ticket">
+      <TodayTicket
+        size="lg"
+        tilt={1.4}
+        note="this one changes daily. the page on the left, monthly-ish."
+      />
+    </div>
+  )}
+</section>
+
+<section class="page-section previously" aria-labelledby="previously">
+  <SectionHead title="Previously" id="previously" size="sm">
+    <div slot="aside">
+      <MarginNote>old /now pages, kept on purpose</MarginNote>
+    </div>
+  </SectionHead>
+  {previous.length > 0 ? (
+    <ul class="dash-list">
+      {previous.map(({ data }) => (
+        <li>
+          <a href={`/now/${data.month}`} class="dash-list__row">
+            <span>{monthLabel(data.month).toLowerCase()}</span>
+            <span class="dash-list__serif">{data.summary}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="previously__empty">Nothing yet. This is the first one.</p>
+  )}
+</section>
+
+<style>
+  .now {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 56px 80px;
+    padding: 80px 0 96px;
+  }
+
+  .now__main {
+    flex: 999 1 520px;
+    min-width: 0;
+  }
+
+  .now__ticket {
+    flex: 1 1 320px;
+    padding-top: 24px;
+  }
+
+  .now__eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .now__title {
+    margin-bottom: 28px;
+    font-size: var(--text-h1);
+    font-weight: 350;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variation-settings:
+      "SOFT" 100,
+      "opsz" 144;
+  }
+
+  .now__lede {
+    max-width: 620px;
+    margin-bottom: 48px;
+    font-size: clamp(20px, 2vw, 25px);
+    font-weight: 300;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .now__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 640px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .now__body :global(h2) {
+    margin-top: 26px;
+    font-size: 28px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.2;
+  }
+
+  .now__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .now__body :global(p + p) {
+    margin-top: 6px;
+  }
+
+  .now__back {
+    margin-top: 40px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+  }
+
+  .now__back a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+
+  .previously {
+    padding-bottom: 104px;
+  }
+
+  .previously :global(.section-head) {
+    margin-bottom: 0;
+  }
+
+  .previously .dash-list__row {
+    padding: 18px 0;
+  }
+
+  .previously__empty {
+    padding: 18px 0;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--muted);
+  }
+</style>

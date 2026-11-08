@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Must exactly match the Worker name in Workers Builds.
+  "name": "akalpco",
+  "compatibility_date": "2026-11-04",
+  // Only handles /api/*; every page is a static asset (free, no Worker run).
+  "main": "./src/worker/index.ts",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"],
+  },
+  "kv_namespaces": [
+    // akalpco-ticket
+    { "binding": "TICKET", "id": "0d0ae35ea4574a6583f3c5b25c5dadc8" },
+  ],
+  // Hourly: refresh "last push" from GitHub.
+  "triggers": { "crons": ["0 * * * *"] },
+  "observability": { "enabled": true },
+  // Required by `wrangler preview`, which Workers Builds runs for
+  // non-production branches. Bindings are not inherited, so previews get
+  // their own KV namespace and never touch production data.
+  "previews": {
+    "kv_namespaces": [
+      // akalpco-ticket-preview
+      { "binding": "TICKET", "id": "c501df0fdbb74807aacd5698c5e8b5d1" },
+    ],
+  },
+  // Secrets (wrangler secret put / wrangler preview secret put):
+  //   TICKET_TOKEN  required for POST /api/ticket
+  //   GITHUB_TOKEN  optional, raises the GitHub API rate limit
+}

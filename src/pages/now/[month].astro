@@ -1,0 +1,28 @@
+---
+import NowPage from "@/components/NowPage.astro";
+import Base from "@/layouts/Base.astro";
+import { getNowEntries, monthLabel, type NowEntry } from "@/lib/now";
+
+export async function getStaticPaths() {
+  const [, ...archived] = await getNowEntries();
+  return archived.map((entry, i) => ({
+    params: { month: entry.data.month },
+    props: { entry, previous: archived.slice(i + 1) },
+  }));
+}
+
+interface Props {
+  entry: NowEntry;
+  previous: NowEntry[];
+}
+
+const { entry, previous } = Astro.props;
+---
+
+<Base
+  title={`Now, ${monthLabel(entry.data.month)}`}
+  description={entry.data.summary}
+  section="now"
+>
+  <NowPage entry={entry} previous={previous} archived />
+</Base>

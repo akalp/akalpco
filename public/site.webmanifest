@@ -1,11 +1,11 @@
 {
-  "name": "Hasan Akalp - Full-Stack Software Engineer",
+  "name": "Hasan Akalp",
   "short_name": "Hasan Akalp",
-  "description": "Full-Stack Software Engineer specializing in TypeScript, React, Next.js, and modern web technologies.",
+  "description": "Hasan Akalp writes software in Ankara: small tools for his own days, and sometimes larger systems for other people.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#171717",
+  "background_color": "#F1EADF",
+  "theme_color": "#F1EADF",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

@@ -1,0 +1,25 @@
+---
+/**
+ * A handwritten note in the margin, in the owner's ballpoint.
+ * Use inside <Margin slot="notes">, or on its own for a loose annotation.
+ */
+interface Props {
+  /** Note number, matching a <NoteRef n>. Omit for an unnumbered note. */
+  n?: number | string;
+  /** Rotation in degrees, roughly -2 to 2. */
+  tilt?: number;
+  scope?: string;
+  class?: string;
+}
+
+const { n, tilt = 0, scope = "mn", class: className } = Astro.props;
+---
+
+<p
+  class:list={["margin-note", "tilt", className]}
+  id={n !== undefined ? `${scope}-${n}` : undefined}
+  style={`--tilt: ${tilt}deg`}
+>
+  {n !== undefined && <span class="margin-note__n">{n} —</span>}
+  <slot />
+</p>

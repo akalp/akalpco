@@ -1,0 +1,65 @@
+---
+import MarginNote from "@/components/MarginNote.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import PostList from "@/components/PostList.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import Base from "@/layouts/Base.astro";
+import { getPosts, postYear, type Post } from "@/lib/writing";
+
+const posts = await getPosts();
+
+const byYear = new Map<number, Post[]>();
+for (const post of posts) {
+  const year = postYear(post.data.date);
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+---
+
+<Base
+  title="Writing"
+  description="Notes from building small tools and larger systems, in English and sometimes Turkish."
+  section="writing"
+>
+  <PageIntro
+    eyebrow={`Writing · ${posts.length} posts`}
+    title="Writing."
+    lede="Notes from building things, mostly after something broke or surprised me. Mostly in English; the ones marked TR are in Turkish."
+  >
+    <MarginNote slot="aside" tilt={-1.2}>
+      no schedule. I write when there’s something worth writing down.
+    </MarginNote>
+  </PageIntro>
+
+  {[...byYear].map(([year, yearPosts]) => (
+    <section class="page-section year" aria-labelledby={`y${year}`}>
+      <SectionHead title={String(year)} id={`y${year}`} size="sm" />
+      <PostList posts={yearPosts} showDate />
+    </section>
+  ))}
+
+  <p class="rss">
+    <a href="/rss.xml">rss feed ↗</a>
+  </p>
+</Base>
+
+<style>
+  .year {
+    padding-bottom: 72px;
+  }
+
+  .year :global(.section-head) {
+    margin-bottom: 0;
+  }
+
+  .rss {
+    padding-bottom: 104px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+  }
+
+  .rss a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+</style>

@@ -1,0 +1,8 @@
+{
+  "$comment": "Build-time defaults for the ticket. The /api/ticket Worker replaces these at runtime; update both (pnpm ticket …) when they change.",
+  "brewing": "Uraga · Ethiopia natural · V60",
+  "playing": "Stardew Valley",
+  "building": "akalp.co v2",
+  "reading": "İnsanlığımı Yitirirken · Osamu Dazai",
+  "lastPush": { "repo": "akalp/akalpco", "at": null }
+}

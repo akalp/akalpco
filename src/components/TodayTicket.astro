@@ -1,0 +1,51 @@
+---
+import MarginNote from "@/components/MarginNote.astro";
+import Ticket from "@/components/Ticket.astro";
+import { ticketNumber, ticketRows, ticketStamp } from "@/lib/ticket";
+
+interface Props {
+  size?: "md" | "lg";
+  tilt?: number;
+  /** Handwritten line under the ticket. */
+  note?: string;
+}
+
+const { size = "md", tilt = 1.6, note } = Astro.props;
+---
+
+<div class="today-ticket" data-ticket>
+  <Ticket
+    title="Today’s ticket"
+    meta={ticketStamp()}
+    rows={ticketRows()}
+    footer={[ticketNumber(), "thanks for stopping by"]}
+    size={size}
+    tilt={tilt}
+  />
+  {note && (
+    <div class="today-ticket__note">
+      <MarginNote>{note}</MarginNote>
+    </div>
+  )}
+</div>
+
+<script>
+  import { refreshTickets } from "@/lib/ticket-client";
+  refreshTickets();
+</script>
+
+<style>
+  .today-ticket {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .today-ticket__note {
+    padding-left: 8px;
+  }
+
+  .today-ticket__note :global(.margin-note) {
+    font-size: 17px;
+  }
+</style>

@@ -1,0 +1,189 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Highlight from "@/components/Highlight.astro";
+import Margin from "@/components/Margin.astro";
+import MarginNote from "@/components/MarginNote.astro";
+import NoteRef from "@/components/NoteRef.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import Ticket from "@/components/Ticket.astro";
+import Base from "@/layouts/Base.astro";
+import portrait from "@/assets/hasan.jpeg";
+
+const route = (await getCollection("route")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const linkedin = await getEntry("links", "linkedin");
+---
+
+<Base
+  title="About"
+  description="Hasan Akalp: software engineer in Ankara, from defense systems and livestreaming to small tools and LLM-driven systems."
+  section="about"
+  footer="full"
+>
+  <PageIntro eyebrow="About" title="The longer version.">
+    <figure slot="aside" class="polaroid tilt">
+      <Image
+        src={portrait}
+        alt="Hasan Akalp"
+        widths={[320, 640]}
+        sizes="(max-width: 640px) 80vw, 320px"
+        class="polaroid__photo"
+        loading="eager"
+      />
+      <figcaption class="polaroid__caption hand">
+        a perfectly ordinary person
+      </figcaption>
+    </figure>
+  </PageIntro>
+
+  <section class="story" aria-label="Story">
+    <Margin>
+      <p class="story__lede">
+        I’m Hasan. I live in Ankara, speak Turkish at home and English at work,
+        and I’ve been writing software for a living since the end of 2019.
+      </p>
+    </Margin>
+
+    <Margin align="end">
+      <p class="story__p">
+        It started at <Highlight>Aselsan</Highlight>
+        <NoteRef n={1} />, part-time at first, automating Excel and XML chores
+        with Python and Django. Then three full-time years of React frontends,
+        Spring Boot services and the Kubernetes clusters underneath them, plus
+        the CI/CD glue in Bash and Go that kept it all moving.
+      </p>
+      <MarginNote slot="notes" n={1} tilt={-1}>
+        OpenShift, Rancher, MicroK8s. I’ve met them all.
+      </MarginNote>
+    </Margin>
+
+    <Margin align="end">
+      <p class="story__p">
+        In 2023 I moved to <Highlight>Scorp</Highlight>, working on
+        livestreaming and moderation: Node and Python on the backend, Vue
+        dashboards for streamers and the people keeping their chats sane. In
+        2024 I took <Highlight>gardro.app</Highlight>
+        <NoteRef n={2} />, an image-generation product, from idea to MVP, end to
+        end.
+      </p>
+      <MarginNote slot="notes" n={2} tilt={1.2}>
+        a lot of SDXL prompt wrangling, mostly to keep the outputs safe.
+      </MarginNote>
+    </Margin>
+
+    <Margin align="end">
+      <p class="story__p">
+        Since 2025 I’ve been <Highlight>independent</Highlight>
+        <NoteRef n={3} />: freelance work in TypeScript and Python, and a lot of
+        time with LLM-driven systems: prompts, evaluation loops, retrieval, tool
+        use. And, of course, the small tools that end up{" "}
+        <a href="/made">on this site</a>.
+      </p>
+      <MarginNote slot="notes" n={3} tilt={-0.8}>
+        this is where the agentic stuff took over my evenings.
+      </MarginNote>
+    </Margin>
+  </section>
+
+  <section class="page-section reach" aria-labelledby="reach">
+    <div class="reach__main">
+      <SectionHead title="What I reach for" id="reach" />
+      <p class="story__p">
+        TypeScript and Python most days. Go when I want a small, fast binary;
+        Java when someone else’s system speaks it. React or Vue in front, Node,
+        FastAPI, Django or Spring behind, Postgres underneath, and Docker and
+        Kubernetes around the whole thing.
+      </p>
+    </div>
+    <div class="reach__ticket">
+      <Ticket
+        title="Route so far"
+        rows={route.map(({ data }) => ({
+          label: String(data.year),
+          value: data.place,
+        }))}
+        footer={[
+          "non-stop",
+          { label: "full history ↗", href: linkedin?.data.href ?? "#" },
+        ]}
+        tilt={-1.4}
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .polaroid {
+    --tilt: 2deg;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+  }
+
+  .polaroid :global(.polaroid__photo) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: var(--photo);
+    border: 10px solid var(--paper-raised);
+    box-shadow: 0 14px 30px -18px rgb(60 40 20 / 0.45);
+  }
+
+  .polaroid__caption {
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .story {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    padding-bottom: 96px;
+  }
+
+  .story :global(.margin-row) {
+    gap: 20px 64px;
+  }
+
+  .story__lede {
+    max-width: var(--measure);
+    font-size: clamp(22px, 2.2vw, 27px);
+    font-weight: 300;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .story__p {
+    max-width: var(--measure);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .reach {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 48px 72px;
+  }
+
+  .reach__main {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: var(--measure);
+  }
+
+  .reach__main :global(.section-head) {
+    margin-bottom: 28px;
+  }
+
+  .reach__ticket {
+    flex: 1 1 300px;
+    padding-top: 8px;
+  }
+</style>
