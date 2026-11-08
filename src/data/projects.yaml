@@ -13,7 +13,9 @@
   note: "[your note on why it exists]"
   media:
     kind: terminal
-    label: "[terminal recording of the TUI]"
+    label: A terminal recording of ws. The fuzzy-search TUI opens a workspace, then ws new scaffolds a Go project.
+    src: ../assets/made/ws-tui.gif
+    still: ../assets/made/ws-tui-still.png
   card:
     tech: Go · TUI
     description: >-
@@ -42,8 +44,9 @@
     with Homebrew.
   repo: https://github.com/akalp/caffbar
   media:
-    kind: photo
-    label: "[screenshot: the menu bar panel]"
+    kind: screen
+    label: CaffBar’s menu bar panel during a session, with presets, duration and mode toggles.
+    src: ../assets/made/caffbar-panel.png
   card:
     tech: Swift · macOS
     description: >-
@@ -61,8 +64,9 @@
   post: slideplay-quiz-app
   note: "[your note]"
   media:
-    kind: photo
-    label: "[photo: host screen on the TV]"
+    kind: screen
+    label: The SlidePlay host screen after a question, showing the correct answer and each player’s pick and time.
+    src: ../assets/made/slideplay-host.png
 
 - id: paper-cleaner
   order: 5
@@ -75,8 +79,9 @@
     no accounts, no cloud.
   repo: https://github.com/akalp/paper-cleaner
   media:
-    kind: photo
-    label: "[screenshot: perspective correction]"
+    kind: screen
+    label: The paper-cleaner editor correcting the perspective of a photographed worksheet, next to the cleaned preview.
+    src: ../assets/made/paper-cleaner-perspective.png
   card:
     tech: Vite · FastAPI
     description: >-
@@ -94,8 +99,9 @@
   repo: https://github.com/akalp/petpomodoro
   site: https://petpomodoro.pages.dev
   media:
-    kind: photo
-    label: "[screenshot: the pet on an iPhone home screen]"
+    kind: screen
+    label: PetPomodoro on an iPhone, showing Momo the pet with its level, mood and stats.
+    src: ../assets/made/petpomodoro-pet.png
   card:
     tech: React · PWA
     description: >-
@@ -113,7 +119,9 @@
   repo: https://github.com/akalp/aseprite-builder
   media:
     kind: terminal
-    label: "[terminal recording of a build]"
+    label: A terminal recording of aseprite-builder. The TUI shows its disclaimer, the main menu and a system check before any build.
+    src: ../assets/made/aseprite-builder-tui.gif
+    still: ../assets/made/aseprite-builder-tui-still.png
 
 - id: latex-devcontainer
   order: 8

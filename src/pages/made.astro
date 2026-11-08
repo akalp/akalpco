@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection, getEntry } from "astro:content";
+import AnimatedShot from "@/components/AnimatedShot.astro";
 import MarginNote from "@/components/MarginNote.astro";
 import PageIntro from "@/components/PageIntro.astro";
 import Base from "@/layouts/Base.astro";
@@ -76,16 +78,41 @@ const tilts = [1.2, -1, 1.6, -1.2, 1.4];
               )}
             </p>
           )}
-          {project.media && (
-            <div
+          {project.media?.src ? (
+            <figure
               class:list={[
-                "project__media",
-                `project__media--${project.media.kind}`,
+                "project__shot",
+                `project__shot--${project.media.kind}`,
                 { tilt: project.media.kind === "photo" },
               ]}
             >
-              {project.media.label}
-            </div>
+              {project.media.src.format === "gif" ? (
+                <AnimatedShot
+                  gif={project.media.src}
+                  still={project.media.still}
+                  alt={project.media.label}
+                />
+              ) : (
+                <Image
+                  src={project.media.src}
+                  alt={project.media.label}
+                  widths={[400, 800, 1280]}
+                  sizes="(max-width: 700px) 100vw, 640px"
+                />
+              )}
+            </figure>
+          ) : (
+            project.media && (
+              <div
+                class:list={[
+                  "project__media",
+                  `project__media--${project.media.kind}`,
+                  { tilt: project.media.kind === "photo" },
+                ]}
+              >
+                {project.media.label}
+              </div>
+            )
           )}
         </div>
         <div class="project__note">
@@ -224,6 +251,33 @@ const tilts = [1.2, -1, 1.6, -1.2, 1.4];
     color: var(--muted);
     background: var(--photo);
     border: 10px solid var(--paper-raised);
+    box-shadow: 0 14px 30px -18px rgb(60 40 20 / 0.45);
+  }
+
+  .project__shot {
+    max-width: 640px;
+    margin: 0;
+  }
+
+  .project__shot :global(img) {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 560px;
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 1px var(--rule),
+      0 14px 30px -18px rgb(60 40 20 / 0.45);
+  }
+
+  .project__shot--photo :global(img) {
+    border: 10px solid var(--paper-raised);
+    border-radius: 0;
+  }
+
+  .project__shot--terminal :global(img) {
+    border-radius: 10px;
     box-shadow: 0 14px 30px -18px rgb(60 40 20 / 0.45);
   }
 

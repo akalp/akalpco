@@ -27,33 +27,40 @@ const now = defineCollection({
 
 const projects = defineCollection({
   loader: file("src/data/projects.yaml"),
-  schema: z.object({
-    order: z.number().int(),
-    /** "mine" = open source on /made, "others" = work for other people. */
-    kind: z.enum(["mine", "others"]),
-    name: z.string(),
-    tech: z.array(z.string()),
-    description: z.string().optional(),
-    repo: z.url().optional(),
-    /** Live site or app, if there is one. */
-    site: z.url().optional(),
-    post: reference("writing").optional(),
-    note: z.string().optional(),
-    /** Placeholder (or, later, real media) shown under the description. */
-    media: z
-      .object({
-        kind: z.enum(["terminal", "photo"]),
-        label: z.string(),
-      })
-      .optional(),
-    /** Short version for the home page cards. Omit to leave it off home. */
-    card: z
-      .object({
-        tech: z.string(),
-        description: z.string(),
-      })
-      .optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      order: z.number().int(),
+      /** "mine" = open source on /made, "others" = work for other people. */
+      kind: z.enum(["mine", "others"]),
+      name: z.string(),
+      tech: z.array(z.string()),
+      description: z.string().optional(),
+      repo: z.url().optional(),
+      /** Live site or app, if there is one. */
+      site: z.url().optional(),
+      post: reference("writing").optional(),
+      note: z.string().optional(),
+      /**
+       * Shown under the description. Without `src`, `label` is rendered as a
+       * placeholder box; with it, `label` is the image's alt text.
+       */
+      media: z
+        .object({
+          kind: z.enum(["terminal", "photo", "screen"]),
+          label: z.string(),
+          src: image().optional(),
+          /** Still frame for animated GIFs (pause, reduced motion). */
+          still: image().optional(),
+        })
+        .optional(),
+      /** Short version for the home page cards. Omit to leave it off home. */
+      card: z
+        .object({
+          tech: z.string(),
+          description: z.string(),
+        })
+        .optional(),
+    }),
 });
 
 const route = defineCollection({
