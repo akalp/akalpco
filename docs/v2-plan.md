@@ -95,7 +95,7 @@ Text in square brackets (`[bean · method]`, `[portrait]`, `[email]` and so on) 
 | `sitemap.ts`, `robots.ts` | Use `@astrojs/sitemap` (`/sitemap-index.xml`) + `public/robots.txt`. |
 | `src/data/projects.ts`, `experience.ts`, `contacts.ts` | Become `src/data/projects.yaml`, `route.yaml` and `links.yaml`, loaded as Zod-validated collections with the `file()` loader. |
 | Tailwind, motion, react, react-icons, twemoji-parser, date-fns | Removed. Plain CSS with custom properties, no framework islands. |
-| `public/favicon*`, `apple-touch-icon`, `site.webmanifest`, `hasan.webp` | Kept. The favicon can be redrawn for the new design later. |
+| `public/favicon*`, `apple-touch-icon`, `site.webmanifest`, `hasan.webp` | Favicon redrawn for v2: an italic Fraunces "ha" on ink with a highlighter underline (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `android-chrome-*`); the same mark sits on the OG cards. `site.webmanifest` uses the paper colors. The portrait is now `src/assets/hasan.jpeg` (metadata stripped), optimized by `astro:assets`; `hasan.webp` is gone. |
 
 ### Markdown plugins
 
@@ -227,7 +227,10 @@ No Pages. Everything runs as one Worker project:
 ## 10. Open decisions
 
 - Footer email address and how it's shown.
-- First `/now` content and the ticket's initial values.
-- Portrait photo: the existing `hasan.webp` or a new one.
-- Whether to turn on Web Analytics.
-- Refreshing the favicon and OG template for the new design.
+- Whether to turn on Web Analytics (the colophon says "none" for now).
+
+Decided:
+
+- First `/now` content and the ticket's initial values: written for November 2026, with October archived; ticket defaults live in `src/data/ticket.json`.
+- Portrait photo: `src/assets/hasan.jpeg`, with EXIF/GPS metadata stripped before committing.
+- Favicon and OG template: redrawn as described in section 4.

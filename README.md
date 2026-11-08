@@ -28,6 +28,19 @@ pnpm dev
 | `format`  | Format with Prettier                                |
 | `deploy`  | Build and deploy with `wrangler deploy`             |
 
+## Content
+
+- Posts: `src/content/writing/*.md`. Footnotes (`[^1]`) become margin notes and `==text==` is highlighted.
+- `/now`: one file per month in `src/content/now/`; the newest is `/now`, older ones are archived.
+- Projects, route, links: YAML in `src/data/`. Project images go in `src/assets/made/`.
+- Strip metadata from photos before adding them (phone photos carry GPS):
+
+  ```bash
+  magick photo.jpeg -auto-orient -strip -quality 92 photo.jpeg
+  ```
+
+- The ticket: `pnpm ticket [brew|play|build|read] "…"` updates the live values; build-time defaults are in `src/data/ticket.json`.
+
 ## Deployment
 
 Cloudflare Workers Builds is connected to this repository:
